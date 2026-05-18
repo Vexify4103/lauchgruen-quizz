@@ -1,0 +1,10 @@
+services:
+  livekit:
+    image: livekit/livekit-server:latest
+    command: --config /etc/livekit.yaml
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "50100-50200:50100-50200/udp"
+    volumes:
+      - ./livekit.dev.yaml:/etc/livekit.yaml:ro

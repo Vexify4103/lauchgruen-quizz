@@ -1,0 +1,23 @@
+services:
+  quiz:
+    image: lauchgruen-quizz:latest
+    container_name: lauchgruen-quizz-app
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${QUIZ_PORT:-3000}:3000"
+    depends_on:
+      - livekit
+
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: lauchgruen-quizz-livekit
+    restart: unless-stopped
+    command: --config /etc/livekit.yaml
+    ports:
+      - "${LIVEKIT_HTTP_PORT:-7880}:7880"
+      - "${LIVEKIT_TCP_PORT:-7881}:7881"
+      - "${LIVEKIT_UDP_PORT_START:-50000}-${LIVEKIT_UDP_PORT_END:-60000}:${LIVEKIT_UDP_PORT_START:-50000}-${LIVEKIT_UDP_PORT_END:-60000}/udp"
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
