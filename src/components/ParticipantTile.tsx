@@ -36,10 +36,10 @@ export function ParticipantTile({
   }, [participant, revision]);
 
   const frameClasses = isCurrentTurn
-    ? "border-4 border-amber-300 shadow-[0_0_26px_rgba(252,211,77,0.45)]"
+    ? "border-[3px] border-orange-300 shadow-[0_0_26px_rgba(249,115,22,0.38)]"
     : isHost
-      ? "border-2 border-emerald-400/45"
-      : "border border-emerald-900/60";
+      ? "border-2 border-cyan-200/30"
+      : "border border-white/10";
   const isOffline = player.connected === false && !videoTrack;
   const offlineClasses = isOffline ? "opacity-55 grayscale" : "";
   const avatarSize = variant === "host" ? 46 : 38;
@@ -57,7 +57,7 @@ export function ParticipantTile({
   return (
     <div
       className={[
-        "relative h-full w-full overflow-hidden rounded-[1.15rem] bg-emerald-950 transition-all",
+        "relative h-full w-full overflow-hidden rounded-lg bg-[#160d09] transition-all",
         frameClasses,
         offlineClasses,
       ].join(" ")}
@@ -93,11 +93,11 @@ export function ParticipantTile({
       ) : null}
 
       {isHost ? (
-        <div className="absolute right-2 top-2 z-10 rounded-full bg-amber-400 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-950 shadow">
+        <div className="absolute right-2 top-2 z-10 rounded-full bg-orange-500 px-2.5 py-1 text-[10px] font-black uppercase text-orange-50 shadow">
           Host
         </div>
       ) : isOffline ? (
-        <div className="absolute right-2 top-2 z-10 rounded-full border border-red-400/30 bg-red-950/65 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-red-200">
+        <div className="absolute right-2 top-2 z-10 rounded-full border border-red-400/30 bg-red-950/65 px-2.5 py-1 text-[10px] font-black uppercase text-red-200">
           Offline
         </div>
       ) : null}
@@ -107,7 +107,7 @@ export function ParticipantTile({
           className={[
             "absolute bottom-2 left-2 z-10 rounded-full p-0.5 shadow-lg",
             isCurrentTurn
-              ? "bg-amber-300 shadow-amber-300/35"
+              ? "bg-orange-400 shadow-orange-950/35"
               : "bg-emerald-950/88 shadow-black/30",
           ].join(" ")}
         >
@@ -134,7 +134,7 @@ export function ParticipantTile({
         </div>
       ) : null}
 
-      <div className="absolute bottom-2 right-2 z-10 max-w-[58%] rounded-full border border-emerald-100/10 bg-emerald-950/78 px-2.5 py-1 text-[10px] font-black text-emerald-50 shadow-lg shadow-black/25 backdrop-blur-sm">
+      <div className="absolute bottom-2 right-2 z-10 max-w-[58%] rounded-md border border-white/10 bg-[#0b0807]/88 px-2.5 py-1 text-[10px] font-black text-emerald-50 shadow-lg shadow-black/25 backdrop-blur-sm">
         <div className="truncate">{player.displayName}</div>
       </div>
     </div>

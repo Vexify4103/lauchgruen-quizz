@@ -71,12 +71,12 @@ export function ReviewQuestionModal({
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950/75 backdrop-blur-sm p-4">
-        <div className="bg-gradient-to-b from-emerald-900 to-emerald-950 border-2 border-emerald-600/60 rounded-2xl max-w-2xl w-full p-6 shadow-2xl flex flex-col gap-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/78 p-4 backdrop-blur-sm">
+        <div className="surface-panel-strong themed-scrollbar flex max-h-[94vh] w-full max-w-2xl flex-col gap-4 overflow-y-auto border-cyan-200/18 p-5 shadow-2xl shadow-black/45 sm:p-6">
 
           {/* Header */}
           <div className="flex items-center justify-between">
-            <span className="inline-block bg-emerald-700 text-emerald-100 text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full shadow">
+            <span className="quiz-status border-cyan-200/20 bg-cyan-200/[0.08] text-cyan-50 shadow">
               🔍 Überprüfung · {categoryName} · {q.points}
             </span>
             {/* Anyone can close their own local view; only host can close broadcast */}
@@ -92,7 +92,7 @@ export function ReviewQuestionModal({
           </div>
 
           {/* Prompt */}
-          <div className="text-2xl font-bold text-amber-50 text-center leading-snug">
+          <div className="text-center text-2xl font-black leading-snug text-emerald-50">
             {q.prompt}
           </div>
 

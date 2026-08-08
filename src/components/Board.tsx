@@ -33,17 +33,17 @@ export function Board({ game, onPickCell, onViewCell, onSwitchBoard }: Props) {
                 disabled={!canSwitch}
                 onClick={() => canSwitch && onSwitchBoard?.(idx)}
                 className={[
-                  "flex-1 rounded-2xl border px-3 py-2 text-xs font-black uppercase tracking-[0.16em] transition-all",
+                  "flex-1 rounded-lg border px-3 py-2 text-xs font-black uppercase transition-all",
                   isCurrent
-                    ? "border-amber-200 bg-gradient-to-r from-amber-300 to-orange-300 text-emerald-950 shadow-lg shadow-amber-500/15"
+                    ? "border-orange-200/45 bg-orange-500 text-orange-50 shadow-lg shadow-orange-950/30"
                     : allUsed
                       ? "border-emerald-900/30 bg-emerald-950/30 text-emerald-700 line-through"
                       : canSwitch
-                        ? "border-emerald-700 bg-emerald-900/85 text-amber-200 hover:border-amber-300/35 hover:bg-emerald-800"
-                        : "border-emerald-800/35 bg-emerald-900/40 text-amber-300/45",
+                        ? "border-white/10 bg-white/[0.04] text-orange-100 hover:border-orange-300/30 hover:bg-orange-400/[0.08]"
+                        : "border-white/8 bg-white/[0.025] text-emerald-100/30",
                 ].join(" ")}
               >
-                Feld {idx + 1}
+                Prüfung {idx + 1}
               </button>
             );
           })}
@@ -51,13 +51,13 @@ export function Board({ game, onPickCell, onViewCell, onSwitchBoard }: Props) {
       ) : null}
 
       {isBoardLocked ? (
-        <div className="shrink-0 rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.14em] text-amber-200/82">
-          Feld {game.currentBoardIndex + 1} wird freigeschaltet, sobald das vorige Feld leer gespielt ist
+        <div className="shrink-0 rounded-lg border border-amber-300/20 bg-amber-300/[0.07] px-4 py-2 text-center text-xs font-bold uppercase text-amber-100/75">
+          Prüfung {game.currentBoardIndex + 1} wird freigeschaltet, sobald die vorige Prüfung abgeschlossen ist
         </div>
       ) : null}
 
       <div
-        className="grid min-h-0 flex-1 gap-2 select-none rounded-[1.5rem] bg-[#031a12] p-2"
+        className="grid min-h-0 flex-1 select-none gap-1.5 rounded-lg border border-white/7 bg-black/25 p-1.5"
         style={{
           gridTemplateColumns: `repeat(${game.categories.length}, minmax(0, 1fr))`,
           gridTemplateRows: `auto repeat(${POINT_VALUES.length}, minmax(0, 1fr))`,
@@ -66,7 +66,7 @@ export function Board({ game, onPickCell, onViewCell, onSwitchBoard }: Props) {
         {game.categories.map((category) => (
           <div
             key={category.id}
-            className="flex items-center justify-center rounded-2xl border border-red-400/40 bg-gradient-to-b from-red-700 via-red-800 to-red-950 px-2 py-3 text-center text-[11px] font-black uppercase tracking-[0.16em] text-red-50 shadow-lg shadow-black/15"
+            className="flex items-center justify-center rounded-lg border border-orange-300/18 bg-gradient-to-b from-[#4a1f12] to-[#25120d] px-2 py-3 text-center text-[11px] font-black uppercase text-orange-50 shadow-lg shadow-black/20"
           >
             {category.displayName}
           </div>
@@ -83,7 +83,7 @@ export function Board({ game, onPickCell, onViewCell, onSwitchBoard }: Props) {
               return (
                 <div
                   key={`${category.id}-${points}`}
-                  className="rounded-2xl bg-emerald-950/35"
+                  className="rounded-lg bg-black/20"
                 />
               );
             }
@@ -96,16 +96,16 @@ export function Board({ game, onPickCell, onViewCell, onSwitchBoard }: Props) {
                   disabled={!onViewCell}
                   onClick={() => onViewCell?.(category.id, points)}
                   className={[
-                    "relative flex items-center justify-center overflow-hidden rounded-2xl border text-center font-black transition-all",
-                    "border-emerald-900/25 bg-gradient-to-b from-emerald-950/50 to-emerald-950/75 text-emerald-700/82",
+                    "relative flex items-center justify-center overflow-hidden rounded-lg border text-center font-black transition-all",
+                    "border-stone-800/45 bg-gradient-to-b from-stone-950/50 to-stone-950/75 text-stone-600/82",
                     onViewCell
-                      ? "hover:border-amber-400/18 hover:bg-emerald-900/70 hover:text-emerald-500"
+                      ? "hover:border-orange-400/25 hover:bg-orange-950/70 hover:text-orange-500"
                       : "cursor-not-allowed",
                   ].join(" ")}
                   style={{ fontSize: "clamp(0.8rem, 1.8vw, 1.4rem)" }}
                   title={onViewCell ? "Frage zur Nachschau öffnen" : undefined}
                 >
-                  <span className="absolute inset-x-4 top-1/2 h-px -translate-y-1/2 bg-emerald-700/45" />
+                  <span className="absolute inset-x-4 top-1/2 h-px -translate-y-1/2 bg-orange-900/45" />
                   <span className="relative">{points}</span>
                 </button>
               );
@@ -115,8 +115,8 @@ export function Board({ game, onPickCell, onViewCell, onSwitchBoard }: Props) {
               return (
                 <div
                   key={`${category.id}-${points}`}
-                  className="flex items-center justify-center rounded-2xl border border-emerald-900/20 bg-emerald-950/30 text-xl text-emerald-700/45"
-                  title="Vorheriges Feld muss erst abgeschlossen werden"
+                  className="flex items-center justify-center rounded-lg border border-white/5 bg-black/18 text-xl text-emerald-100/20"
+                  title="Vorherige Prüfung muss erst abgeschlossen werden"
                 >
                   •
                 </div>
@@ -130,16 +130,16 @@ export function Board({ game, onPickCell, onViewCell, onSwitchBoard }: Props) {
                 disabled={!onPickCell}
                 onClick={() => onPickCell?.(category.id, points)}
                 className={[
-                  "relative flex items-center justify-center overflow-hidden rounded-2xl border text-center font-black transition-all",
-                  "border-emerald-600/65 bg-gradient-to-b from-emerald-700 via-emerald-800 to-emerald-950 text-amber-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]",
+                  "relative flex items-center justify-center overflow-hidden rounded-lg border text-center font-black transition-all",
+                  "border-orange-300/18 bg-gradient-to-b from-[#4a2114] via-[#2e1710] to-[#170c09] text-amber-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
                   onPickCell
-                    ? "hover:-translate-y-0.5 hover:border-amber-300/40 hover:from-emerald-600 hover:via-emerald-700 hover:to-emerald-900 hover:text-amber-100 hover:shadow-xl hover:shadow-amber-500/12 active:translate-y-0"
+                    ? "hover:-translate-y-0.5 hover:border-orange-300/40 hover:from-[#713117] hover:via-[#4b2113] hover:to-[#21100c] hover:text-orange-100 hover:shadow-xl hover:shadow-orange-950/30 active:translate-y-0"
                     : "",
                 ].join(" ")}
                 style={{ fontSize: "clamp(0.85rem, 2vw, 1.55rem)" }}
               >
                 <span className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-white/6 to-transparent" />
-                <span className="relative tracking-[0.08em]">{points}</span>
+                <span className="relative">{points}</span>
               </button>
             );
           }),

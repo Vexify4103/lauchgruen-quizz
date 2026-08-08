@@ -7,7 +7,8 @@ rtc:
   port_range_start: 50100
   port_range_end: 50200
   use_external_ip: false
-  node_ip: 127.0.0.1
+  # Docker must advertise the Windows host address, not its container loopback.
+  node_ip: 192.168.178.155
 
 keys:
-  devkey: secret
+  devkey: local-dev-secret-8f3c2a7e5d1b9c4f

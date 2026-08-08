@@ -23,31 +23,29 @@ function apexHomeUrl(): string {
 export function GameNotFound({ code, reason = "not_found" }: Props) {
   const homeUrl = apexHomeUrl();
   const isKick = reason === "kicked";
-  const heading = isKick ? "Aus dem Spiel entfernt" : "Spiel nicht gefunden";
+  const heading = isKick ? "Aus der Prüfung entfernt" : "Prüfung nicht gefunden";
   const body = isKick
-    ? "Der Host hat dich aus dieser Lobby entfernt."
-    : "Dieses Spiel existiert nicht mehr - vermutlich ist die Runde vorbei oder der Code stimmt nicht.";
+    ? "Die Prüfungsleitung hat dich aus dem Versammlungsraum entfernt."
+    : "Diese Prüfung existiert nicht mehr - vermutlich ist sie vorbei oder der Code stimmt nicht.";
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-b from-emerald-900 via-emerald-950 to-emerald-900 px-6 py-16 text-emerald-50">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-amber-400/10 to-transparent blur-3xl" />
-
-      <div className="relative flex w-full max-w-lg flex-col items-center gap-8 text-center">
+    <div className="quiz-shell relative flex min-h-screen w-full flex-col items-center justify-center bg-[#0b0807] px-6 py-16 text-emerald-50">
+      <div className="surface-panel-strong relative flex w-full max-w-lg flex-col items-center gap-7 p-8 text-center sm:p-10">
         <Image
-          src="/bear-logo.png"
-          alt="QuizDuell Baer"
+          src="/naruto/shinobi-crest.png"
+          alt="Shinobi Quiz Wappen"
           width={140}
           height={140}
-          className="opacity-90 drop-shadow-2xl"
+          className="size-28 rounded-lg border border-orange-300/25 object-cover shadow-[0_0_34px_rgba(249,115,22,0.2)]"
           priority
         />
 
         <div className="space-y-3">
-          <div className="text-7xl font-extrabold tracking-tight text-amber-300 drop-shadow-lg">
+          <div className="text-6xl font-black text-lime-200">
             {isKick ? "X" : "404"}
           </div>
-          <h1 className="text-3xl font-extrabold text-amber-100">{heading}</h1>
-          <p className="leading-relaxed text-emerald-200/80">{body}</p>
+          <h1 className="text-3xl font-black text-emerald-50">{heading}</h1>
+          <p className="leading-relaxed text-emerald-100/58">{body}</p>
           {code ? (
             <p className="text-sm text-emerald-300/70">
               {isKick ? "Code:" : "Gesuchter Code:"}{" "}
@@ -60,7 +58,7 @@ export function GameNotFound({ code, reason = "not_found" }: Props) {
 
         <a
           href={homeUrl}
-          className="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 px-8 py-4 text-lg font-extrabold text-emerald-950 shadow-2xl shadow-amber-400/30 transition-all hover:scale-105 hover:from-amber-300 hover:to-amber-500 active:scale-95"
+          className="quiz-button-primary px-7 py-3 text-sm"
         >
           <span>Zurück zur Startseite</span>
         </a>

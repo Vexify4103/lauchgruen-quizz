@@ -10,12 +10,12 @@ export function TurnIndicator({ game }: Props) {
   const turnPlayer = game.currentTurn ? game.players[game.currentTurn] : null;
 
   return (
-    <div className="flex items-center gap-2 rounded-full border border-amber-400/20 bg-emerald-950/55 px-3 py-1.5 text-center shadow-lg">
-      <span className="shrink-0 text-[10px] font-bold uppercase tracking-widest text-emerald-300/56">
+    <div className="quiz-status border-orange-300/18 bg-orange-400/[0.06] text-center shadow-lg">
+      <span className="shrink-0 text-[10px] font-bold uppercase text-emerald-100/42">
         Zug
       </span>
       {turnPlayer ? (
-        <span className="max-w-[150px] truncate text-sm font-extrabold text-amber-100">
+        <span className="max-w-[150px] truncate text-sm font-extrabold normal-case text-lime-100">
           {turnPlayer.displayName}
         </span>
       ) : (

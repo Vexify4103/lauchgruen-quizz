@@ -22,9 +22,9 @@ export function CreateGameButton() {
           router.push(`/lobby/${gameId}`);
         });
       }}
-      className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 px-5 py-4 text-base font-black text-emerald-950 shadow-xl shadow-amber-500/20 transition-all hover:-translate-y-0.5 hover:shadow-amber-400/30 disabled:translate-y-0 disabled:opacity-60"
+      className="quiz-button-primary w-full py-3 text-sm disabled:translate-y-0 disabled:opacity-60"
     >
-      {pending ? "Spiel wird erstellt..." : "Neues Spiel hosten"}
+      {pending ? "Prüfung wird vorbereitet..." : "Neue Prüfung eröffnen"}
     </button>
   );
 }

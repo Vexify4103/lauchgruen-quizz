@@ -65,7 +65,7 @@ export function BuzzButton({ myPlayerId }: Props) {
     <div className="flex flex-col items-center gap-2">
       {isBonusBuzz && (
         <div className="text-xs font-extrabold text-amber-300 uppercase tracking-widest animate-pulse">
-          🎯 Bonusrunde!
+          Spezialprüfung
         </div>
       )}
       <button

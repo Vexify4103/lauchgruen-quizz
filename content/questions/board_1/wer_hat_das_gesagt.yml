@@ -1,5 +1,5 @@
 category: wer_hat_das_gesagt
-displayName: Wer hat das gesagt I
+displayName: Wer sagte das?
 questions:
   - points: 100
     prompt: "Wer hat das gesagt? - Ich werde sie alle vernichten! Jeden einzelnen von ihnen, der auf dieser Erde existiert!"

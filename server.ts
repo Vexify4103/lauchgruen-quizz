@@ -10,7 +10,7 @@ loadEnvConfig(process.cwd(), dev);
 // In production bind to all interfaces so the server is reachable from outside.
 // Override with HOSTNAME env var if needed (e.g. HOSTNAME=127.0.0.1 for local dev behind a proxy).
 const hostname = process.env.HOSTNAME ?? (dev ? "localhost" : "0.0.0.0");
-const port = Number(process.env.PORT ?? 3000);
+const port = Number(process.env.PORT ?? (dev ? 4000 : 3000));
 
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();

@@ -76,7 +76,7 @@ function ObsQuestionDisplay({
   const isReview = Boolean(reviewQuestion && !activeQuestion);
   const isBonus = currentQuestion.category === "_bonus_buzzer";
   const categoryName = isBonus
-    ? "Bonusrunde"
+    ? "Spezialprüfung"
     : game.categories.find((category) => category.id === currentQuestion.category)?.displayName ?? "Frage";
   const hasAnswer = Boolean(q.answer);
   const hasMedia = Boolean(q.imageUrl || q.answerImageUrl);
@@ -248,7 +248,7 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
   return (
     <LiveKitRoomProvider gameId={gameId} publish={false}>
       <div
-      className="flex h-screen w-screen flex-col overflow-hidden bg-gradient-to-b from-emerald-900 via-emerald-950 to-emerald-900 text-emerald-50"
+      className="quiz-shell flex h-screen w-screen flex-col overflow-hidden bg-[#0b0807] text-emerald-50"
       style={{ padding: compact ? "8px" : "10px", gap: compact ? "6px" : "8px" }}
     >
       <div
@@ -310,24 +310,24 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
           <div className="surface-panel-strong rounded-[1.6rem] p-4">
             <div className="flex items-center gap-3">
               <Image
-                src="/bear-logo.png"
-                alt="QuizDuell Bear"
+                src="/naruto/shinobi-crest.png"
+                alt="Shinobi Quiz Wappen"
                 width={compact ? 56 : 64}
                 height={compact ? 56 : 64}
-                className="rounded-2xl shadow-lg shadow-amber-500/10"
+                className="brand-mark"
                 priority
               />
               <div>
                 <div className="section-kicker">Broadcast</div>
-                <div className="mt-1 text-xl font-black tracking-tight text-amber-300">
-                  QUIZ<span className="text-emerald-100">DUELL</span>
+                <div className="mt-1 text-lg font-black text-emerald-50">
+                  Shinobi <span className="text-lime-200">Quiz</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="surface-panel rounded-[1.6rem] p-4">
-            <div className="section-kicker">Spielstand</div>
+            <div className="section-kicker">Rangliste</div>
             <div className="mt-3">
               <TurnIndicator game={game} />
             </div>
@@ -336,23 +336,23 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
                 <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300/52">
                   Phase
                 </div>
-                <div className="mt-1 text-sm font-black text-amber-100">
+                <div className="mt-1 text-sm font-black text-emerald-50">
                   {phaseLabel}
                 </div>
               </div>
               <div className="rounded-2xl border border-emerald-300/10 bg-emerald-950/35 p-3">
                 <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300/52">
-                  Board
+                  Prüfung
                 </div>
-                <div className="mt-1 text-sm font-black text-amber-100">
-                  Feld {game.currentBoardIndex + 1}
+                <div className="mt-1 text-sm font-black text-emerald-50">
+                  Runde {game.currentBoardIndex + 1}
                 </div>
               </div>
               <div className="rounded-2xl border border-emerald-300/10 bg-emerald-950/35 p-3">
                 <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300/52">
                   Status
                 </div>
-                <div className="mt-1 text-sm font-black text-amber-100">
+                <div className="mt-1 text-sm font-black text-emerald-50">
                   {boardStateLabel}
                 </div>
               </div>

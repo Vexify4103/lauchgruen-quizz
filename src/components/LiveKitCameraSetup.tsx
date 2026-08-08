@@ -53,7 +53,7 @@ export function LiveKitCameraSetup({
 
   return (
     <div className="mt-4 grid gap-4">
-      <div className="aspect-video w-full overflow-hidden rounded-2xl border border-emerald-300/16 bg-emerald-950/65">
+      <div className="aspect-video w-full overflow-hidden rounded-lg border border-white/10 bg-black/30">
         <ParticipantTile
           player={player}
           gameId={gameId}
@@ -64,7 +64,7 @@ export function LiveKitCameraSetup({
       </div>
 
         <div className="flex flex-col gap-3">
-        <div className="surface-panel grid gap-3 rounded-[1.4rem] p-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+        <div className="grid gap-3 rounded-lg border border-white/8 bg-white/[0.025] p-3 sm:grid-cols-[minmax(0,1fr)_auto]">
           <div className="relative min-w-0" ref={menuRef}>
             <div className="section-kicker">Kameraquelle</div>
             <button
@@ -73,10 +73,10 @@ export function LiveKitCameraSetup({
               disabled={disabled || status === "disabled"}
               aria-haspopup="listbox"
               aria-expanded={cameraMenuOpen}
-              className="mt-2 flex h-12 w-full min-w-0 items-center justify-between gap-3 rounded-2xl border border-emerald-300/16 bg-emerald-950/70 px-4 text-left text-sm font-black text-amber-100 shadow-inner shadow-black/18 outline-none transition-colors hover:border-emerald-300/28 focus:border-amber-300/55 disabled:cursor-not-allowed disabled:opacity-60"
+              className="quiz-input mt-2 flex h-12 w-full min-w-0 items-center justify-between gap-3 px-4 text-left text-sm font-black text-emerald-50 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <span className="truncate">{selectedCameraLabel}</span>
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-amber-300/20 bg-amber-300/10 text-amber-200">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-orange-300/20 bg-orange-400/[0.08] text-orange-100">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 20 20"
@@ -93,7 +93,7 @@ export function LiveKitCameraSetup({
             {cameraMenuOpen ? (
               <div
                 role="listbox"
-                className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 max-h-64 overflow-y-auto rounded-2xl border border-amber-300/22 bg-emerald-950/96 p-1.5 shadow-2xl shadow-black/45 backdrop-blur"
+                className="themed-scrollbar absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 max-h-64 overflow-y-auto rounded-lg border border-orange-300/20 bg-[#160d09]/98 p-1.5 shadow-2xl shadow-black/45 backdrop-blur"
               >
                 {[
                   { deviceId: "", label: "Browser-Standardkamera" },
@@ -101,11 +101,11 @@ export function LiveKitCameraSetup({
                     deviceId: device.deviceId,
                     label: device.label || `Kamera ${index + 1}`,
                   })),
-                ].map((device) => {
+                ].map((device, optionIndex) => {
                   const selected = device.deviceId === selectedVideoDeviceId;
                   return (
                     <button
-                      key={device.deviceId || "default"}
+                      key={`${device.deviceId || "default"}-${optionIndex}`}
                       type="button"
                       role="option"
                       aria-selected={selected}
@@ -117,8 +117,8 @@ export function LiveKitCameraSetup({
                       className={[
                         "flex min-h-10 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition-colors",
                         selected
-                          ? "bg-amber-300 text-emerald-950"
-                          : "text-emerald-100 hover:bg-emerald-800/70 hover:text-amber-100",
+                          ? "bg-orange-500 text-orange-50"
+                          : "text-emerald-100 hover:bg-white/[0.05] hover:text-lime-100",
                       ].join(" ")}
                     >
                       <span className="truncate">{device.label}</span>
@@ -138,22 +138,22 @@ export function LiveKitCameraSetup({
             type="button"
             onClick={() => void refreshVideoDevices()}
             disabled={disabled || status === "disabled"}
-            className="h-12 self-end rounded-2xl border border-emerald-300/18 bg-emerald-950/55 px-4 text-xs font-black uppercase tracking-[0.14em] text-emerald-100 transition-colors hover:border-amber-300/32 hover:bg-emerald-900/55 hover:text-amber-200 disabled:cursor-not-allowed disabled:opacity-60"
+            className="quiz-button-secondary h-12 self-end px-4 disabled:cursor-not-allowed disabled:opacity-60"
           >
             Aktualisieren
           </button>
         </div>
 
-        <div className="rounded-2xl border border-emerald-300/12 bg-emerald-950/35 px-4 py-3 text-sm leading-6 text-emerald-100/74">
+        <div className="rounded-lg border border-white/8 bg-white/[0.025] px-4 py-3 text-sm leading-6 text-emerald-100/58">
           {status === "disabled"
             ? "LiveKit ist noch nicht konfiguriert. Setze LIVEKIT_* Variablen, dann verbindet sich die Kamera hier direkt."
             : isLive
-              ? "Kamera ist mit dem QuizDuell-Videoraum verbunden. Du kannst die Quelle wechseln und erneut verbinden."
+              ? "Kamera ist mit dem Shinobi-Videoraum verbunden. Du kannst die Quelle jederzeit wechseln."
               : "Wähle bei Bedarf OBS Virtual Camera oder eine andere Kamera, dann startet dein Browser den Videostream."}
         </div>
 
         {error ? (
-          <div className="rounded-2xl border border-red-400/24 bg-red-950/40 px-4 py-3 text-sm text-red-100">
+          <div className="rounded-lg border border-red-400/24 bg-red-950/40 px-4 py-3 text-sm text-red-100">
             {error}
           </div>
         ) : null}
@@ -163,7 +163,7 @@ export function LiveKitCameraSetup({
             type="button"
             onClick={() => void publishCamera()}
             disabled={disabled}
-            className="inline-flex w-fit items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950 shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
+            className="quiz-button-primary w-fit disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {disabled
               ? "Kamera verbindet..."

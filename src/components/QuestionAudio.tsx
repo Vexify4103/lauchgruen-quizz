@@ -97,7 +97,7 @@ export function QuestionAudio({ src }: Props) {
   const pct = duration > 0 ? (position / duration) * 100 : 0;
 
   return (
-    <div className="w-full max-w-md mx-auto bg-emerald-950/80 border border-amber-400/40 rounded-xl p-3 flex items-center gap-3 shadow-lg">
+    <div className="mx-auto flex w-full max-w-md items-center gap-3 rounded-lg border border-white/10 bg-black/25 p-3 shadow-lg">
       {/* Native element — hidden, we drive it via the custom UI. */}
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio ref={audioRef} src={src} preload="metadata" />
@@ -111,7 +111,7 @@ export function QuestionAudio({ src }: Props) {
           "shrink-0 w-12 h-12 rounded-full font-extrabold text-xl transition-all border-2 flex items-center justify-center",
           error
             ? "bg-red-900 border-red-700 text-red-300 cursor-not-allowed"
-            : "bg-gradient-to-br from-amber-400 to-amber-600 border-amber-200 text-emerald-950 hover:scale-105 active:scale-95 shadow-lg shadow-amber-400/30",
+            : "border-orange-200 bg-orange-500 text-orange-50 shadow-lg shadow-orange-950/30 hover:scale-105 active:scale-95",
         ].join(" ")}
       >
         {playing ? "❚❚" : "▶"}
@@ -129,13 +129,13 @@ export function QuestionAudio({ src }: Props) {
               step={0.1}
               value={position}
               onChange={onSeek}
-              className="w-full h-1.5 appearance-none rounded-full bg-emerald-900 cursor-pointer accent-amber-400"
+              className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-emerald-900 accent-lime-300"
               style={{
-                background: `linear-gradient(to right, rgb(252 211 77) ${pct}%, rgb(6 78 59) ${pct}%)`,
+                background: `linear-gradient(to right, rgb(190 242 100) ${pct}%, rgb(6 78 59) ${pct}%)`,
               }}
               disabled={!duration}
             />
-            <div className="flex justify-between text-[10px] font-mono text-amber-300/70 tabular-nums">
+            <div className="flex justify-between font-mono text-[10px] tabular-nums text-lime-100/55">
               <span>{formatTime(position)}</span>
               <span>{formatTime(duration)}</span>
             </div>

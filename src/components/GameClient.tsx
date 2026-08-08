@@ -68,8 +68,8 @@ export function GameClient({ gameId, userId }: Props) {
 
   if (!game || !connected) {
     return (
-      <div className="flex h-screen w-screen items-center justify-center bg-emerald-950 text-amber-300">
-        Verbinde mit Spiel...
+      <div className="quiz-shell flex h-screen w-screen items-center justify-center bg-[#0b0807] text-lime-200">
+        <div className="quiz-status"><span className="quiz-live-dot" /> Verbinde mit Spiel...</div>
       </div>
     );
   }
@@ -144,36 +144,36 @@ export function GameClient({ gameId, userId }: Props) {
         : "Frage aktiv"
     : game.phase === "finished"
       ? "Spiel beendet"
-      : "Board bereit";
+      : "Prüfungsbrett bereit";
   const currentViewer = game.players[userId];
   const chatChannel = currentViewer?.twitchLogin ?? null;
   return (
     <LiveKitRoomProvider gameId={gameId} publish={Boolean(currentViewer)}>
       <div
-      className="flex h-screen w-screen flex-col overflow-hidden bg-gradient-to-b from-emerald-900 via-emerald-950 to-emerald-900 text-emerald-50"
+      className="quiz-shell flex h-screen w-screen flex-col overflow-hidden bg-[#0b0807] text-emerald-50"
       style={{ padding: "10px", gap: "8px" }}
     >
-      <header className="surface-panel-strong flex shrink-0 items-center justify-between rounded-[1.6rem] px-4 py-3">
+      <header className="surface-panel-strong flex shrink-0 items-center justify-between px-4 py-3">
         <div className="flex min-w-0 items-center gap-4">
           <Link
             href="/"
-            className="hidden text-sm text-emerald-300/62 transition-colors hover:text-amber-300 sm:block"
+            className="hidden text-xs font-bold text-emerald-100/42 transition-colors hover:text-lime-100 sm:block"
           >
             Startseite
           </Link>
           <div className="flex items-center gap-3">
             <Image
-              src="/bear-logo.png"
-              alt="Bear"
+              src="/naruto/shinobi-crest.png"
+              alt="Shinobi Quiz Wappen"
               width={34}
               height={34}
-              className="rounded-xl shadow-lg shadow-amber-500/10"
+              className="brand-mark !size-[34px]"
               priority
             />
             <div className="min-w-0">
-              <div className="section-kicker">Live-Spiel</div>
-              <div className="truncate text-xl font-black tracking-tight text-amber-300">
-                QUIZ<span className="text-emerald-100">DUELL</span>
+              <div className="section-kicker">Chunin-Prüfung</div>
+              <div className="truncate text-lg font-black text-emerald-50">
+                Shinobi <span className="text-lime-200">Quiz</span>
               </div>
             </div>
           </div>
@@ -181,10 +181,10 @@ export function GameClient({ gameId, userId }: Props) {
 
         <div className="hidden items-center gap-3 lg:flex">
           <TurnIndicator game={game} />
-          <div className="rounded-full border border-emerald-300/16 bg-emerald-950/45 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-emerald-200/72">
+          <div className="quiz-status">
             {boardStateLabel}
           </div>
-          <div className="rounded-full border border-emerald-300/16 bg-emerald-950/45 px-3 py-1.5 font-mono text-xs font-bold tracking-[0.22em] text-amber-300">
+          <div className="quiz-status font-mono text-lime-200">
             {gameId}
           </div>
         </div>
@@ -223,7 +223,7 @@ export function GameClient({ gameId, userId }: Props) {
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
                 <div className="section-kicker">Stream-Chat</div>
-                <div className="mt-1 truncate text-sm font-black text-amber-100">
+                <div className="mt-1 truncate text-sm font-black text-emerald-50">
                   {chatChannel ? `@${chatChannel}` : "Kein Twitch-Login"}
                 </div>
               </div>
@@ -277,7 +277,7 @@ export function GameClient({ gameId, userId }: Props) {
           {!isHost ? (
             <div className="surface-panel h-full rounded-[1.6rem] p-4">
               <div className="section-kicker">Spieler</div>
-              <div className="mt-3 text-xl font-black text-amber-100">
+              <div className="mt-3 text-xl font-black text-emerald-50">
                 Deine Aktion
               </div>
               <p className="mt-2 text-sm leading-6 text-emerald-100/72">
@@ -286,7 +286,7 @@ export function GameClient({ gameId, userId }: Props) {
               </p>
               {!game.activeQuestion ? (
                 <div className="mt-4 rounded-2xl border border-emerald-300/10 bg-emerald-950/35 p-4 text-sm text-emerald-100/68">
-                  Kein aktiver Buzzer. Das Board ist bereit für den nächsten Pick.
+                  Kein aktiver Buzzer. Das Prüfungsbrett wartet auf die nächste Aufgabe.
                 </div>
               ) : (
                 <div className="mt-5 flex justify-center">

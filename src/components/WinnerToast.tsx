@@ -25,10 +25,10 @@ export function WinnerToast({ game, durationMs = 6500 }: Props) {
 
   return (
     <div className="pointer-events-none fixed left-1/2 top-5 z-[85] w-[min(92vw,520px)] -translate-x-1/2">
-      <div className="rounded-[1.5rem] border border-amber-300/50 bg-emerald-950/92 px-5 py-4 text-center shadow-2xl shadow-amber-500/20 backdrop-blur-md">
-        <div className="section-kicker">Ergebnis</div>
-        <div className="mt-1 text-2xl font-black leading-tight text-amber-200">
-          {winner.displayName} gewinnt
+      <div className="surface-panel-strong border-orange-300/35 px-5 py-4 text-center shadow-2xl shadow-orange-950/35 backdrop-blur-md">
+        <div className="section-kicker">Prüfung bestanden</div>
+        <div className="mt-1 text-2xl font-black leading-tight text-lime-100">
+          {winner.displayName} steigt zum Sieger auf
         </div>
         <div className="mt-1 text-sm font-bold text-emerald-100/72">
           {winner.score} Punkte

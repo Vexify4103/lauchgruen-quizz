@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { auth, signIn, signOut } from "@/lib/auth";
 import { CreateGameButton } from "@/components/CreateGameButton";
 import { JoinGameForm } from "@/components/JoinGameForm";
@@ -20,230 +21,224 @@ export default async function Home({
       : null;
 
   return (
-    <div className="relative min-h-screen overflow-hidden px-6 text-emerald-50">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[28rem] bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.16),transparent_62%)]" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(16,185,129,0.12),transparent_65%)]" />
+    <div className="quiz-shell flex min-h-screen flex-col bg-[#0b0807] text-emerald-50">
+      <a
+        href="#main-content"
+        className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-orange-500 px-4 py-3 text-xs font-black uppercase text-orange-50 shadow-xl transition focus:translate-y-0"
+      >
+        Zum Inhalt
+      </a>
 
-      <main className="relative mx-auto flex min-h-screen w-full max-w-6xl items-center py-10 lg:py-14">
-        <div className="grid w-full gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <section className="flex flex-col gap-8">
-            <div className="brand-chip w-fit">
-              <Image
-                src="/bear-logo.png"
-                alt="QuizDuell Bear"
-                width={96}
-                height={96}
-                className="brand-mark rounded-2xl shadow-2xl shadow-amber-500/10"
-                priority
-              />
-              <div>
-                <div className="section-kicker">Live Gameshow</div>
-                <div className="mt-2 text-2xl font-black tracking-tight text-amber-300 sm:text-3xl">
-                  QUIZ<span className="text-emerald-100">DUELL</span>
-                </div>
-              </div>
+      <header className="sticky top-0 z-40 border-b border-white/8 bg-[#0b0807]/90 backdrop-blur-xl">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
+          <Link href="/" className="quiz-brand min-w-0">
+            <Image
+              src="/naruto/shinobi-crest.png"
+              alt="Lauchgruen Shinobi Quiz"
+              width={48}
+              height={48}
+              className="brand-mark"
+              priority
+            />
+            <span className="min-w-0">
+              <span className="section-kicker block">Lauchgruen</span>
+              <span className="mt-1 block truncate text-base font-black text-emerald-50">
+                Shinobi Quiz
+              </span>
+            </span>
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <span className="quiz-status hidden sm:inline-flex">
+              <span className="quiz-live-dot" /> Chunin-Prüfung
+            </span>
+            <a
+              href="https://lauchgruen.de"
+              className="quiz-button-secondary min-h-10 px-3"
+            >
+              Hauptseite
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto grid w-full max-w-7xl flex-1 gap-4 px-5 py-6 sm:px-8 sm:py-10 lg:grid-cols-12"
+      >
+        <section className="shinobi-hero surface-panel-strong relative overflow-hidden p-6 sm:p-8 lg:col-span-7 lg:p-10">
+          <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-red-800 via-orange-500 to-cyan-300" />
+          <div className="flex h-full flex-col">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <span className="quiz-status border-orange-300/20 bg-orange-400/[0.08] text-orange-100/75">
+                <span className="quiz-live-dot" /> Die Prüfung beginnt
+              </span>
+              <span className="font-mono text-xs font-black text-emerald-100/25">
+                LG / SHINOBI
+              </span>
             </div>
 
-            <div className="max-w-2xl">
-              <h1 className="text-4xl font-black leading-tight tracking-tight text-emerald-50 sm:text-5xl lg:text-6xl">
-                Die Gameshow für besondere Stream-Events und eingeladene
-                Gäste.
+            <div className="my-auto py-10 sm:py-14">
+              <div className="section-kicker text-cyan-100/50">
+                Wissen · Buzzer · Ehre
+              </div>
+              <h1 className="shinobi-display shinobi-wordmark mt-4 max-w-[14ch] text-4xl font-black leading-[0.98] sm:text-5xl">
+                Lauchgruen <strong>Shinobi Quiz</strong>.
               </h1>
-              <p className="mt-5 max-w-xl text-base leading-7 text-emerald-100/78 sm:text-lg">
-                QuizDuell ist kein offenes Tool, sondern wird für ausgewählte
-                Runden auf lauchgruen genutzt. Wenn du einen Spielcode hast,
-                bist du für das Event eingeplant.
+              <p className="mt-5 max-w-2xl text-base leading-7 text-emerald-100/58">
+                Werde zur Legende deiner Generation. Eine private
+                Naruto-Quizrunde für eingeladene Shinobi mit drei
+                Prüfungsrunden, Live-Kameras und Buzzer.
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div className="surface-panel rounded-3xl p-5">
-                <div className="section-kicker">Format</div>
-                <div className="mt-3 text-lg font-bold text-amber-100">
-                  Private Showrunde
+            <div className="grid border-t border-white/8 sm:grid-cols-3 sm:divide-x sm:divide-white/8">
+              {[
+                ["01", "Einschreiben", "Mit Twitch und Prüfungscode"],
+                ["02", "Sammeln", "Kamera und Ausrüstung prüfen"],
+                ["03", "Bestehen", "Buzzern, antworten, aufsteigen"],
+              ].map(([index, title, detail]) => (
+                <div key={index} className="flex gap-3 py-4 sm:px-4 sm:first:pl-0 sm:last:pr-0">
+                  <span className="font-mono text-[10px] font-black text-lime-200/38">
+                    {index}
+                  </span>
+                  <div>
+                    <div className="text-sm font-black text-emerald-50">{title}</div>
+                    <div className="mt-1 text-xs text-emerald-100/42">{detail}</div>
+                  </div>
                 </div>
-                <p className="mt-2 text-sm leading-6 text-emerald-100/72">
-                  Gespielt wird nur im Rahmen geplanter Streams und Events mit
-                  eingeladenen Teilnehmenden.
-                </p>
-              </div>
-              <div className="surface-panel rounded-3xl p-5">
-                <div className="section-kicker">Zugang</div>
-                <div className="mt-3 text-lg font-bold text-amber-100">
-                  Eintritt per Code
-                </div>
-                <p className="mt-2 text-sm leading-6 text-emerald-100/72">
-                  Ohne Einladung oder Spielcode gibt es nichts vorzubereiten,
-                  nur auf das nächste Event warten.
-                </p>
-              </div>
-              <div className="surface-panel rounded-3xl p-5">
-                <div className="section-kicker">Live</div>
-                <div className="mt-3 text-lg font-bold text-amber-100">
-                  On Stream
-                </div>
-                <p className="mt-2 text-sm leading-6 text-emerald-100/72">
-                  Kategorien, Punkte und Buzzer laufen live, sobald die Runde
-                  auf Sendung geht.
-                </p>
-              </div>
+              ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section className="surface-panel-strong rounded-[2rem] p-5 sm:p-7 lg:p-8">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="section-kicker">Spielzentrale</div>
-                <h2 className="mt-3 text-2xl font-black tracking-tight text-amber-100 sm:text-3xl">
-                  Rein in die nächste Runde
-                </h2>
-              </div>
-              <div className="hidden rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-amber-200 sm:block">
-                Multi-Streamer
-              </div>
+        <section className="surface-panel p-5 sm:p-7 lg:col-span-5">
+          <div className="flex items-start justify-between gap-4 border-b border-white/8 pb-5">
+            <div>
+              <div className="section-kicker">Meldehalle</div>
+              <h2 className="mt-2 text-2xl font-black text-emerald-50">
+                Zugang zur Prüfung
+              </h2>
             </div>
+            <span className="quiz-status">Bis zu 6 Shinobi</span>
+          </div>
 
-            {errorMessage ? (
-              <div className="mt-6 rounded-2xl border border-red-500/40 bg-red-950/40 px-4 py-3 text-sm text-red-100">
-                {errorMessage}
-              </div>
-            ) : null}
+          {errorMessage ? (
+            <div className="mt-5 rounded-lg border border-red-300/20 bg-red-950/40 px-4 py-3 text-sm text-red-100">
+              {errorMessage}
+            </div>
+          ) : null}
 
-            {session?.user ? (
-              <div className="mt-6 flex flex-col gap-5">
-                <div className="surface-panel rounded-[1.6rem] p-4 sm:p-5">
-                  <div className="flex items-center gap-4">
-                    {session.user.image ? (
-                      <Image
-                        src={session.user.image}
-                        alt={session.user.name ?? "avatar"}
-                        width={56}
-                        height={56}
-                        className="rounded-2xl border-2 border-amber-400 object-cover shadow-lg shadow-amber-500/10"
-                      />
-                    ) : (
-                      <div className="h-14 w-14 rounded-2xl bg-emerald-900/70" />
-                    )}
-                    <div className="min-w-0">
-                      <div className="text-xs font-bold uppercase tracking-[0.28em] text-emerald-300/68">
-                        Eingeloggt als
-                      </div>
-                      <div className="mt-1 truncate text-xl font-black text-amber-100">
-                        {session.user.name}
-                      </div>
-                      <div className="text-sm text-emerald-200/72">
-                        @{session.user.twitchLogin}
-                      </div>
-                    </div>
+          {session?.user ? (
+            <div className="mt-5 flex flex-col gap-6">
+              <div className="flex items-center gap-4 border-b border-white/8 pb-5">
+                {session.user.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name ?? "Twitch-Avatar"}
+                    width={48}
+                    height={48}
+                    className="size-12 rounded-lg border border-lime-200/24 object-cover"
+                  />
+                ) : (
+                  <div className="size-12 rounded-lg border border-white/10 bg-white/[0.04]" />
+                )}
+                <div className="min-w-0 flex-1">
+                  <div className="section-kicker">Angemeldet</div>
+                  <div className="mt-1 truncate text-lg font-black text-emerald-50">
+                    {session.user.name}
+                  </div>
+                  <div className="truncate text-xs text-emerald-100/45">
+                    @{session.user.twitchLogin}
                   </div>
                 </div>
+                <span className="quiz-status border-lime-200/18 text-lime-100/70">
+                  <span className="quiz-live-dot" /> Online
+                </span>
+              </div>
 
-                {canHost ? (
-                  <div className="surface-panel rounded-[1.6rem] p-5">
-                    <div className="section-kicker">Hosten</div>
-                    <div className="mt-3 text-xl font-black text-amber-100">
-                      Event-Lobby starten
-                    </div>
-                    <p className="mt-2 text-sm leading-6 text-emerald-100/72">
-                      Nur für freigeschaltete Hosts. Starte die Lobby für die
-                      nächste geplante QuizDuell-Runde.
-                    </p>
-                    <div className="mt-5">
-                      <CreateGameButton />
-                    </div>
-                  </div>
-                ) : null}
-
-                <div className="surface-panel rounded-[1.6rem] p-5">
-                  <div className="section-kicker">Beitreten</div>
-                  <div className="mt-3 text-xl font-black text-amber-100">
-                    Mit Einladungscode beitreten
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-emerald-100/72">
-                    Du bist für die Runde eingeplant? Dann mit dem erhaltenen
-                    Spielcode direkt in die Lobby.
+              {canHost ? (
+                <div>
+                  <div className="section-kicker">Host</div>
+                  <h3 className="mt-2 text-lg font-black text-emerald-50">
+                    Neue Prüfung eröffnen
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-emerald-100/52">
+                    Erstellt einen neuen Code und öffnet den Versammlungsraum.
                   </p>
-                  <div className="mt-5">
-                    <JoinGameForm />
+                  <div className="mt-4">
+                    <CreateGameButton />
                   </div>
                 </div>
+              ) : null}
 
+              <div className={canHost ? "border-t border-white/8 pt-6" : ""}>
+                <div className="section-kicker">Teilnehmen</div>
+                <h3 className="mt-2 text-lg font-black text-emerald-50">
+                  Prüfungscode eingeben
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-emerald-100/52">
+                  Den Code aus der Einladung verwenden, um dem richtigen Team
+                  beizutreten.
+                </p>
+                <div className="mt-4">
+                  <JoinGameForm />
+                </div>
+              </div>
+
+              <form
+                className="border-t border-white/8 pt-4"
+                action={async () => {
+                  "use server";
+                  await signOut({ redirectTo: "/" });
+                }}
+              >
+                <button type="submit" className="text-xs font-bold text-emerald-100/42 transition hover:text-lime-100">
+                  Twitch-Konto abmelden
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="mt-5 flex min-h-[26rem] flex-col justify-between">
+              <div>
+                <div className="section-kicker">Twitch Login</div>
+                <h3 className="mt-3 text-2xl font-black text-emerald-50">
+                  Deine Identität für Prüfung, Kamera und Chat.
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-emerald-100/52">
+                  Deine Twitch-Identität verbindet Avatar, Anzeigename und den
+                  richtigen Chat mit der Prüfung. Ohne Einladungscode bleibt
+                  das Dorfportal geschlossen.
+                </p>
+              </div>
+
+              <div className="border-t border-white/8 pt-5">
                 <form
                   action={async () => {
                     "use server";
-                    await signOut({ redirectTo: "/" });
+                    await signIn("twitch", { redirectTo: "/" });
                   }}
                 >
-                  <button
-                    type="submit"
-                    className="text-sm font-medium text-emerald-300/70 underline decoration-emerald-400/30 underline-offset-4 transition-colors hover:text-amber-300"
-                  >
-                    Abmelden
+                  <button type="submit" className="quiz-button-primary w-full py-3 text-sm">
+                    Mit Twitch anmelden
                   </button>
                 </form>
+                <p className="mt-3 text-center text-xs leading-5 text-emerald-100/34">
+                  Zugang nur für eingeladene Teilnehmer dieser Prüfung.
+                </p>
               </div>
-            ) : (
-              <div className="mt-6 flex flex-col gap-5">
-                <div className="surface-panel rounded-[1.6rem] p-5">
-                  <div className="section-kicker">Anmelden</div>
-                  <div className="mt-3 text-xl font-black text-amber-100">
-                    Twitch rein, Runde los
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-emerald-100/72">
-                    Login via Twitch, danach kannst du hosten oder mit einem Code
-                    beitreten.
-                  </p>
-                  <form
-                    className="mt-5"
-                    action={async () => {
-                      "use server";
-                      await signIn("twitch", { redirectTo: "/" });
-                    }}
-                  >
-                    <button
-                      type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 px-6 py-4 text-base font-black text-emerald-950 shadow-xl shadow-amber-500/20 transition-transform hover:-translate-y-0.5 hover:shadow-amber-400/30"
-                    >
-                      Mit Twitch anmelden
-                    </button>
-                  </form>
-                </div>
-
-                <div className="rounded-[1.6rem] border border-emerald-400/12 bg-emerald-950/35 p-5">
-                  <div className="section-kicker">Hinweis</div>
-                  <p className="mt-3 text-sm leading-6 text-emerald-100/72">
-                    QuizDuell wird für ausgewählte Events auf Twitch genutzt.
-                    Ohne Einladung brauchst du hier nichts weiter zu tun.
-                  </p>
-                </div>
-              </div>
-            )}
-          </section>
-        </div>
+            </div>
+          )}
+        </section>
       </main>
 
-      <footer className="relative border-t border-emerald-300/12 px-6 pb-8 pt-6">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 text-sm text-emerald-200/58 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="text-xs font-bold uppercase tracking-[0.24em] text-emerald-300/46">
-              QuizDuell
-            </div>
-            <p className="mt-2 max-w-md leading-6">
-              Echtzeit-Gameshow für Streamer, gebaut für schnelle Lobbys,
-              klare Join-Flows und saubere Showstarts.
-            </p>
-          </div>
-          <div className="text-sm text-emerald-100/62 sm:text-right">
-            <div>© {new Date().getFullYear()} QuizDuell</div>
-            <a
-              href={VEXIFY_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 inline-flex items-center gap-2 font-semibold text-amber-200 transition-colors hover:text-amber-100"
-            >
-              Crafted by vexify
-            </a>
-          </div>
+      <footer className="border-t border-white/7 px-5 py-6 sm:px-8">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 text-xs text-emerald-100/35 sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} Lauchgruen · Shinobi Quiz</span>
+          <a href={VEXIFY_URL} target="_blank" rel="noreferrer" className="font-bold transition hover:text-lime-100">
+            Crafted by Vexify
+          </a>
         </div>
       </footer>
     </div>

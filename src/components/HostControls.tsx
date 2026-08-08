@@ -41,11 +41,16 @@ export function HostControls({ game }: Props) {
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
-    <div className="surface-panel themed-scrollbar h-full overflow-y-auto rounded-[1.6rem] p-4">
-      <div className="section-kicker">Host-Steuerung</div>
-      <div className="mt-3 text-xl font-black text-amber-100">Regie</div>
-      <div className="mt-2 text-sm text-emerald-100/72">
-        Phase: <span className="font-bold text-amber-300">{phaseLabel}</span>
+    <div className="surface-panel themed-scrollbar h-full overflow-y-auto p-4">
+      <div className="flex items-start justify-between gap-3 border-b border-white/8 pb-4">
+        <div>
+          <div className="section-kicker">Prüfungsleitung</div>
+          <div className="mt-2 text-xl font-black text-emerald-50">Kontrollraum</div>
+        </div>
+        <span className="quiz-status"><span className="quiz-live-dot" /> {phaseLabel}</span>
+      </div>
+      <div className="mt-3 text-sm text-emerald-100/58">
+        Aktuelle Phase: <span className="font-bold text-lime-200">{phaseLabel}</span>
         {game.isBonusRound ? (
           <span className="ml-2 rounded-full bg-amber-400/16 px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-200">
             Bonus
@@ -54,7 +59,7 @@ export function HostControls({ game }: Props) {
       </div>
 
       {isBonusPending ? (
-        <div className="mt-5 rounded-[1.4rem] border border-amber-400/35 bg-amber-400/10 p-4">
+        <div className="mt-4 rounded-lg border border-amber-300/25 bg-amber-300/[0.07] p-4">
           <div className="text-sm font-black uppercase tracking-[0.18em] text-amber-200">
             Bonus bereit
           </div>
@@ -62,14 +67,14 @@ export function HostControls({ game }: Props) {
             <button
               type="button"
               onClick={() => emit("host:open_bonus_buzzers")}
-              className="rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950"
+              className="quiz-button-primary w-full"
             >
               Bonus-Buzzer öffnen
             </button>
             <button
               type="button"
               onClick={() => emit("host:cancel_bonus_buzz")}
-              className="rounded-2xl border border-red-500/35 bg-red-950/35 px-4 py-3 text-sm font-bold text-red-200 transition-colors hover:bg-red-900/45"
+              className="quiz-button-danger w-full"
             >
               Bonus überspringen
             </button>
@@ -78,7 +83,7 @@ export function HostControls({ game }: Props) {
       ) : null}
 
       {isBonusBuzz ? (
-        <div className="mt-5 rounded-[1.4rem] border border-amber-400/30 bg-amber-400/10 p-4">
+        <div className="mt-4 rounded-lg border border-amber-300/25 bg-amber-300/[0.07] p-4">
           <div className="text-sm font-black uppercase tracking-[0.18em] text-amber-200">
             Bonus-Buzzer offen
           </div>
@@ -86,14 +91,14 @@ export function HostControls({ game }: Props) {
             <button
               type="button"
               onClick={() => emit("host:force_resolve_bonus")}
-              className="rounded-2xl bg-amber-400 px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950"
+              className="quiz-button-primary w-full"
             >
               Buzz auswerten
             </button>
             <button
               type="button"
               onClick={() => emit("host:cancel_bonus_buzz")}
-              className="rounded-2xl border border-red-500/35 bg-red-950/35 px-4 py-3 text-sm font-bold text-red-200 transition-colors hover:bg-red-900/45"
+              className="quiz-button-danger w-full"
             >
               Bonus abbrechen
             </button>
@@ -102,7 +107,7 @@ export function HostControls({ game }: Props) {
       ) : null}
 
       {isBonusAnswering && bonusAnswererName ? (
-        <div className="mt-5 rounded-[1.4rem] border border-amber-400/30 bg-amber-400/10 p-4">
+        <div className="mt-4 rounded-lg border border-amber-300/25 bg-amber-300/[0.07] p-4">
           <div className="text-sm font-black uppercase tracking-[0.18em] text-amber-200">
             Bonus-Antwort
           </div>
@@ -117,14 +122,14 @@ export function HostControls({ game }: Props) {
             <button
               type="button"
               onClick={() => emit("host:reopen_bonus_buzzers")}
-              className="rounded-2xl bg-amber-400 px-4 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950"
+              className="quiz-button-primary w-full"
             >
               Bonus-Buzzer wieder öffnen
             </button>
             <button
               type="button"
               onClick={() => emit("host:skip_bonus_answer")}
-              className="rounded-2xl border border-emerald-300/15 bg-emerald-950/45 px-4 py-3 text-sm font-bold text-emerald-100 transition-colors hover:border-amber-400/45 hover:text-amber-100"
+              className="quiz-button-secondary w-full"
             >
               Continue / Weiter
             </button>
@@ -133,7 +138,7 @@ export function HostControls({ game }: Props) {
       ) : null}
 
       {bonusWinnerPending && bonusWinnerName ? (
-        <div className="mt-5 rounded-[1.4rem] border border-amber-400/30 bg-amber-400/10 p-4">
+        <div className="mt-4 rounded-lg border border-amber-300/25 bg-amber-300/[0.07] p-4">
           <div className="text-sm font-black uppercase tracking-[0.18em] text-amber-200">
             Bonus-Gewinner
           </div>
@@ -146,13 +151,13 @@ export function HostControls({ game }: Props) {
             ) : null}
           </div>
           <p className="mt-2 text-sm leading-6 text-emerald-100/74">
-            Wähle jetzt auf dem Board die gewünschte Frage für den nächsten Zug.
+            Wähle jetzt auf dem Prüfungsbrett die gewünschte Aufgabe für den nächsten Zug.
           </p>
         </div>
       ) : null}
 
       {activeQuestion ? (
-        <div className="mt-5 rounded-[1.4rem] border border-emerald-300/10 bg-emerald-950/35 p-4 text-sm text-emerald-100/72">
+        <div className="mt-4 rounded-lg border border-white/8 bg-white/[0.025] p-4 text-sm text-emerald-100/64">
           {activeQuestion.buzzersOpen && !activeQuestion.currentAnswerer
             ? "Buzzer sind offen."
             : activeQuestion.currentAnswerer
@@ -162,8 +167,8 @@ export function HostControls({ game }: Props) {
       ) : null}
 
       {game.boards.length > 1 ? (
-        <div className="mt-5 border-t border-emerald-300/10 pt-4">
-          <div className="section-kicker">Felder</div>
+        <div className="mt-5 border-t border-white/8 pt-4">
+          <div className="section-kicker">Prüfungsrunden</div>
           <div className="mt-3 flex gap-2">
             {game.boards.map((board, idx) => {
               const isCurrent = idx === game.currentBoardIndex;
@@ -186,7 +191,7 @@ export function HostControls({ game }: Props) {
                           : "bg-emerald-950/40 text-emerald-700",
                   ].join(" ")}
                 >
-                  Feld {idx + 1}
+                  Runde {idx + 1}
                 </button>
               );
             })}
@@ -194,8 +199,8 @@ export function HostControls({ game }: Props) {
         </div>
       ) : null}
 
-      <div className="mt-5 border-t border-emerald-300/10 pt-4">
-        <div className="section-kicker">Zug setzen</div>
+      <div className="mt-5 border-t border-white/8 pt-4">
+        <div className="section-kicker">Nächster Shinobi</div>
         <div className="mt-3 flex flex-wrap gap-2">
           {contestants.map((player) => {
             const active = game.currentTurn === player.id;

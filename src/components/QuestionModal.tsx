@@ -26,7 +26,7 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
   const answerer = aq?.currentAnswerer ? game.players[aq.currentAnswerer] : null;
   const isBonusBuzzerQ = aq?.category === "_bonus_buzzer";
   const categoryName = isBonusBuzzerQ
-    ? "🎯 Bonusrunde"
+    ? "Spezialprüfung"
     : aq
       ? game.categories.find((c) => c.id === aq.category)?.displayName
       : "";
@@ -87,18 +87,18 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950/75 backdrop-blur-sm p-4">
-        <div className="bg-gradient-to-b from-emerald-900 to-emerald-950 border-2 border-amber-400/60 rounded-2xl max-w-3xl w-full p-6 shadow-2xl shadow-amber-400/20 flex flex-col gap-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/78 p-4 backdrop-blur-sm">
+        <div className="surface-panel-strong themed-scrollbar flex max-h-[94vh] w-full max-w-3xl flex-col gap-4 overflow-y-auto border-lime-200/22 p-5 shadow-2xl shadow-black/45 sm:p-6">
 
           {/* Category + points badge */}
           <div className="text-center">
-            <span className="inline-block bg-amber-500 text-emerald-950 text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full shadow">
+            <span className="quiz-status border-amber-200/24 bg-amber-300 text-emerald-950 shadow">
               {categoryName} · {q.points}
             </span>
           </div>
 
           {/* Prompt */}
-          <div className="text-2xl font-bold text-amber-50 text-center leading-snug">
+          <div className="text-center text-2xl font-black leading-snug text-emerald-50">
             {q.prompt}
           </div>
 
@@ -116,7 +116,7 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
           {/* ── Answer reveal ─────────────────────────────────────────────── */}
           {answerRevealed && q.answer ? (
             /* Revealed to everyone after host skips buzzers */
-            <div className="bg-amber-500/20 border-2 border-amber-400 rounded-xl px-5 py-4 text-center">
+            <div className="rounded-lg border border-amber-300/35 bg-amber-300/10 px-5 py-4 text-center">
               <div className="text-xs uppercase font-bold text-amber-300/70 tracking-wider mb-1">
                 🍯 Antwort
               </div>
@@ -155,7 +155,7 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
               <button
                 type="button"
                 onClick={() => setShowAnswer(true)}
-                className="self-center bg-emerald-900 hover:bg-emerald-800 border border-emerald-700 text-emerald-300 hover:text-amber-300 font-bold rounded-lg px-5 py-2 text-sm transition-colors"
+                className="quiz-button-secondary self-center min-h-10 px-5 py-2"
               >
                 🔍 Antwort anzeigen
               </button>

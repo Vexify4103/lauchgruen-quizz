@@ -22,13 +22,13 @@ pnpm dev
 Local URL:
 
 ```txt
-http://localhost:3001
+http://localhost:4000
 ```
 
 Register a Twitch OAuth callback:
 
 ```txt
-http://localhost:3001/api/auth/callback/twitch
+http://localhost:4000/api/auth/callback/twitch
 ```
 
 ## Routes

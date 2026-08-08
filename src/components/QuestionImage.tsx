@@ -25,7 +25,7 @@ export function QuestionImage({ src, alt = "" }: Props) {
 
   if (failed) {
     return (
-      <div className="w-full aspect-video bg-emerald-950/60 border-2 border-red-700/50 rounded-xl flex items-center justify-center text-red-300 text-xs font-mono p-3">
+      <div className="flex aspect-video w-full items-center justify-center rounded-lg border border-red-700/50 bg-red-950/30 p-3 font-mono text-xs text-red-300">
         ⚠ Bild konnte nicht geladen werden:
         <span className="ml-1 text-red-200 truncate max-w-full">{src}</span>
       </div>
@@ -38,7 +38,7 @@ export function QuestionImage({ src, alt = "" }: Props) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="group relative w-full aspect-video rounded-xl overflow-hidden border-2 border-emerald-700/60 hover:border-amber-400/80 transition-all cursor-zoom-in shadow-lg block bg-emerald-950"
+        className="group relative block aspect-video w-full cursor-zoom-in overflow-hidden rounded-lg border border-white/10 bg-[#06130b] shadow-lg transition-all hover:border-lime-200/42"
         aria-label="Bild vergrößern"
       >
         {/* Skeleton shown until the image loads */}
@@ -61,7 +61,7 @@ export function QuestionImage({ src, alt = "" }: Props) {
         />
         {/* Subtle hover hint */}
         <div className="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/15 transition-colors flex items-end justify-end p-2">
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity text-amber-300 text-xs font-bold bg-emerald-950/80 px-2 py-1 rounded">
+          <div className="rounded-md bg-[#020b07]/82 px-2 py-1 text-xs font-bold text-lime-100 opacity-0 transition-opacity group-hover:opacity-100">
             🔍 Klicken zum Vergrößern
           </div>
         </div>
@@ -77,13 +77,13 @@ export function QuestionImage({ src, alt = "" }: Props) {
           <img
             src={src}
             alt={alt}
-            className="max-w-[95vw] max-h-[95vh] rounded-xl shadow-2xl object-contain"
+            className="max-h-[95vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute top-4 right-4 w-12 h-12 rounded-full bg-emerald-950/80 hover:bg-emerald-900 border-2 border-amber-400/60 text-amber-300 text-2xl font-bold flex items-center justify-center transition-colors"
+            className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full border border-lime-200/30 bg-[#020b07]/85 text-2xl font-bold text-lime-100 transition-colors hover:bg-emerald-950"
             aria-label="Schließen"
           >
             ✕

@@ -76,13 +76,13 @@ config and in this app.
 ## Local Testing
 
 ```txt
-http://localhost:3001
+http://localhost:4000
 ```
 
 Register this local Twitch callback:
 
 ```txt
-http://localhost:3001/api/auth/callback/twitch
+http://localhost:4000/api/auth/callback/twitch
 ```
 
 ## Caddy

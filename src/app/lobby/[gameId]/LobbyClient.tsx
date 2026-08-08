@@ -78,50 +78,50 @@ export function LobbyClient({ gameId, userId }: Props) {
 
   return (
     <LiveKitRoomProvider gameId={gameId} publish={Boolean(me)}>
-      <div className="min-h-screen bg-gradient-to-b from-emerald-900 via-emerald-950 to-emerald-900 px-6 py-8 text-emerald-50">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6">
-        <header className="surface-panel-strong rounded-[2rem] p-5 sm:p-6">
+      <div className="quiz-shell min-h-screen bg-[#0b0807] px-5 py-6 text-emerald-50 sm:px-8 sm:py-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4">
+        <header className="surface-panel-strong p-5 sm:p-6">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="flex flex-col gap-4">
               <Link
                 href="/"
-                className="text-sm text-emerald-300/68 transition-colors hover:text-amber-300"
+                className="text-xs font-bold text-emerald-100/44 transition-colors hover:text-lime-100"
               >
                 Zurück zur Startseite
               </Link>
               <div className="flex items-center gap-4">
                 <Image
-                  src="/bear-logo.png"
-                  alt="QuizDuell Bear"
+                  src="/naruto/shinobi-crest.png"
+                  alt="Shinobi Quiz Wappen"
                   width={52}
                   height={52}
-                  className="rounded-2xl shadow-lg shadow-amber-500/10"
+                  className="brand-mark"
                   priority
                 />
                 <div>
-                  <div className="section-kicker">Lobby</div>
-                  <h1 className="mt-2 text-3xl font-black tracking-tight text-amber-300 sm:text-4xl">
-                    QUIZ<span className="text-emerald-100">DUELL</span>
+                  <div className="section-kicker">Versammlungsraum</div>
+                  <h1 className="mt-1 text-2xl font-black text-emerald-50 sm:text-3xl">
+                    Shinobi <span className="text-lime-200">Quiz</span>
                   </h1>
                 </div>
               </div>
               <p className="max-w-2xl text-sm leading-6 text-emerald-100/72 sm:text-base">
                 {isHost
-                  ? "Richte die Event-Lobby ein, teile den Code mit deinen eingeladenen Gästen und starte, sobald alle bereit sind."
-                  : "Du bist für diese Runde eingeladen. Kamera verbinden, auf bereit setzen und auf den Start des Hosts warten."}
+                  ? "Stelle dein Team zusammen, teile den Prüfungscode und gib das Startsignal, sobald alle Shinobi bereit sind."
+                  : "Du wurdest zu dieser Prüfung gerufen. Kamera verbinden, bereit melden und auf das Signal des Prüfungsleiters warten."}
               </p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[340px]">
               <div className="surface-panel rounded-[1.5rem] p-4">
-                <div className="section-kicker">Spielcode</div>
-                <div className="mt-2 font-mono text-3xl font-black tracking-[0.3em] text-amber-300">
+                <div className="section-kicker">Prüfungscode</div>
+                <div className="mt-2 font-mono text-3xl font-black text-lime-200">
                   {gameId}
                 </div>
                 <button
                   type="button"
                   onClick={() => copyText(gameId, setCodeCopied)}
-                  className="mt-3 rounded-xl border border-emerald-300/18 bg-emerald-950/45 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-100 transition-colors hover:border-amber-300/30 hover:text-amber-200"
+                  className="quiz-button-secondary mt-3 min-h-9 px-3 py-2 text-[10px]"
                 >
                   {codeCopied ? "Code kopiert" : "Code kopieren"}
                 </button>
@@ -129,7 +129,8 @@ export function LobbyClient({ gameId, userId }: Props) {
 
               <div className="surface-panel rounded-[1.5rem] p-4">
                 <div className="section-kicker">Status</div>
-                <div className="mt-2 text-lg font-black text-amber-100">
+                <div className="mt-2 flex items-center gap-2 text-lg font-black text-emerald-50">
+                  <span className={connected ? "quiz-live-dot" : "size-2 rounded-full bg-amber-300"} />
                   {connected ? "Verbunden" : "Verbinde..."}
                 </div>
                 <p className="mt-2 text-sm leading-6 text-emerald-100/70">
@@ -147,9 +148,9 @@ export function LobbyClient({ gameId, userId }: Props) {
         <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <section className="flex flex-col gap-6">
             <div className="surface-panel rounded-[1.8rem] p-5 sm:p-6">
-              <div className="section-kicker">Dein Platz im Event</div>
+              <div className="section-kicker">Dein Platz im Team</div>
               <h2 className="mt-3 text-2xl font-black text-amber-100">
-                Kamera verbinden und kurz bereitmachen
+                Kamera wählen und Ausrüstung prüfen
               </h2>
               {me ? (
                 <LiveKitCameraSetup player={me} gameId={gameId} />
@@ -268,9 +269,9 @@ export function LobbyClient({ gameId, userId }: Props) {
             <div className="surface-panel-strong rounded-[1.8rem] p-5 sm:p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="section-kicker">Teilnehmer</div>
+                  <div className="section-kicker">Teilnehmende Shinobi</div>
                   <h2 className="mt-3 text-2xl font-black text-amber-100">
-                    Lobby-Besetzung
+                    Reihenfolge der Prüfung
                   </h2>
                 </div>
                 <div className="rounded-full border border-emerald-300/18 bg-emerald-950/45 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-emerald-200/72">
