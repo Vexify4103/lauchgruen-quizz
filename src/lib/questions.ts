@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import yaml from "js-yaml";
 import type {
   BoardCell,
@@ -34,12 +34,13 @@ function loadYamlFilesFromDir(dir: string): {
 } {
   const categories: CategoryMeta[] = [];
   const questionsByCategory = new Map<string, Question[]>();
+  const questionNamespace = basename(dir);
 
   if (!existsSync(dir)) return { categories, questionsByCategory };
 
   const files = readdirSync(dir).filter(
     (f) => f.endsWith(".yml") || f.endsWith(".yaml"),
-  );
+  ).sort((a, b) => a.localeCompare(b, "de"));
 
   for (const file of files) {
     const raw = readFileSync(join(dir, file), "utf-8");
@@ -56,7 +57,7 @@ function loadYamlFilesFromDir(dir: string): {
     const questions: Question[] = parsed.questions
       .filter((q) => POINT_VALUES.includes(q.points as 100))
       .map((q) => ({
-        id: `${parsed.category}-${q.points}`,
+        id: `${questionNamespace}-${parsed.category}-${q.points}`,
         category: parsed.category,
         points: q.points as 100 | 200 | 300 | 400 | 500,
         prompt: q.prompt,
@@ -119,17 +120,19 @@ export function pickAllBoards(maxBoards = 3): BoardData[] {
 }
 
 /**
- * Load bonus-buzzer image rounds from `content/questions/buzzer/buzzer.yml`.
+ * Load bonus-buzzer rounds from `content/questions/buzzer/buzzer.yml`.
  *
  * Expected shape:
  *   default_points: 500
  *   default_prompt: "Welches Ereignis wird hier dargestellt?"
  *   rounds:
+ *     - prompt: "Welches Dorf liegt im Land des Feuers?"
+ *       answer: "Konohagakure"                 # text only
  *     - image: buzzer_1.png
- *       prompt: "Was passiert in dieser Szene?" # optional per-round override
- *       answer: "Eren Yeager"
+ *       answer: "Das Haupttor von Konoha"      # default prompt + image
  *     - image: buzzer_2.jpg
- *       answer: "Mikasa"
+ *       prompt: "Welches Gebäude sehen wir?"   # text + image
+ *       answer: "Das Krankenhaus von Konoha"
  *       points: 800   # optional per-round override
  *
  * Image files themselves live next to the YAML at content/questions/buzzer/<file>
@@ -141,7 +144,7 @@ export function pickAllBoards(maxBoards = 3): BoardData[] {
 interface YamlBuzzerFile {
   default_points?: number;
   default_prompt?: string;
-  rounds?: Array<{ image: string; prompt?: string; answer: string; points?: number }>;
+  rounds?: Array<{ image?: string; prompt?: string; answer?: string; points?: number }>;
 }
 
 export function loadBonusBuzzerRounds(): BonusBuzzerRound[] {
@@ -157,23 +160,36 @@ export function loadBonusBuzzerRounds(): BonusBuzzerRound[] {
     return [];
   }
   const defaultPoints = parsed.default_points ?? 250;
-  const defaultPrompt = parsed.default_prompt ?? "Welches Ereignis wird hier dargestellt?";
+  const defaultPrompt = parsed.default_prompt ?? "Was ist die richtige Antwort?";
   // Images live in public/buzzer/ so they're served as static files (no route handler overhead).
   const buzzerPublicDir = join(process.cwd(), "public", "buzzer");
   return parsed.rounds
-    .map((r, i) => ({
-      id:       `_bonus_buzzer_${i + 1}`,
-      prompt:   r.prompt ?? defaultPrompt,
-      imageUrl: `/buzzer/${r.image}`,
-      answer:   r.answer,
-      points:   r.points ?? defaultPoints,
-    }))
-    .filter((round) => {
-      const imagePath = join(buzzerPublicDir, round.imageUrl.split("/").pop()!);
-      const exists = existsSync(imagePath);
-      if (!exists) console.warn(`[questions] buzzer image missing in public/buzzer/, skipping: ${imagePath}`);
-      return exists;
-    });
+    .map((r, i): BonusBuzzerRound | null => {
+      const id = `_bonus_buzzer_${i + 1}`;
+      const answer = r.answer?.trim();
+      if (!answer) {
+        console.warn(`[questions] buzzer round ${id} has no answer, skipping`);
+        return null;
+      }
+
+      const image = r.image?.trim();
+      if (image) {
+        const imagePath = join(buzzerPublicDir, image);
+        if (!existsSync(imagePath)) {
+          console.warn(`[questions] buzzer image missing in public/buzzer/, skipping: ${imagePath}`);
+          return null;
+        }
+      }
+
+      return {
+        id,
+        prompt: r.prompt?.trim() || defaultPrompt,
+        ...(image ? { imageUrl: `/buzzer/${image}` } : {}),
+        answer,
+        points: r.points ?? defaultPoints,
+      };
+    })
+    .filter((round): round is BonusBuzzerRound => round !== null);
 }
 
 /**

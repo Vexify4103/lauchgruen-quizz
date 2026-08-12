@@ -1,23 +1,23 @@
-category: geographie_2
-displayName: Die Shinobi-Welt
+category: geographie
+displayName: Geographie
 questions:
   - points: 100
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_2/images/geo_1.png"
-    answer: Das ist die Burg Utgard.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_2/images/geographie_100.png"
+    answer: "Die Arena der Chūnin-Auswahlprüfung."
   - points: 200
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_2/images/geo_2.png"
-    answer: Das ist Marleys Anlegestelle auf Paradis.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_2/images/geographie_200.png"
+    answer: "Der Berg Myōboku."
   - points: 300
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_2/images/geo_3.png"
-    answer: Das ist das Camp, aus dem Zeke Jaeger vor Levi Ackerman flieht.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_2/images/geographie_300.png"
+    answer: "Kaguyas Eisdimension."
   - points: 400
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_2/images/geo_4.png"
-    answer: Das ist das Ausbildungslager.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_2/images/geographie_400.png"
+    answer: "Der Naka-Fluss."
   - points: 500
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_2/images/geo_5.png"
-    answer: Das ist das zerstörte Camp in Liberio, Marley.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_2/images/geographie_500.png"
+    answer: "Die Ryūchi-Höhle."

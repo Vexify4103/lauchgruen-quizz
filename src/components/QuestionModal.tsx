@@ -237,7 +237,7 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
           {/* ── Host buttons ────────────────────────────────────────────── */}
           {isHost && !answerRevealed ? (
             game.phase === "bonus_pending" ? (
-              /* Bonus image is staged, buzzers not open yet — host's talk window. */
+              /* Bonus round is staged, buzzers not open yet — host's talk window. */
               <div className="grid gap-3 border-t border-emerald-800 pt-2 sm:grid-cols-2">
                 <button
                   type="button"

@@ -1,18 +1,18 @@
-category: random_wissen_2
-displayName: Clans & Familien
+category: random_wissen
+displayName: Random Wissen
 questions:
   - points: 100
-    prompt: "Welche Farbe hat der Rauch der Signalpistole, wenn ein Titan gesichtet wurde?"
-    answer: Rot.
+    prompt: "Was hasst Naruto beim Zubereiten von Instant-Ramen am meisten?"
+    answer: "Die drei Minuten Wartezeit."
   - points: 200
-    prompt: "Wie heißt das Volk, das sich in Titanen verwandeln kann?"
-    answer: Eldianer.
+    prompt: "Wie heißt Jiraiyas erotische Buchreihe?"
+    answer: "Icha Icha."
   - points: 300
-    prompt: "Wie heißen die drei Mauern in AoT?"
-    answer: Sina, Rose und Maria.
+    prompt: "Welche Lebensmittel mag Sasuke nicht?"
+    answer: "Süßigkeiten und Nattō."
   - points: 400
-    prompt: "Welches andere Land wird neben Marley und Paradis im Manga/Anime erwähnt?"
-    answer: Hizuru.
+    prompt: "Wie viele Marionetten kann Sasori laut Databook gleichzeitig mit seinen Chakra-Fäden kontrollieren?"
+    answer: "Bis zu einhundert."
   - points: 500
-    prompt: "Wann erschien das erste Manga-Kapitel in Japan?"
-    answer: 2009.
+    prompt: "In welchem Jahr erschien das erste Kapitel des Naruto-Mangas?"
+    answer: "1999."

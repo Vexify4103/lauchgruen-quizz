@@ -1,0 +1,23 @@
+category: jutsu
+displayName: Jutsu
+questions:
+  - points: 100
+    prompt: "Welches Jutsu sehen wir und wer wendet es an?"
+    imageUrl: "/questions/board_3/images/jutsu_100.png"
+    answer: "Chidori, angewendet von Sasuke Uchiha oder Kakashi Hatake."
+  - points: 200
+    prompt: "Welches Jutsu sehen wir und wer wendet es an?"
+    imageUrl: "/questions/board_3/images/jutsu_200.png"
+    answer: "Kamui, hier angewendet von Obito Uchiha."
+  - points: 300
+    prompt: "Welches Jutsu sehen wir und wer wendet es an?"
+    imageUrl: "/questions/board_3/images/jutsu_300.png"
+    answer: "Jinton (Staubfreisetzung), angewendet von Ōnoki."
+  - points: 400
+    prompt: "Welches Jutsu sehen wir und wer wendet es an?"
+    imageUrl: "/questions/board_3/images/jutsu_400.png"
+    answer: "Doku Kiri (Giftnebel), angewendet von Shizune."
+  - points: 500
+    prompt: "Welches Jutsu sehen wir und wer wendet es an?"
+    imageUrl: "/questions/board_3/images/jutsu_500.png"
+    answer: "Doton: Yomi Numa (Sumpf der Unterwelt), angewendet von Jiraiya."

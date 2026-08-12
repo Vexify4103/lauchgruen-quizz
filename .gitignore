@@ -52,3 +52,6 @@ next-env.d.ts
 # local tournament submissions
 /data/tournament-applications.json
 lauchgruen-quizz-image.tar
+
+# Raw content handoff; normalized questions are copied into content/questions/.
+/DropboxDownload/

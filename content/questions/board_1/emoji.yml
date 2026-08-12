@@ -1,18 +1,18 @@
 category: emoji
-displayName: Symbolkunde
+displayName: Emoji
 questions:
   - points: 100
-    prompt: "Welcher Charakter ist hier gesucht? - 🧣👱‍♀️⚫🕊️"
-    answer: Mikasa Ackerman
+    prompt: "Welcher Charakter ist gesucht? 🌸 ✊ 🩺 🔷"
+    answer: "Sakura Haruno."
   - points: 200
-    prompt: "Welcher Charakter ist hier gesucht? - 👑👱‍♀️😇🥷"
-    answer: Historia Reiss (Christa Lenz)
+    prompt: "Welcher Charakter ist gesucht? 💨 🍃 🗡️ 🚬"
+    answer: "Asuma Sarutobi."
   - points: 300
-    prompt: "Welcher Charakter ist hier gesucht? - 👑🩶🧔‍♂️🪆"
-    answer: König Fritz (Galionsfigur)
+    prompt: "Welcher Charakter ist gesucht? 🥩 🌀 🥔 🔴"
+    answer: "Chōji Akimichi."
   - points: 400
-    prompt: "Welcher Charakter wird hier gesucht? - 🗣️🪖🧠📖"
-    answer: Willy Tybur
+    prompt: "Welcher Charakter ist gesucht? 🕊️ 🪆 🏜️ 👵"
+    answer: "Chiyo."
   - points: 500
-    prompt: "Welcher Charakter wird hier gesucht? - 🌍👱‍♀️🧎‍♂️🛳️"
-    answer: Yelena
+    prompt: "Welcher Charakter ist gesucht? 🌙 💜 🗡️ ⚰️"
+    answer: "Hayate Gekkō."

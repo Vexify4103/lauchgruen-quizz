@@ -35,7 +35,7 @@ export function registerQuestionPool(questions: Question[]): void {
   for (const q of questions) questionPool.set(q.id, q);
 }
 
-/** Replace the bonus-buzzer image-round pool (loaded once at server boot). */
+/** Replace the bonus-buzzer round pool (loaded once at server boot). */
 export function registerBonusBuzzerRounds(rounds: BonusBuzzerRound[]): void {
   globalForStore.__qd_bonus_buzzer = rounds.slice();
   // Also expose each round as a synthetic Question so the existing
@@ -57,7 +57,7 @@ export function listBonusBuzzerRounds(): BonusBuzzerRound[] {
   return globalForStore.__qd_bonus_buzzer ?? [];
 }
 
-/** Pick the next bonus-buzzer round in order (buzzer_1 → buzzer_2 → …). */
+/** Pick the next bonus-buzzer round in configured order. */
 export function pickNextBonusBuzzerRound(game: GameState): BonusBuzzerRound | null {
   const pool = listBonusBuzzerRounds();
   if (pool.length === 0) return null;

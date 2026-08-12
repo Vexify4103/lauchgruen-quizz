@@ -1,0 +1,23 @@
+category: fehler
+displayName: Fehlersuche
+questions:
+  - points: 100
+    prompt: "Was stimmt an diesem Bild nicht?"
+    imageUrl: "/questions/board_3/images/fehler_100.png"
+    answer: "Die falsche Brille ist abgebildet."
+  - points: 200
+    prompt: "Was stimmt an diesem Bild nicht?"
+    imageUrl: "/questions/board_3/images/fehler_200.png"
+    answer: "Die Insekten müssten vollständig schwarz sein und dürften keine roten Punkte haben."
+  - points: 300
+    prompt: "Was stimmt an diesem Bild nicht?"
+    imageUrl: "/questions/board_3/images/fehler_300.png"
+    answer: "Sasuke besitzt in dieser Szene fälschlicherweise bereits Itachis Augen."
+  - points: 400
+    prompt: "Was stimmt an diesem Bild nicht?"
+    imageUrl: "/questions/board_3/images/fehler_400.png"
+    answer: "Der Hintergrund wurde um zusätzliche Elemente erweitert."
+  - points: 500
+    prompt: "Was stimmt an diesem Bild nicht?"
+    imageUrl: "/questions/board_3/images/fehler_500.png"
+    answer: "As Tattoo wurde farblich ausgefüllt; die Öffnung müsste größer sein."

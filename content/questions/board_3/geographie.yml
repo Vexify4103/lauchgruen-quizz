@@ -1,23 +1,23 @@
-category: geographie_3
-displayName: Legendäre Orte
+category: geographie
+displayName: Geographie
 questions:
   - points: 100
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_3/images/geo_1.png"
-    answer: Das ist der Flughafen, an dem Hange Zoë Zeit kauft.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_3/images/geographie_100.png"
+    answer: "Sunagakure."
   - points: 200
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_3/images/geo_2.png"
-    answer: Das ist das verschneite Trainingsgebiet.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_3/images/geographie_200.png"
+    answer: "Otogakure."
   - points: 300
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_3/images/geo_3.png"
-    answer: Das ist das Anwesen der Reiss-Familie.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_3/images/geographie_300.png"
+    answer: "Die Kamui-Dimension."
   - points: 400
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_3/images/geo_4.png"
-    answer: Das ist der Wald, in dem Sasha Braus das Mädchen rettet.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_3/images/geographie_400.png"
+    answer: "Kusagakure."
   - points: 500
-    prompt: "Wo sind wir hier?"
-    imageUrl: "/questions/board_3/images/geo_5.png"
-    answer: Das ist der Raum, in dem Eren Jaeger Armin Arlert verprügelt.
+    prompt: "Welchen Ort sehen wir hier?"
+    imageUrl: "/questions/board_3/images/geographie_500.png"
+    answer: "Der Shikkotsu-Wald."

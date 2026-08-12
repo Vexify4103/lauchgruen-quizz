@@ -1,0 +1,23 @@
+category: tode
+displayName: Legendäre Tode
+questions:
+  - points: 100
+    prompt: "Wer stirbt in dieser Szene?"
+    imageUrl: "/questions/board_3/images/tode_100.png"
+    answer: "Rin Nohara."
+  - points: 200
+    prompt: "Wer stirbt in dieser Szene?"
+    imageUrl: "/questions/board_3/images/tode_200.png"
+    answer: "Haku."
+  - points: 300
+    prompt: "Wer stirbt in dieser Szene?"
+    imageUrl: "/questions/board_3/images/tode_300.png"
+    answer: "Yugito Nii."
+  - points: 400
+    prompt: "Wer stirbt in dieser Szene?"
+    imageUrl: "/questions/board_3/images/tode_400.png"
+    answer: "Nono Yakushi."
+  - points: 500
+    prompt: "Wer stirbt in dieser Szene?"
+    imageUrl: "/questions/board_3/images/tode_500.png"
+    answer: "Hamura Ōtsutsuki."

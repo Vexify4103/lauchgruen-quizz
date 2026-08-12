@@ -5,7 +5,7 @@
  * Run automatically via the prebuild / predev npm lifecycle hooks.
  * Add new images to content/questions/buzzer/ — they'll be picked up next run.
  */
-import { cpSync, existsSync, mkdirSync, readdirSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -20,6 +20,9 @@ if (!existsSync(src)) {
   process.exit(0);
 }
 
+// public/buzzer is generated output. Recreate it so deleted or renamed source
+// images cannot remain available after a content update.
+rmSync(dest, { recursive: true, force: true });
 mkdirSync(dest, { recursive: true });
 
 const files = readdirSync(src).filter((f) => IMAGE_EXTS.has(extname(f).toLowerCase()));

@@ -1,18 +1,18 @@
-category: emoji_3
-displayName: Siegel & Symbole
+category: emoji
+displayName: Emoji
 questions:
   - points: 100
-    prompt: "Welcher Charakter ist hier gesucht? - 🧱👦🤼‍♂️🔼"
-    answer: Reiner Braun
+    prompt: "Welcher Charakter ist gesucht? 🐍 🧪 ⚪ 👅"
+    answer: "Orochimaru."
   - points: 200
-    prompt: "Welcher Charakter ist hier gesucht? - 🤓💉2️⃣📗"
-    answer: Grisha Jaeger
+    prompt: "Welcher Charakter ist gesucht? 🪆 🔴 🪡 🌹"
+    answer: "Sasori."
   - points: 300
-    prompt: "Welcher Charakter ist hier gesucht? - ☕🧹⚔️😑"
-    answer: Levi Ackerman
+    prompt: "Welcher Charakter ist gesucht? 🌋 💨 💋 👩"
+    answer: "Mei Terumī."
   - points: 400
-    prompt: "Welcher Charakter wird hier gesucht? - 🛠️🏰👨‍👧😨"
-    answer: Rod Reiss
+    prompt: "Welcher Charakter ist gesucht? 👁️ 🏹 ⚡ 🔴"
+    answer: "Indra Ōtsutsuki."
   - points: 500
-    prompt: "Welcher Charakter wird hier gesucht? - 👨‍🍳🍞🏰😨"
-    answer: Niccolo
+    prompt: "Welcher Charakter ist gesucht? 🐺 ⚫ ⚪ 🩺"
+    answer: "Hana Inuzuka."

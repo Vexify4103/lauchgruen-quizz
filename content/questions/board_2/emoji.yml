@@ -1,18 +1,18 @@
-category: emoji_2
-displayName: Jutsu in Bildern
+category: emoji
+displayName: Emoji
 questions:
   - points: 100
-    prompt: "Welcher Charakter ist hier gesucht? - 💎👱‍♀️🤼‍♀️🏃‍♀️"
-    answer: Annie Leonhart
+    prompt: "Welcher Charakter ist gesucht? 🦈 🗡️ 🌊 🟦"
+    answer: "Kisame Hoshigaki."
   - points: 200
-    prompt: "Welcher Charakter ist hier gesucht? - ⬆️👦💀👱‍♀️"
-    answer: Armin Arlert
+    prompt: "Welcher Charakter ist gesucht? 🐸 🔞 📘 🤍"
+    answer: "Jiraiya."
   - points: 300
-    prompt: "Welcher Charakter ist hier gesucht? - ⛏️👴⬆️🌹"
-    answer: Dot Pixis
+    prompt: "Welcher Charakter ist gesucht? 🗡️ ⚡ 🐙 🎤"
+    answer: "Killer B."
   - points: 400
-    prompt: "Welcher Charakter wird hier gesucht? - 🫩🎒🪲👮"
-    answer: Pieck Finger
+    prompt: "Welcher Charakter ist gesucht? 🦌 🧠 🍃 👨‍👦"
+    answer: "Shikaku Nara."
   - points: 500
-    prompt: "Welcher Charakter wird hier gesucht? - 🪑🔒😑🎖️"
-    answer: Dhalis Zachary
+    prompt: "Welcher Charakter ist gesucht? 🔨 🪓 🥷 🌫️"
+    answer: "Jinin Akebino."

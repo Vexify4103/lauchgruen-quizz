@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/sync-buzzer.mjs && tsx watch server.ts",
+    "dev": "node scripts/validate-questions.mjs && node scripts/sync-buzzer.mjs && tsx watch server.ts",
     "build": "next build",
-    "prebuild": "node scripts/sync-buzzer.mjs",
+    "prebuild": "node scripts/validate-questions.mjs && node scripts/sync-buzzer.mjs",
     "start": "cross-env NODE_ENV=production tsx server.ts",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate:questions": "node scripts/validate-questions.mjs"
   },
   "dependencies": {
     "@auth/core": "^0.34.3",
