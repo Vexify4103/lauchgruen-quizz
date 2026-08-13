@@ -76,6 +76,9 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
 
   // Safe to bail now — all hooks are above
   if (!aq || !q) return null;
+  const showBonusInstruction = Boolean(
+    isBonusBuzzerQ && q.instruction && q.instruction !== q.prompt,
+  );
 
   const handleBuzz = () => {
     if (!eligible || buzzPressed || lastEnabledAt.current === null) return;
@@ -98,8 +101,15 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
           </div>
 
           {/* Prompt */}
-          <div className="text-center text-2xl font-black leading-snug text-emerald-50">
-            {q.prompt}
+          <div className="text-center">
+            {showBonusInstruction ? (
+              <div className="text-sm font-black uppercase text-orange-200/78">
+                {q.instruction}
+              </div>
+            ) : null}
+            <div className={`${showBonusInstruction ? "mt-3" : ""} text-2xl font-black leading-snug text-emerald-50`}>
+              {q.prompt}
+            </div>
           </div>
 
           {/* Image — 16:9 preview, click anywhere on it to toggle lightbox */}
@@ -299,16 +309,25 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
               </div>
             ) : buzzersOpen ? (
               /* Buzzers-open phase — allow host to skip / force-resolve */
-              <div className="flex gap-3 pt-2 border-t border-emerald-800">
+              <div className="grid gap-3 border-t border-emerald-800 pt-2 sm:grid-cols-2">
                 {isBonusBuzzerQ ? (
-                  <button
-                    type="button"
-                    onClick={() => emit("host:force_resolve_bonus")}
-                    className="flex-1 bg-amber-600 hover:bg-amber-500 text-emerald-950 font-extrabold rounded-lg px-6 py-3 transition-colors text-base"
-                    title="Falls ein Spieler gebuzzert hat, das System aber hängt — jetzt auswerten."
-                  >
-                    ⚡ Buzz jetzt auswerten
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => emit("host:force_resolve_bonus")}
+                      className="bg-amber-600 hover:bg-amber-500 text-emerald-950 font-extrabold rounded-lg px-6 py-3 transition-colors text-base"
+                      title="Einen bereits eingegangenen Buzz sofort auswerten."
+                    >
+                      Buzz jetzt auswerten
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => emit("host:cancel_bonus_buzz")}
+                      className="rounded-lg border border-red-700 bg-red-950/70 px-6 py-3 text-base font-extrabold text-red-200 transition-colors hover:bg-red-900"
+                    >
+                      Niemand buzzert - Bonus überspringen
+                    </button>
+                  </>
                 ) : (
                   <button
                     type="button"

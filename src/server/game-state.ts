@@ -47,6 +47,7 @@ export function registerBonusBuzzerRounds(rounds: BonusBuzzerRound[]): void {
       category: BONUS_BUZZER_CATEGORY,
       points: r.points as 100 | 200 | 300 | 400 | 500, // any number — cast for the union; UI doesn't care
       prompt: r.prompt,
+      instruction: r.instruction,
       imageUrl: r.imageUrl,
       answer: r.answer,
     });
@@ -296,6 +297,7 @@ export function serializeFor(
           category: q.category,
           points: q.points,
           prompt: q.prompt,
+          instruction: q.instruction,
           imageUrl: q.imageUrl,
           audioUrl: q.audioUrl,
           ...(isHost || game.activeQuestion.answerRevealed
@@ -326,6 +328,7 @@ export function serializeFor(
           category: q.category,
           points: q.points,
           prompt: q.prompt,
+          instruction: q.instruction,
           imageUrl: q.imageUrl,
           answerImageUrl: q.answerImageUrl,
           audioUrl: q.audioUrl,
@@ -347,6 +350,7 @@ export function serializeFor(
             category: q.category,
             points: q.points,
             prompt: q.prompt,
+            instruction: q.instruction,
             imageUrl: q.imageUrl,
             answerImageUrl: q.answerImageUrl,
             audioUrl: q.audioUrl,

@@ -13,6 +13,8 @@ import { HostControls } from "@/components/HostControls";
 import { TurnIndicator } from "@/components/TurnIndicator";
 import { GameNotFound } from "@/components/GameNotFound";
 import { WinnerToast } from "@/components/WinnerToast";
+import { SiteVolumeControl } from "@/components/SiteVolumeControl";
+import { FinalResults } from "@/components/FinalResults";
 import Image from "next/image";
 import { LiveKitRoomProvider } from "@/lib/livekit-context";
 import { playCorrect, playWrong } from "@/lib/sounds";
@@ -23,7 +25,7 @@ interface Props {
   mode: "host" | "play";
 }
 
-export function GameClient({ gameId, userId }: Props) {
+export function GameClient({ gameId, userId, mode }: Props) {
   const { game, joinGame, connected, emit, lastJudgeResult } = useSocket();
   const [correctFlash, setCorrectFlash] = useState(false);
   const [wrongFlash, setWrongFlash] = useState(false);
@@ -245,13 +247,17 @@ export function GameClient({ gameId, userId }: Props) {
 
         <section className="surface-panel min-h-0 overflow-hidden rounded-[1.6rem] p-3">
           <div className="flex h-full min-h-0 flex-col gap-3 overflow-hidden">
-            <Board
-              game={game}
-              onPickCell={handlePickCell}
-              onViewCell={handleViewCell}
-              onSwitchBoard={handleSwitchBoard}
-            />
-            {game.activeQuestion ? (
+            {game.phase === "finished" ? (
+              <FinalResults game={game} />
+            ) : (
+              <Board
+                game={game}
+                onPickCell={handlePickCell}
+                onViewCell={handleViewCell}
+                onSwitchBoard={handleSwitchBoard}
+              />
+            )}
+            {game.phase !== "finished" && game.activeQuestion ? (
               <div className="surface-panel-strong shrink-0 overflow-hidden rounded-[1.4rem] px-4 py-3">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
@@ -284,6 +290,7 @@ export function GameClient({ gameId, userId }: Props) {
                 Wenn die Buzzer offen sind, erscheint dein Button hier. Ansonsten
                 einfach auf die nächste Frage warten.
               </p>
+              {mode === "play" ? <SiteVolumeControl /> : null}
               {!game.activeQuestion ? (
                 <div className="mt-4 rounded-2xl border border-emerald-300/10 bg-emerald-950/35 p-4 text-sm text-emerald-100/68">
                   Kein aktiver Buzzer. Das Prüfungsbrett wartet auf die nächste Aufgabe.

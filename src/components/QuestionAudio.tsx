@@ -17,6 +17,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { useSiteVolume } from "@/lib/site-volume";
 
 interface Props {
   src: string;
@@ -35,6 +36,11 @@ export function QuestionAudio({ src }: Props) {
   const [duration, setDuration] = useState(0);
   const [position, setPosition] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const siteVolume = useSiteVolume();
+
+  useEffect(() => {
+    if (audioRef.current) audioRef.current.volume = siteVolume;
+  }, [siteVolume]);
 
   // Reset when src changes.
   useEffect(() => {

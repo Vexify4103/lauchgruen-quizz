@@ -3,6 +3,8 @@
  * All functions are safe to call server-side (they no-op when window is absent).
  */
 
+import { getSiteVolume } from "@/lib/site-volume";
+
 let _ctx: AudioContext | null = null;
 
 function getCtx(): AudioContext | null {
@@ -40,13 +42,16 @@ function note(
   type: OscillatorType = "sine",
   vol = 0.35,
 ) {
+  const outputVolume = vol * getSiteVolume();
+  if (outputVolume <= 0) return;
+
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.connect(gain);
   gain.connect(ctx.destination);
   osc.type = type;
   osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
-  gain.gain.setValueAtTime(vol, ctx.currentTime + start);
+  gain.gain.setValueAtTime(Math.max(0.001, outputVolume), ctx.currentTime + start);
   gain.gain.exponentialRampToValueAtTime(
     0.001,
     ctx.currentTime + start + dur,

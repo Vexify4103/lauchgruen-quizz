@@ -100,7 +100,7 @@ export function HostControls({ game }: Props) {
               onClick={() => emit("host:cancel_bonus_buzz")}
               className="quiz-button-danger w-full"
             >
-              Bonus abbrechen
+              Niemand buzzert - Bonus überspringen
             </button>
           </div>
         </div>
@@ -115,8 +115,8 @@ export function HostControls({ game }: Props) {
             {bonusAnswererName} ist dran
           </div>
           <p className="mt-2 text-sm leading-6 text-emerald-100/74">
-            Wenn die Person die Antwort nicht weiss, kannst du den Bonus-Buzzer
-            wieder öffnen oder direkt ohne Punkte weitermachen.
+            Wenn die Person die Antwort nicht weiss, kannst du die übrigen
+            Teilnehmer buzzern lassen oder direkt ohne Punkte weitermachen.
           </p>
           <div className="mt-4 flex flex-col gap-2">
             <button
@@ -124,14 +124,14 @@ export function HostControls({ game }: Props) {
               onClick={() => emit("host:reopen_bonus_buzzers")}
               className="quiz-button-primary w-full"
             >
-              Bonus-Buzzer wieder öffnen
+              Andere Teilnehmer buzzern lassen
             </button>
             <button
               type="button"
               onClick={() => emit("host:skip_bonus_answer")}
               className="quiz-button-secondary w-full"
             >
-              Continue / Weiter
+              Bonus beenden
             </button>
           </div>
         </div>

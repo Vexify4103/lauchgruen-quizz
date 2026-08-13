@@ -10,6 +10,7 @@ import { ChatOverlay } from "@/components/ChatOverlay";
 import { StartingSoon } from "@/components/StartingSoon";
 import { GameNotFound } from "@/components/GameNotFound";
 import { WinnerToast } from "@/components/WinnerToast";
+import { FinalResults } from "@/components/FinalResults";
 import { LiveKitRoomProvider } from "@/lib/livekit-context";
 import type { ClientGameState } from "@/server/types";
 
@@ -80,6 +81,9 @@ function ObsQuestionDisplay({
     : game.categories.find((category) => category.id === currentQuestion.category)?.displayName ?? "Frage";
   const hasAnswer = Boolean(q.answer);
   const hasMedia = Boolean(q.imageUrl || q.answerImageUrl);
+  const showBonusInstruction = Boolean(
+    isBonus && q.instruction && q.instruction !== q.prompt,
+  );
 
   return (
     <div className="surface-panel-strong shrink-0 overflow-hidden rounded-[1.6rem] px-5 py-4">
@@ -98,7 +102,12 @@ function ObsQuestionDisplay({
               {isReview ? "Auflösung" : stateLabel}
             </div>
           </div>
-          <div className="mt-3 text-2xl font-black leading-tight text-amber-50">
+          {showBonusInstruction ? (
+            <div className="mt-3 text-xs font-black uppercase text-orange-200/72">
+              {q.instruction}
+            </div>
+          ) : null}
+          <div className={`${showBonusInstruction ? "mt-2" : "mt-3"} text-2xl font-black leading-tight text-amber-50`}>
             {q.prompt}
           </div>
           {hasAnswer ? (
@@ -296,6 +305,8 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
           <div className="surface-panel min-h-0 flex-1 overflow-hidden rounded-[1.7rem] p-3">
             {game.phase === "lobby" ? (
               <StartingSoon game={game} />
+            ) : game.phase === "finished" ? (
+              <FinalResults game={game} compact={compact} />
             ) : (
               <Board game={game} />
             )}

@@ -184,6 +184,7 @@ export function loadBonusBuzzerRounds(): BonusBuzzerRound[] {
       return {
         id,
         prompt: r.prompt?.trim() || defaultPrompt,
+        instruction: defaultPrompt,
         ...(image ? { imageUrl: `/buzzer/${image}` } : {}),
         answer,
         points: r.points ?? defaultPoints,

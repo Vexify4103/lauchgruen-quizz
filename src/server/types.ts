@@ -28,6 +28,8 @@ export interface Question {
   category: CategoryId;
   points: 100 | 200 | 300 | 400 | 500;
   prompt: string;
+  /** Optional instruction displayed above the specific prompt. */
+  instruction?: string;
   imageUrl?: string;
   answerImageUrl?: string;
   audioUrl?: string;
@@ -105,6 +107,7 @@ export interface QuestionForClient {
   category: CategoryId;
   points: number;
   prompt: string;
+  instruction?: string;
   imageUrl?: string;
   answerImageUrl?: string;
   audioUrl?: string;
@@ -141,6 +144,8 @@ export interface BonusBuzzerRound {
   id: string;
   /** Prompt shown for the bonus-buzzer round. */
   prompt: string;
+  /** Repeated task description shown above the round-specific prompt. */
+  instruction: string;
   /** Optional public URL of the image. */
   imageUrl?: string;
   /** The single accepted answer (host judges with leeway). */

@@ -8,6 +8,7 @@ import { useSocket } from "@/lib/socket-context";
 import { GameNotFound } from "@/components/GameNotFound";
 import { LiveKitCameraSetup } from "@/components/LiveKitCameraSetup";
 import { LiveKitRoomProvider } from "@/lib/livekit-context";
+import { SiteVolumeControl } from "@/components/SiteVolumeControl";
 
 interface Props {
   gameId: string;
@@ -405,6 +406,8 @@ export function LobbyClient({ gameId, userId }: Props) {
                     ? "Du bist als bereit markiert und wirst automatisch in die Runde geschickt."
                     : "Wenn Kamera und Setup passen, markiere dich als bereit."}
               </p>
+
+              {!isHost ? <SiteVolumeControl /> : null}
 
               {isHost ? (
                 <button

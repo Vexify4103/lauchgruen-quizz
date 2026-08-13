@@ -744,12 +744,9 @@ export function registerSocketHandlers(io: SocketIOServer): void {
       }
       clearBuzzerOpenTimer(gameId);
 
-      setActiveQuestion(game, null);
-      game.isBonusRound = false;
-      // Don't call nextTurn — turn was already advanced when the regular question resolved.
-      if (!finishGameIfOver(game)) {
-        game.phase = "playing";
-      }
+      // If a question is already staged, closeBonusRound marks it as used so
+      // it cannot return in a later bonus round.
+      closeBonusRound(game);
       broadcastAll(io, game);
     });
 
@@ -765,13 +762,9 @@ export function registerSocketHandlers(io: SocketIOServer): void {
         clearTimeout(collector.timer);
         resolveBuzzes(io, gameId);
       } else {
-        // No buzzes at all — bail out of bonus. Don't advance turn; it was
-        // already set when the regular question resolved.
-        game.isBonusRound = false;
-        setActiveQuestion(game, null);
-        if (!finishGameIfOver(game)) {
-          game.phase = "playing";
-        }
+        // No buzzes at all. Consume the bonus and resume without changing the
+        // turn, which already advanced after the regular question.
+        closeBonusRound(game);
         broadcastAll(io, game);
       }
     });

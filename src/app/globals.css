@@ -271,6 +271,32 @@ body::-webkit-scrollbar-thumb,
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
 }
 
+.site-volume-slider {
+  height: 0.5rem;
+  appearance: none;
+  border-radius: 999px;
+  outline: none;
+}
+
+.site-volume-slider::-webkit-slider-thumb {
+  width: 1.05rem;
+  height: 1.05rem;
+  appearance: none;
+  border: 2px solid #fff7ed;
+  border-radius: 999px;
+  background: #f97316;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
+}
+
+.site-volume-slider::-moz-range-thumb {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 2px solid #fff7ed;
+  border-radius: 999px;
+  background: #f97316;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
+}
+
 .quiz-status {
   display: inline-flex;
   min-height: 1.75rem;

@@ -20,4 +20,4 @@ questions:
   - points: 500
     prompt: "Was stimmt an diesem Bild nicht?"
     imageUrl: "/questions/board_2/images/fehler_500.png"
-    answer: "Der Stab zeigt nur sechs statt acht Ringe."
+    answer: "Der Stab zeigt acht statt sechs Ringe."
