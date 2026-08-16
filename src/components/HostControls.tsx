@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useSocket } from "@/lib/socket-context";
 import type { ClientGameState } from "@/server/types";
 
@@ -17,6 +18,7 @@ const PHASE_LABELS: Record<string, string> = {
 
 export function HostControls({ game }: Props) {
   const { emit, lastBuzzWinner } = useSocket();
+  const [scoreAdjustment, setScoreAdjustment] = useState(100);
   const activeQuestion = game.activeQuestion;
   const phase = game.phase;
   const phaseLabel = PHASE_LABELS[phase] ?? phase;
@@ -198,6 +200,68 @@ export function HostControls({ game }: Props) {
           </div>
         </div>
       ) : null}
+
+      <div className="mt-5 border-t border-white/8 pt-4">
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <div className="section-kicker">Punktekorrektur</div>
+            <div className="mt-1 text-xs text-emerald-100/48">
+              Wird sofort auf den aktuellen Stand angewendet.
+            </div>
+          </div>
+          <label className="shrink-0">
+            <span className="sr-only">Korrekturwert</span>
+            <input
+              type="number"
+              min={1}
+              max={5000}
+              step={50}
+              value={scoreAdjustment}
+              onChange={(event) => {
+                const value = Number(event.currentTarget.value);
+                if (Number.isFinite(value)) {
+                  setScoreAdjustment(Math.min(5000, Math.max(1, Math.round(value))));
+                }
+              }}
+              className="quiz-input h-10 w-24 px-3 text-right font-mono text-sm font-black tabular-nums"
+            />
+          </label>
+        </div>
+
+        <div className="mt-3 grid gap-2">
+          {contestants.map((player) => (
+            <div
+              key={player.id}
+              className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto] items-center gap-2 border-b border-white/7 px-1 py-2 last:border-b-0"
+            >
+              <span className="truncate text-sm font-bold text-emerald-100/82">
+                {player.displayName}
+              </span>
+              <span className="min-w-14 text-right font-mono text-sm font-black tabular-nums text-amber-100">
+                {player.score}
+              </span>
+              <button
+                type="button"
+                onClick={() => emit("host:adjust_score", { playerId: player.id, delta: -scoreAdjustment })}
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-red-400/24 bg-red-950/55 text-lg font-black text-red-200 transition-colors hover:bg-red-900"
+                title={`${scoreAdjustment} Punkte abziehen`}
+                aria-label={`${player.displayName} ${scoreAdjustment} Punkte abziehen`}
+              >
+                −
+              </button>
+              <button
+                type="button"
+                onClick={() => emit("host:adjust_score", { playerId: player.id, delta: scoreAdjustment })}
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-300/24 bg-emerald-950/55 text-lg font-black text-emerald-100 transition-colors hover:bg-emerald-900"
+                title={`${scoreAdjustment} Punkte hinzufügen`}
+                aria-label={`${player.displayName} ${scoreAdjustment} Punkte hinzufügen`}
+              >
+                +
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className="mt-5 border-t border-white/8 pt-4">
         <div className="section-kicker">Nächster Shinobi</div>

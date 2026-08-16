@@ -13,6 +13,7 @@ import type {
 } from "./types";
 import { BONUS_BUZZER_CATEGORY } from "./types";
 import { generateGameId } from "../lib/stream-id";
+import { recordResolvedTurn } from "./game-rules";
 
 // Custom Next.js server + App Router loads this module twice (once via tsx for
 // the Socket.IO handler, once via Next's bundler for API routes). Stash the
@@ -76,6 +77,82 @@ export function listGames(): GameState[] {
 
 export function getGame(id: GameId): GameState | undefined {
   return games.get(id);
+}
+
+export function restoreGames(restoredGames: GameState[]): void {
+  games.clear();
+  for (const game of restoredGames) {
+    normalizeRestoredGame(game);
+    games.set(game.id, game);
+  }
+}
+
+export function normalizeRestoredGame(game: GameState): void {
+  const boardIndex = Math.min(
+    Math.max(0, game.currentBoardIndex),
+    Math.max(0, game.boards.length - 1),
+  );
+  game.currentBoardIndex = boardIndex;
+  const currentBoard = game.boards[boardIndex];
+  if (currentBoard) {
+    game.categories = currentBoard.categories;
+    game.board = currentBoard.board;
+  }
+
+  for (const player of Object.values(game.players)) player.connected = false;
+
+  const active = game.activeQuestion;
+  if (active?.answerRevealed) {
+    if (game.isBonusRound || active.category === BONUS_BUZZER_CATEGORY) {
+      if (!game.usedBonusBuzzerIds.includes(active.questionId)) {
+        game.usedBonusBuzzerIds.push(active.questionId);
+      }
+      game.activeQuestion = null;
+      game.isBonusRound = false;
+      game.phase = "playing";
+    } else {
+      markCellUsed(game, active.category, active.points);
+      game.activeQuestion = null;
+      game.isBonusRound = false;
+      nextTurn(game, active.pickedBy);
+      game.phase = "playing";
+
+      const roundComplete = recordResolvedTurn(game, active.pickedBy);
+      if (roundComplete && pickNextBonusBuzzerRound(game)) {
+        game.isBonusRound = true;
+        game.phase = "bonus_pending";
+      }
+    }
+  }
+
+  if (game.phase === "buzzing" || game.phase === "bonus_buzzing") {
+    if (game.activeQuestion) {
+      game.activeQuestion.currentAnswerer = null;
+      game.activeQuestion.buzzersOpen = true;
+      game.activeQuestion.buzzersOpenedAt = Date.now();
+    } else {
+      game.phase = "playing";
+      game.isBonusRound = false;
+    }
+  } else if (game.phase === "answering" && !game.activeQuestion) {
+    game.phase = "playing";
+    game.isBonusRound = false;
+  } else if (
+    game.phase === "answering" &&
+    game.activeQuestion &&
+    !game.activeQuestion.currentAnswerer
+  ) {
+    game.phase = game.isBonusRound ? "bonus_buzzing" : "buzzing";
+    game.activeQuestion.buzzersOpen = true;
+    game.activeQuestion.buzzersOpenedAt = Date.now();
+  }
+
+  const winner = checkGameOver(game);
+  if (winner && game.phase !== "bonus_pending" && !game.isBonusRound) {
+    game.phase = "finished";
+    game.winnerId = winner;
+    game.activeQuestion = null;
+  }
 }
 
 export function createGame(args: {

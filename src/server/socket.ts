@@ -15,6 +15,7 @@ import {
   registerQuestionPool,
   removePlayer,
   reorderContestants,
+  restoreGames,
   serializeFor,
   setActiveQuestion,
   setPlayerConnected,
@@ -24,6 +25,8 @@ import {
 } from "./game-state";
 import { loadBonusBuzzerRounds, loadQuestionPool } from "../lib/questions";
 import { decodeSessionFromCookie } from "./socket-auth";
+import { canAcceptBuzz, judgmentScoreDelta, recordResolvedTurn } from "./game-rules";
+import { restorePersistedGames, saveGame } from "./game-persistence";
 import {
   BUZZ_ARM_DELAY_MS,
   BUZZ_COLLECTION_WINDOW_MS,
@@ -104,6 +107,9 @@ function broadcastSpectatorState(io: SocketIOServer, game: GameState) {
 function broadcastAll(io: SocketIOServer, game: GameState) {
   broadcastState(io, game);
   broadcastSpectatorState(io, game);
+  void saveGame(game).catch((error) => {
+    console.error(`[persistence] failed to save game ${game.id}`, error);
+  });
 }
 
 function clearBuzzerOpenTimer(gameId: string): void {
@@ -189,6 +195,17 @@ function closeBonusRound(game: GameState): void {
   if (!finishGameIfOver(game)) {
     game.phase = "playing";
   }
+}
+
+function finishResolvedRegularQuestion(game: GameState, pickedBy: PlayerId): void {
+  const roundComplete = recordResolvedTurn(game, pickedBy);
+  if (roundComplete && pickNextBonusBuzzerRound(game)) {
+    game.isBonusRound = true;
+    game.phase = "bonus_pending";
+    return;
+  }
+
+  finishGameIfOver(game);
 }
 
 // ---------------------------------------------------------------------------
@@ -291,6 +308,10 @@ const JudgeUsedPayload     = z.object({
   correct: z.boolean(),
 });
 const SetTurnPayload       = z.object({ playerId: z.string() });
+const AdjustScorePayload   = z.object({
+  playerId: z.string().min(1),
+  delta: z.number().int().min(-5000).max(5000).refine((delta) => delta !== 0),
+});
 const BuzzPayload          = z.object({ clientReactionMs: z.number().min(0).max(60_000) });
 const SetReadyPayload      = z.object({ ready: z.boolean() });
 const ReorderPlayersPayload = z.object({ playerOrder: z.array(z.string()).max(5) });
@@ -298,8 +319,9 @@ const SwitchBoardPayload   = z.object({ index: z.number().int().min(0) });
 const OpenReviewPayload    = z.object({ category: z.string(), points: z.number().int().positive() });
 
 // ---------------------------------------------------------------------------
-export function registerSocketHandlers(io: SocketIOServer): void {
+export async function registerSocketHandlers(io: SocketIOServer): Promise<void> {
   ensureQuestionPool();
+  restoreGames(await restorePersistedGames());
 
   io.use(async (socket, nextFn) => {
     const role = (socket.handshake.auth?.role as string) ?? "player";
@@ -653,35 +675,18 @@ export function registerSocketHandlers(io: SocketIOServer): void {
         if (!g?.activeQuestion?.answerRevealed) return;
         if (g.activeQuestion.questionId !== savedQuestionId) return;
 
-        const category = g.activeQuestion.category;
-        const points   = g.activeQuestion.points;
+        if (wasBonus) {
+          closeBonusRound(g);
+        } else {
+          const category = g.activeQuestion.category;
+          const points = g.activeQuestion.points;
 
-        markCellUsed(g, category, points);
-        g.isBonusRound = false;
-        setActiveQuestion(g, null);
-        nextTurn(g);
-        g.phase = "playing";
-
-        // Round tracking — same logic as host:judge, but reveal-and-close
-        // doesn't trigger bonus buzz (host explicitly skipped the question).
-        if (pickedBy !== g.hostId && !wasBonus) {
-          if (!g.roundAnswered.includes(pickedBy)) {
-            g.roundAnswered.push(pickedBy);
-          }
-          const contestants = getNonHostPlayers(g);
-          const roundComplete =
-            contestants.length > 0 &&
-            contestants.every((p) => g.roundAnswered.includes(p.id));
-
-          if (roundComplete) {
-            g.roundAnswered = [];
-          }
-        }
-
-        const winner = checkGameOver(g);
-        if (winner) {
-          g.phase    = "finished";
-          g.winnerId = winner;
+          markCellUsed(g, category, points);
+          g.isBonusRound = false;
+          setActiveQuestion(g, null);
+          nextTurn(g, pickedBy);
+          g.phase = "playing";
+          finishResolvedRegularQuestion(g, pickedBy);
         }
 
         broadcastAll(io, g);
@@ -827,25 +832,35 @@ export function registerSocketHandlers(io: SocketIOServer): void {
         `[buzz] player:buzz from ${socket.data.twitchLogin} (${socket.data.userId}) phase=${game.phase} bonus=${isBonusBuzz}`,
       );
 
-      // Gate: a buzz only counts while an active question has open buzzers.
-      if (!game.activeQuestion?.buzzersOpen) {
+      // The client and server use the same advertised opensAt timestamp. Accept
+      // a buzz once that timestamp has elapsed even if the server timer that
+      // flips buzzersOpen is a few milliseconds late.
+      const active = game.activeQuestion;
+      const now = Date.now();
+      const openByTimestamp =
+        active?.buzzersOpenedAt !== null &&
+        active?.buzzersOpenedAt !== undefined &&
+        now >= active.buzzersOpenedAt;
+      if (
+        !active ||
+        !canAcceptBuzz({
+          phase: game.phase,
+          buzzersOpen: active.buzzersOpen,
+          opensAt: active.buzzersOpenedAt,
+          now,
+        })
+      ) {
         console.log(`[buzz] player:buzz rejected: buzzers closed`);
         return;
       }
-      if (
-        game.activeQuestion.buzzersOpenedAt &&
-        Date.now() < game.activeQuestion.buzzersOpenedAt
-      ) {
-        console.log(`[buzz] player:buzz rejected: buzzers armed but not open`);
-        return;
-      }
+      if (openByTimestamp) active.buzzersOpen = true;
 
       const player = game.players[socket.data.userId];
       if (!player) return;
       // Host can't buzz, hosts only judge.
       if (socket.data.userId === game.hostId) return;
 
-      if (game.activeQuestion.alreadyTried.includes(socket.data.userId)) return;
+      if (active.alreadyTried.includes(socket.data.userId)) return;
 
       const buzz: PendingBuzz = {
         playerId:        socket.data.userId,
@@ -900,8 +915,15 @@ export function registerSocketHandlers(io: SocketIOServer): void {
       // Board 3 (index 2) has special scoring: correct = x2 points, wrong = -points.
       const isBoard3 = !wasBonus && game.currentBoardIndex === 2;
 
+      const scoreDelta = judgmentScoreDelta({
+        correct: parsed.data.correct,
+        points,
+        isBoard3,
+        isPickerFirstAttempt,
+      });
+      if (scoreDelta !== 0) awardPoints(game, answerer, scoreDelta);
+
       if (parsed.data.correct) {
-        awardPoints(game, answerer, isBoard3 ? points * 2 : points);
         // Bonus image is not on the board, so no cell to mark used.
         if (!wasBonus) {
           markCellUsed(game, aqCategory, aqPoints);
@@ -924,14 +946,7 @@ export function registerSocketHandlers(io: SocketIOServer): void {
         game.phase = "playing";
         questionResolved = true;
       } else {
-        // Wrong answer.
-        if (isBoard3) {
-          // Board 3: always deduct full point value regardless of who answered.
-          awardPoints(game, answerer, -points);
-        } else if (!isPickerFirstAttempt) {
-          // Regular boards: half-point penalty for buzz attempts and bonus answers.
-          awardPoints(game, answerer, -Math.floor(points / 2));
-        }
+        // Wrong answer. The score delta was applied above before reopening.
         game.activeQuestion.alreadyTried.push(answerer);
         game.activeQuestion.currentAnswerer = null;
 
@@ -966,44 +981,14 @@ export function registerSocketHandlers(io: SocketIOServer): void {
         }
       }
 
-      // ── Round-end bonus-buzz trigger ────────────────────────────────────
-      // Once every contestant has played one question this round, fire a
-      // bonus-image buzz race. No hearts, no eliminations — everyone stays.
-      let startBonusBuzz = false;
-
-      if (questionResolved && pickedBy !== game.hostId && !wasBonus) {
-        if (!game.roundAnswered.includes(pickedBy)) {
-          game.roundAnswered.push(pickedBy);
-        }
-        const contestants = getNonHostPlayers(game);
-        const roundComplete =
-          contestants.length > 0 &&
-          contestants.every((p) => game.roundAnswered.includes(p.id));
-
-        if (roundComplete) {
-          game.roundAnswered = [];
-          // Check there's at least one unused round before entering bonus_pending.
-          // The question is staged later when the host clicks "open bonus buzzers"
-          // so no popup appears until the host explicitly triggers it.
-          if (pickNextBonusBuzzerRound(game)) {
-            startBonusBuzz = true;
-          }
-        }
-      }
-
       // Emit sound/flash cue to all clients.
       io.to(`game:${gameId}`).emit("judge_result", { correct: parsed.data.correct });
       io.to(`spectator:${gameId}`).emit("judge_result", { correct: parsed.data.correct });
 
       // ── Game-over check ──────────────────────────────────────────────────
-      if (startBonusBuzz) {
-        // Image is already in activeQuestion — visible to everyone now.
-        // Host clicks "Bonus-Buzzer öffnen" → phase becomes bonus_buzzing +
-        // buzzers_opened emitted. Gives host a talk window first.
-        game.isBonusRound = true;
-        game.phase        = "bonus_pending";
-      } else {
-        finishGameIfOver(game);
+      if (questionResolved) {
+        if (wasBonus) finishGameIfOver(game);
+        else finishResolvedRegularQuestion(game, pickedBy);
       }
 
       broadcastAll(io, game);
@@ -1021,6 +1006,22 @@ export function registerSocketHandlers(io: SocketIOServer): void {
       if (!game.players[parsed.data.playerId]) return;
       if (parsed.data.playerId === game.hostId) return;
       game.currentTurn = parsed.data.playerId;
+      broadcastAll(io, game);
+    });
+
+    socket.on("host:adjust_score", (payload: unknown) => {
+      const parsed = AdjustScorePayload.safeParse(payload);
+      if (!parsed.success) return;
+      const gameId = socket.data.gameId;
+      if (!gameId) return;
+      const game = getGame(gameId);
+      if (!game || !isHost(socket, game)) return;
+      if (parsed.data.playerId === game.hostId || !game.players[parsed.data.playerId]) return;
+
+      awardPoints(game, parsed.data.playerId, parsed.data.delta);
+      if (game.phase === "finished") {
+        game.winnerId = checkGameOver(game);
+      }
       broadcastAll(io, game);
     });
 

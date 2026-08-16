@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { createGame, registerQuestionPool, registerBonusBuzzerRounds } from "@/server/game-state";
 import { loadQuestionPool, pickAllBoards, loadBonusBuzzerRounds } from "@/lib/questions";
+import { saveGame } from "@/server/game-persistence";
 
 let questionPoolRegistered = false;
 function ensureQuestionPool(): void {
@@ -28,5 +29,6 @@ export async function POST() {
     hostId: session.user.id,
     boards,
   });
+  await saveGame(game);
   return NextResponse.json({ gameId: game.id });
 }
