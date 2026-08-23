@@ -5,6 +5,8 @@ import { useSocket } from "@/lib/socket-context";
 import { playBuzz } from "@/lib/sounds";
 import { QuestionImage } from "@/components/QuestionImage";
 import { QuestionAudio } from "@/components/QuestionAudio";
+import { ScoringRules } from "@/components/ScoringRules";
+import { correctMultiplierLabel } from "@/lib/scoring-rules";
 import type { ClientGameState } from "@/server/types";
 
 interface Props {
@@ -26,7 +28,7 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
   const answerer = aq?.currentAnswerer ? game.players[aq.currentAnswerer] : null;
   const isBonusBuzzerQ = aq?.category === "_bonus_buzzer";
   const categoryName = isBonusBuzzerQ
-    ? "Spezialprüfung"
+    ? "Bonusrunde"
     : aq
       ? game.categories.find((c) => c.id === aq.category)?.displayName
       : "";
@@ -79,6 +81,10 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
   const showBonusInstruction = Boolean(
     isBonusBuzzerQ && q.instruction && q.instruction !== q.prompt,
   );
+  const pointMultiplier = correctMultiplierLabel(
+    game.currentBoardIndex,
+    isBonusBuzzerQ,
+  );
 
   const handleBuzz = () => {
     if (!eligible || buzzPressed || lastEnabledAt.current === null) return;
@@ -97,13 +103,21 @@ export function QuestionModal({ game, isHost, myPlayerId }: Props) {
           <div className="text-center">
             <span className="quiz-status border-amber-200/24 bg-amber-300 text-emerald-950 shadow">
               {categoryName} · {q.points}
+              {pointMultiplier ? ` ${pointMultiplier}` : ""}
             </span>
           </div>
+
+          <ScoringRules
+            boardIndex={game.currentBoardIndex}
+            isBonus={isBonusBuzzerQ}
+            compact
+            className="justify-center rounded-lg"
+          />
 
           {/* Prompt */}
           <div className="text-center">
             {showBonusInstruction ? (
-              <div className="text-sm font-black uppercase text-orange-200/78">
+              <div className="text-sm font-black uppercase text-lime-200/78">
                 {q.instruction}
               </div>
             ) : null}

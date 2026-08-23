@@ -7,12 +7,12 @@ import { LobbyClient } from "./LobbyClient";
 
 function LobbyLoginGate({ gameId, playerCount }: { gameId: string; playerCount: number }) {
   return (
-    <main className="quiz-shell flex min-h-screen items-center justify-center bg-[#0b0807] px-5 py-10 text-emerald-50">
+    <main className="quiz-shell flex min-h-screen items-center justify-center bg-[#04110b] px-5 py-10 text-emerald-50">
       <section className="surface-panel-strong w-full max-w-lg overflow-hidden p-6 sm:p-8">
         <div className="flex items-center gap-4 border-b border-white/8 pb-5">
           <Image
-            src="/naruto/shinobi-crest.png"
-            alt="Lauchgruen Shinobi Quiz"
+            src="/bear-logo.png"
+            alt="Lauchgruen Quiz"
             width={58}
             height={58}
             className="brand-mark"
@@ -30,7 +30,7 @@ function LobbyLoginGate({ gameId, playerCount }: { gameId: string; playerCount: 
           <div className="quiz-status border-lime-200/20 text-lime-100/76">
             <span className="quiz-live-dot" /> Lobby-Code gültig
           </div>
-          <div className="mt-4 font-mono text-4xl font-black text-orange-200 sm:text-5xl">
+          <div className="mt-4 font-mono text-4xl font-black text-lime-200 sm:text-5xl">
             {gameId}
           </div>
           <p className="mt-4 text-sm leading-6 text-emerald-100/58">

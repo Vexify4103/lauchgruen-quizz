@@ -1,0 +1,18 @@
+category: "naturwissenschaften"
+displayName: "Naturwissenschaften"
+questions:
+  - points: 100
+    prompt: "Welche Kraft zieht Gegenstände zur Erde?"
+    answer: "Die Gravitation beziehungsweise Schwerkraft."
+  - points: 200
+    prompt: "Welches Gas macht den größten Teil der Erdatmosphäre aus und ungefähr wie viel?"
+    answer: "Stickstoff mit rund 78 Prozent."
+  - points: 300
+    prompt: "Warum erscheint ein Schwarzes Loch schwarz?"
+    answer: "Weil jenseits des Ereignishorizonts kein Licht entkommen kann."
+  - points: 400
+    prompt: "Welche mathematische Reihe trägt denselben Namen wie die Sängerin Taylor Swift?"
+    answer: "Die Taylorreihe."
+  - points: 500
+    prompt: "Wie hoch ist das Preisgeld für die Lösung eines der noch ungelösten Millennium-Probleme?"
+    answer: "Eine Million US-Dollar."

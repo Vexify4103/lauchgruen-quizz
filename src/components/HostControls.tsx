@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useSocket } from "@/lib/socket-context";
+import { correctMultiplierLabel } from "@/lib/scoring-rules";
+import { ScoringRules } from "@/components/ScoringRules";
 import type { ClientGameState } from "@/server/types";
 
 interface Props {
@@ -15,6 +17,12 @@ const PHASE_LABELS: Record<string, string> = {
   bonus_buzzing: "Bonus-Buzzer offen",
   finished: "Spiel beendet",
 };
+
+const SCORE_STEP = 50;
+
+function clampScoreAdjustment(value: number): number {
+  return Math.min(5000, Math.max(0, Math.round(value)));
+}
 
 export function HostControls({ game }: Props) {
   const { emit, lastBuzzWinner } = useSocket();
@@ -42,21 +50,26 @@ export function HostControls({ game }: Props) {
     .map((pid) => game.players[pid])
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
+  const changeScoreAdjustment = (delta: number) => {
+    setScoreAdjustment((current) => clampScoreAdjustment(current + delta));
+  };
+
   return (
-    <div className="surface-panel themed-scrollbar h-full overflow-y-auto p-4">
-      <div className="flex items-start justify-between gap-3 border-b border-white/8 pb-4">
-        <div>
-          <div className="section-kicker">Prüfungsleitung</div>
-          <div className="mt-2 text-xl font-black text-emerald-50">Kontrollraum</div>
-        </div>
-        <span className="quiz-status"><span className="quiz-live-dot" /> {phaseLabel}</span>
-      </div>
-      <div className="mt-3 text-sm text-emerald-100/58">
-        Aktuelle Phase: <span className="font-bold text-lime-200">{phaseLabel}</span>
-        {game.isBonusRound ? (
-          <span className="ml-2 rounded-full bg-amber-400/16 px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-amber-200">
-            Bonus
+    <div className="surface-panel themed-scrollbar h-full min-w-0 overflow-x-hidden overflow-y-auto p-4">
+      <div className="border-b border-white/8 pb-4">
+        <div className="min-w-0">
+          <div className="section-kicker">Spielleitung</div>
+          <div className="mt-1 text-lg font-black text-emerald-50">
+            Kontrollraum
+          </div>
+          <span className="quiz-status mt-3 max-w-full justify-center text-center leading-tight">
+            <span className="quiz-live-dot" /> {phaseLabel}
           </span>
+        </div>
+        {game.isBonusRound ? (
+          <div className="mt-3 rounded-lg border border-amber-300/18 bg-amber-300/[0.07] px-3 py-2 text-center text-[10px] font-black uppercase text-amber-200">
+            Bonusrunde aktiv
+          </div>
         ) : null}
       </div>
 
@@ -153,7 +166,7 @@ export function HostControls({ game }: Props) {
             ) : null}
           </div>
           <p className="mt-2 text-sm leading-6 text-emerald-100/74">
-            Wähle jetzt auf dem Prüfungsbrett die gewünschte Aufgabe für den nächsten Zug.
+            Wähle jetzt auf dem Spielbrett die gewünschte Frage für den nächsten Zug.
           </p>
         </div>
       ) : null}
@@ -170,8 +183,8 @@ export function HostControls({ game }: Props) {
 
       {game.boards.length > 1 ? (
         <div className="mt-5 border-t border-white/8 pt-4">
-          <div className="section-kicker">Prüfungsrunden</div>
-          <div className="mt-3 flex gap-2">
+          <div className="section-kicker">Spielbretter</div>
+          <div className="mt-3 grid grid-cols-3 gap-1.5" role="group" aria-label="Spielbrett auswählen">
             {game.boards.map((board, idx) => {
               const isCurrent = idx === game.currentBoardIndex;
               const allUsed = board.board.every((cell) => cell.used);
@@ -183,7 +196,7 @@ export function HostControls({ game }: Props) {
                   disabled={!canSwitch}
                   onClick={() => canSwitch && emit("host:switch_board", { index: idx })}
                   className={[
-                    "flex-1 rounded-xl px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] transition-colors",
+                    "min-w-0 rounded-lg px-1 py-2 text-center text-xs font-black transition-colors",
                     isCurrent
                       ? "bg-amber-400 text-emerald-950"
                       : allUsed
@@ -193,79 +206,119 @@ export function HostControls({ game }: Props) {
                           : "bg-emerald-950/40 text-emerald-700",
                   ].join(" ")}
                 >
-                  Runde {idx + 1}
+                  <span className="block text-[9px] uppercase text-current/65">Brett</span>
+                  <span className="mt-0.5 block tabular-nums">
+                    {idx + 1}
+                    {correctMultiplierLabel(idx) ? ` ${correctMultiplierLabel(idx)}` : ""}
+                  </span>
                 </button>
               );
             })}
           </div>
+          <ScoringRules
+            boardIndex={game.currentBoardIndex}
+            isBonus={game.isBonusRound}
+            compact
+            className="mt-3 rounded-lg"
+          />
         </div>
       ) : null}
 
       <div className="mt-5 border-t border-white/8 pt-4">
-        <div className="flex items-end justify-between gap-3">
-          <div>
-            <div className="section-kicker">Punktekorrektur</div>
-            <div className="mt-1 text-xs text-emerald-100/48">
-              Wird sofort auf den aktuellen Stand angewendet.
-            </div>
+        <div className="section-kicker">Punktekorrektur</div>
+        <p className="mt-1 text-xs leading-5 text-emerald-100/48">
+          Direkte Korrektur ohne Brett-Multiplikator.
+        </p>
+
+        <div className="mt-3 rounded-lg border border-emerald-300/10 bg-emerald-950/35 p-2.5">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <label htmlFor="score-adjustment" className="text-[10px] font-black uppercase text-emerald-200/60">
+              Betrag pro Klick
+            </label>
+            <span className="text-[10px] font-bold text-emerald-100/40">0–5000</span>
           </div>
-          <label className="shrink-0">
-            <span className="sr-only">Korrekturwert</span>
+          <div className="grid grid-cols-[2rem_minmax(0,1fr)_2rem] gap-1.5">
+            <button
+              type="button"
+              disabled={scoreAdjustment === 0}
+              onClick={() => changeScoreAdjustment(-SCORE_STEP)}
+              className="flex h-9 items-center justify-center rounded-lg border border-white/10 bg-black/18 text-base font-black text-emerald-100 transition-colors hover:border-lime-300/25 hover:bg-lime-400/[0.08] disabled:cursor-not-allowed disabled:opacity-35"
+              title={`Korrekturwert um ${SCORE_STEP} verringern`}
+              aria-label={`Korrekturwert um ${SCORE_STEP} verringern`}
+            >
+              −
+            </button>
             <input
+              id="score-adjustment"
               type="number"
-              min={1}
+              min={0}
               max={5000}
               step={50}
               value={scoreAdjustment}
               onChange={(event) => {
                 const value = Number(event.currentTarget.value);
                 if (Number.isFinite(value)) {
-                  setScoreAdjustment(Math.min(5000, Math.max(1, Math.round(value))));
+                  setScoreAdjustment(clampScoreAdjustment(value));
                 }
               }}
-              className="quiz-input h-10 w-24 px-3 text-right font-mono text-sm font-black tabular-nums"
+              className="quiz-input score-adjustment-input h-9 min-w-0 w-full px-2 text-center font-mono text-sm font-black tabular-nums"
             />
-          </label>
+            <button
+              type="button"
+              onClick={() => changeScoreAdjustment(SCORE_STEP)}
+              className="flex h-9 items-center justify-center rounded-lg border border-white/10 bg-black/18 text-base font-black text-emerald-100 transition-colors hover:border-lime-300/25 hover:bg-lime-400/[0.08]"
+              title={`Korrekturwert um ${SCORE_STEP} erhöhen`}
+              aria-label={`Korrekturwert um ${SCORE_STEP} erhöhen`}
+            >
+              +
+            </button>
+          </div>
         </div>
 
         <div className="mt-3 grid gap-2">
           {contestants.map((player) => (
             <div
               key={player.id}
-              className="grid grid-cols-[minmax(0,1fr)_auto_auto_auto] items-center gap-2 border-b border-white/7 px-1 py-2 last:border-b-0"
+              className="min-w-0 rounded-lg border border-white/7 bg-white/[0.025] p-2.5"
             >
-              <span className="truncate text-sm font-bold text-emerald-100/82">
-                {player.displayName}
-              </span>
-              <span className="min-w-14 text-right font-mono text-sm font-black tabular-nums text-amber-100">
-                {player.score}
-              </span>
-              <button
-                type="button"
-                onClick={() => emit("host:adjust_score", { playerId: player.id, delta: -scoreAdjustment })}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-red-400/24 bg-red-950/55 text-lg font-black text-red-200 transition-colors hover:bg-red-900"
-                title={`${scoreAdjustment} Punkte abziehen`}
-                aria-label={`${player.displayName} ${scoreAdjustment} Punkte abziehen`}
-              >
-                −
-              </button>
-              <button
-                type="button"
-                onClick={() => emit("host:adjust_score", { playerId: player.id, delta: scoreAdjustment })}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-emerald-300/24 bg-emerald-950/55 text-lg font-black text-emerald-100 transition-colors hover:bg-emerald-900"
-                title={`${scoreAdjustment} Punkte hinzufügen`}
-                aria-label={`${player.displayName} ${scoreAdjustment} Punkte hinzufügen`}
-              >
-                +
-              </button>
+              <div className="flex min-w-0 items-center justify-between gap-2">
+                <span className="min-w-0 truncate text-sm font-bold text-emerald-100/82">
+                  {player.displayName}
+                </span>
+                <span className="shrink-0 font-mono text-sm font-black tabular-nums text-amber-100">
+                  {player.score}
+                </span>
+              </div>
+              <div className="mt-2 grid grid-cols-2 gap-1.5">
+                <button
+                  type="button"
+                  disabled={scoreAdjustment === 0}
+                  onClick={() => emit("host:adjust_score", { playerId: player.id, delta: -scoreAdjustment })}
+                  className="flex h-9 min-w-0 items-center justify-center gap-1 rounded-lg border border-red-400/24 bg-red-950/55 px-2 text-xs font-black tabular-nums text-red-200 transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-35"
+                  title={`${scoreAdjustment} Punkte abziehen`}
+                  aria-label={`${player.displayName} ${scoreAdjustment} Punkte abziehen`}
+                >
+                  <span className="text-base">−</span> {scoreAdjustment}
+                </button>
+                <button
+                  type="button"
+                  disabled={scoreAdjustment === 0}
+                  onClick={() => emit("host:adjust_score", { playerId: player.id, delta: scoreAdjustment })}
+                  className="flex h-9 min-w-0 items-center justify-center gap-1 rounded-lg border border-emerald-300/24 bg-emerald-950/55 px-2 text-xs font-black tabular-nums text-emerald-100 transition-colors hover:bg-emerald-900 disabled:cursor-not-allowed disabled:opacity-35"
+                  title={`${scoreAdjustment} Punkte hinzufügen`}
+                  aria-label={`${player.displayName} ${scoreAdjustment} Punkte hinzufügen`}
+                >
+                  <span className="text-base">+</span> {scoreAdjustment}
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <div className="mt-5 border-t border-white/8 pt-4">
-        <div className="section-kicker">Nächster Shinobi</div>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="section-kicker">Nächster Gast</div>
+        <div className="mt-3 grid min-w-0 gap-1.5">
           {contestants.map((player) => {
             const active = game.currentTurn === player.id;
             return (
@@ -274,12 +327,13 @@ export function HostControls({ game }: Props) {
                 type="button"
                 onClick={() => emit("host:set_turn", { playerId: player.id })}
                 className={[
-                  "rounded-xl px-3 py-2 text-xs font-bold transition-colors",
+                  "min-w-0 truncate rounded-lg px-3 py-2 text-left text-xs font-bold transition-colors",
                   active
                     ? "bg-amber-400 text-emerald-950"
                     : "bg-emerald-800 text-emerald-100 hover:bg-emerald-700",
                 ].join(" ")}
               >
+                <span className="mr-2 inline-block size-1.5 rounded-full bg-current opacity-60" />
                 {player.displayName}
               </button>
             );

@@ -1,0 +1,18 @@
+category: "kultur"
+displayName: "Kultur"
+questions:
+  - points: 100
+    prompt: "Wer komponierte die Oper Die Zauberflöte?"
+    answer: "Wolfgang Amadeus Mozart."
+  - points: 200
+    prompt: "In welchem Land wurde Papier erfunden?"
+    answer: "In China."
+  - points: 300
+    prompt: "Wie hießen die sagenhaften Gründer Roms, und wer tötete wen?"
+    answer: "Romulus und Remus; Romulus tötete Remus."
+  - points: 400
+    prompt: "Aus welchem Holz werden Whiskyfässer überwiegend gefertigt?"
+    answer: "Aus Eichenholz."
+  - points: 500
+    prompt: "Welcher ägyptische Pharao führte vorübergehend den Aton-Kult ein?"
+    answer: "Echnaton beziehungsweise Amenophis IV."

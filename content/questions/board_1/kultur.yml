@@ -1,0 +1,18 @@
+category: "kultur"
+displayName: "Kultur"
+questions:
+  - points: 100
+    prompt: "Wer malte die Mona Lisa?"
+    answer: "Leonardo da Vinci."
+  - points: 200
+    prompt: "Welches Land schenkte den USA die Freiheitsstatue?"
+    answer: "Frankreich."
+  - points: 300
+    prompt: "Bringe diese Epochen in die richtige zeitliche Reihenfolge: Barock, Gotik, Renaissance."
+    answer: "Gotik, Renaissance, Barock."
+  - points: 400
+    prompt: "Wie heißt die hinduistische Asketengemeinschaft, die für extreme Rituale auf Verbrennungsplätzen bekannt ist?"
+    answer: "Die Aghori."
+  - points: 500
+    prompt: "Welches Werk gilt als das älteste erhaltene schriftliche Epos der Menschheit? Tipp: Der Name beginnt mit G."
+    answer: "Das Gilgamesch-Epos."

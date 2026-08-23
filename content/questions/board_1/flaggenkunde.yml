@@ -1,0 +1,23 @@
+category: "flaggenkunde"
+displayName: "Flaggenkunde"
+questions:
+  - points: 100
+    prompt: "Zu welchem Land gehört diese Flagge?"
+    imageUrl: "/questions/board_1/images/flaggenkunde_100.png"
+    answer: "Italien."
+  - points: 200
+    prompt: "Zu welchem Land gehört diese Flagge?"
+    imageUrl: "/questions/board_1/images/flaggenkunde_200.png"
+    answer: "Südafrika."
+  - points: 300
+    prompt: "Zu welchem Land gehört diese Flagge?"
+    imageUrl: "/questions/board_1/images/flaggenkunde_300.png"
+    answer: "Panama."
+  - points: 400
+    prompt: "Zu welchem Land gehört diese Flagge?"
+    imageUrl: "/questions/board_1/images/flaggenkunde_400.png"
+    answer: "Libanon."
+  - points: 500
+    prompt: "Zu welchem Land gehört diese Flagge?"
+    imageUrl: "/questions/board_1/images/flaggenkunde_500.png"
+    answer: "Kiribati."

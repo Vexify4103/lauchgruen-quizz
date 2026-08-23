@@ -1,0 +1,18 @@
+category: "naturwissenschaften"
+displayName: "Naturwissenschaften"
+questions:
+  - points: 100
+    prompt: "Wie lautet die chemische Formel von Wasser?"
+    answer: "H₂O."
+  - points: 200
+    prompt: "Wie nennt man den Vorgang, bei dem Pflanzen Licht zur Energiegewinnung nutzen?"
+    answer: "Fotosynthese."
+  - points: 300
+    prompt: "Welcher zentrale Mechanismus treibt laut Charles Darwin die Evolution an?"
+    answer: "Natürliche Selektion: besser angepasste Lebewesen haben häufiger überlebende Nachkommen."
+  - points: 400
+    prompt: "Welcher Teil des Gehirns steuert vor allem Gleichgewicht und Koordination?"
+    answer: "Das Kleinhirn."
+  - points: 500
+    prompt: "Nenne vier der sechs Quark-Arten."
+    answer: "Up, Down, Charm, Strange, Top und Bottom; vier davon genügen."

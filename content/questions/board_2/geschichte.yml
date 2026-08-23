@@ -1,0 +1,18 @@
+category: "geschichte"
+displayName: "Geschichte"
+questions:
+  - points: 100
+    prompt: "Wer war der erste Präsident der Vereinigten Staaten?"
+    answer: "George Washington."
+  - points: 200
+    prompt: "Welcher französische Herrscher krönte sich 1804 selbst zum Kaiser?"
+    answer: "Napoleon Bonaparte."
+  - points: 300
+    prompt: "Welcher berühmte Handelsweg verband China mit Europa?"
+    answer: "Die Seidenstraße."
+  - points: 400
+    prompt: "Wie heißt die Schlacht, in der germanische Verbände im Jahr 9 n. Chr. drei römische Legionen besiegten?"
+    answer: "Die Varusschlacht, auch Schlacht im Teutoburger Wald."
+  - points: 500
+    prompt: "Nenne die sieben Weltwunder der Antike."
+    answer: "Pyramiden von Gizeh, Hängende Gärten von Babylon, Artemistempel von Ephesos, Zeusstatue von Olympia, Mausoleum von Halikarnassos, Koloss von Rhodos und Leuchtturm von Alexandria."

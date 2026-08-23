@@ -1,0 +1,18 @@
+category: "geschichte"
+displayName: "Geschichte"
+questions:
+  - points: 100
+    prompt: "Wer leitete mit seinen 95 Thesen die Reformation ein?"
+    answer: "Martin Luther."
+  - points: 200
+    prompt: "Welcher Vulkan zerstörte im Jahr 79 n. Chr. Pompeji?"
+    answer: "Der Vesuv."
+  - points: 300
+    prompt: "Wie hieß der erste Hund, der die Erde im Weltraum umkreiste?"
+    answer: "Laika."
+  - points: 400
+    prompt: "Welcher US-Präsident erließ 1863 die Emanzipationsproklamation?"
+    answer: "Abraham Lincoln."
+  - points: 500
+    prompt: "Welcher Vulkanausbruch in Indonesien verursachte 1816 das sogenannte Jahr ohne Sommer? A: Krakatau, B: Tambora, C: Toba, D: Merapi"
+    answer: "B: Tambora."

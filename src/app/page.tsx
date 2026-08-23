@@ -21,20 +21,20 @@ export default async function Home({
       : null;
 
   return (
-    <div className="quiz-shell flex min-h-screen flex-col bg-[#0b0807] text-emerald-50">
+    <div className="quiz-shell flex min-h-screen flex-col bg-[#04110b] text-emerald-50">
       <a
         href="#main-content"
-        className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-orange-500 px-4 py-3 text-xs font-black uppercase text-orange-50 shadow-xl transition focus:translate-y-0"
+        className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-lime-500 px-4 py-3 text-xs font-black uppercase text-lime-50 shadow-xl transition focus:translate-y-0"
       >
         Zum Inhalt
       </a>
 
-      <header className="sticky top-0 z-40 border-b border-white/8 bg-[#0b0807]/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-white/8 bg-[#04110b]/90 backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
           <Link href="/" className="quiz-brand min-w-0">
             <Image
-              src="/naruto/shinobi-crest.png"
-              alt="Lauchgruen Shinobi Quiz"
+              src="/bear-logo.png"
+              alt="Lauchgruen Quiz"
               width={48}
               height={48}
               className="brand-mark"
@@ -43,14 +43,14 @@ export default async function Home({
             <span className="min-w-0">
               <span className="section-kicker block">Lauchgruen</span>
               <span className="mt-1 block truncate text-base font-black text-emerald-50">
-                Shinobi Quiz
+                Allgemeinwissen Quiz
               </span>
             </span>
           </Link>
 
           <div className="flex items-center gap-2">
             <span className="quiz-status hidden sm:inline-flex">
-              <span className="quiz-live-dot" /> Chunin-Prüfung
+              <span className="quiz-live-dot" /> Live-Quizshow
             </span>
             <a
               href="https://lauchgruen.de"
@@ -67,37 +67,36 @@ export default async function Home({
         tabIndex={-1}
         className="mx-auto grid w-full max-w-7xl flex-1 gap-4 px-5 py-6 sm:px-8 sm:py-10 lg:grid-cols-12"
       >
-        <section className="shinobi-hero surface-panel-strong relative overflow-hidden p-6 sm:p-8 lg:col-span-7 lg:p-10">
-          <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-red-800 via-orange-500 to-cyan-300" />
+        <section className="knowledge-hero surface-panel-strong relative overflow-hidden p-6 sm:p-8 lg:col-span-7 lg:p-10">
+          <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-lime-300 via-emerald-300 to-cyan-300" />
           <div className="flex h-full flex-col">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <span className="quiz-status border-orange-300/20 bg-orange-400/[0.08] text-orange-100/75">
-                <span className="quiz-live-dot" /> Die Prüfung beginnt
+              <span className="quiz-status border-lime-300/20 bg-lime-400/[0.08] text-lime-100/75">
+                <span className="quiz-live-dot" /> Gleich geht es los
               </span>
               <span className="font-mono text-xs font-black text-emerald-100/25">
-                LG / SHINOBI
+                LG / QUIZ
               </span>
             </div>
 
             <div className="my-auto py-10 sm:py-14">
               <div className="section-kicker text-cyan-100/50">
-                Wissen · Buzzer · Ehre
+                Wissen · Buzzer · Punkte
               </div>
-              <h1 className="shinobi-display shinobi-wordmark mt-4 max-w-[14ch] text-4xl font-black leading-[0.98] sm:text-5xl">
-                Lauchgruen <strong>Shinobi Quiz</strong>.
+              <h1 className="quiz-display quiz-wordmark mt-4 max-w-full text-2xl font-black leading-[0.98] sm:max-w-[14ch] sm:text-5xl">
+                Lauchgruen <strong>Allgemeinwissen</strong>.
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-7 text-emerald-100/58">
-                Werde zur Legende deiner Generation. Eine private
-                Naruto-Quizrunde für eingeladene Shinobi mit drei
-                Prüfungsrunden, Live-Kameras und Buzzer.
+                Drei Spielbretter, sechs Kameras und ein Buzzer, der keine
+                Ausreden kennt. Die private Quizshow für eingeladene Gäste.
               </p>
             </div>
 
             <div className="grid border-t border-white/8 sm:grid-cols-3 sm:divide-x sm:divide-white/8">
               {[
-                ["01", "Einschreiben", "Mit Twitch und Prüfungscode"],
-                ["02", "Sammeln", "Kamera und Ausrüstung prüfen"],
-                ["03", "Bestehen", "Buzzern, antworten, aufsteigen"],
+                ["01", "Anmelden", "Mit Twitch und Spielcode"],
+                ["02", "Bereitmachen", "Kamera und Ton prüfen"],
+                ["03", "Spielen", "Buzzern, antworten, punkten"],
               ].map(([index, title, detail]) => (
                 <div key={index} className="flex gap-3 py-4 sm:px-4 sm:first:pl-0 sm:last:pr-0">
                   <span className="font-mono text-[10px] font-black text-lime-200/38">
@@ -116,12 +115,12 @@ export default async function Home({
         <section className="surface-panel p-5 sm:p-7 lg:col-span-5">
           <div className="flex items-start justify-between gap-4 border-b border-white/8 pb-5">
             <div>
-              <div className="section-kicker">Meldehalle</div>
+              <div className="section-kicker">Spielzugang</div>
               <h2 className="mt-2 text-2xl font-black text-emerald-50">
-                Zugang zur Prüfung
+                Bereit für die Quizshow
               </h2>
             </div>
-            <span className="quiz-status">Bis zu 6 Shinobi</span>
+            <span className="quiz-status">Bis zu 6 Gäste</span>
           </div>
 
           {errorMessage ? (
@@ -162,10 +161,10 @@ export default async function Home({
                 <div>
                   <div className="section-kicker">Host</div>
                   <h3 className="mt-2 text-lg font-black text-emerald-50">
-                    Neue Prüfung eröffnen
+                    Neues Spiel eröffnen
                   </h3>
                   <p className="mt-2 text-sm leading-6 text-emerald-100/52">
-                    Erstellt einen neuen Code und öffnet den Versammlungsraum.
+                    Erstellt einen neuen Code und öffnet die Lobby.
                   </p>
                   <div className="mt-4">
                     <CreateGameButton />
@@ -176,7 +175,7 @@ export default async function Home({
               <div className={canHost ? "border-t border-white/8 pt-6" : ""}>
                 <div className="section-kicker">Teilnehmen</div>
                 <h3 className="mt-2 text-lg font-black text-emerald-50">
-                  Prüfungscode eingeben
+                  Spielcode eingeben
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-emerald-100/52">
                   Den Code aus der Einladung verwenden, um dem richtigen Team
@@ -204,12 +203,12 @@ export default async function Home({
               <div>
                 <div className="section-kicker">Twitch Login</div>
                 <h3 className="mt-3 text-2xl font-black text-emerald-50">
-                  Deine Identität für Prüfung, Kamera und Chat.
+                  Deine Identität für Spiel, Kamera und Chat.
                 </h3>
                 <p className="mt-3 text-sm leading-7 text-emerald-100/52">
                   Deine Twitch-Identität verbindet Avatar, Anzeigename und den
-                  richtigen Chat mit der Prüfung. Ohne Einladungscode bleibt
-                  das Dorfportal geschlossen.
+                  richtigen Chat mit dem Spiel. Ohne Einladungscode bleibt
+                  der Zugang geschlossen.
                 </p>
               </div>
 
@@ -225,7 +224,7 @@ export default async function Home({
                   </button>
                 </form>
                 <p className="mt-3 text-center text-xs leading-5 text-emerald-100/34">
-                  Zugang nur für eingeladene Teilnehmer dieser Prüfung.
+                  Zugang nur für eingeladene Teilnehmer dieser Quizrunde.
                 </p>
               </div>
             </div>
@@ -235,7 +234,7 @@ export default async function Home({
 
       <footer className="border-t border-white/7 px-5 py-6 sm:px-8">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 text-xs text-emerald-100/35 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} Lauchgruen · Shinobi Quiz</span>
+          <span>© {new Date().getFullYear()} Lauchgruen · Allgemeinwissen Quiz</span>
           <a href={VEXIFY_URL} target="_blank" rel="noreferrer" className="font-bold transition hover:text-lime-100">
             Crafted by Vexify
           </a>

@@ -1,0 +1,23 @@
+category: "flaggenkunde"
+displayName: "Flaggenkunde"
+questions:
+  - points: 100
+    prompt: "Zu welchem Land oder Gebiet gehört diese Flagge?"
+    imageUrl: "/questions/board_2/images/flaggenkunde_100.png"
+    answer: "Griechenland."
+  - points: 200
+    prompt: "Zu welchem Land oder Gebiet gehört diese Flagge?"
+    imageUrl: "/questions/board_2/images/flaggenkunde_200.png"
+    answer: "Schottland."
+  - points: 300
+    prompt: "Zu welchem Land oder Gebiet gehört diese Flagge?"
+    imageUrl: "/questions/board_2/images/flaggenkunde_300.png"
+    answer: "Uganda."
+  - points: 400
+    prompt: "Zu welchem Land oder Gebiet gehört diese Flagge?"
+    imageUrl: "/questions/board_2/images/flaggenkunde_400.png"
+    answer: "Laos."
+  - points: 500
+    prompt: "Zu welchem Land oder Gebiet gehört diese Flagge?"
+    imageUrl: "/questions/board_2/images/flaggenkunde_500.png"
+    answer: "Die Isle of Man."

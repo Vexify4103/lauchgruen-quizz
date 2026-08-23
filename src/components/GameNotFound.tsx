@@ -23,20 +23,20 @@ function apexHomeUrl(): string {
 export function GameNotFound({ code, reason = "not_found" }: Props) {
   const homeUrl = apexHomeUrl();
   const isKick = reason === "kicked";
-  const heading = isKick ? "Aus der Prüfung entfernt" : "Prüfung nicht gefunden";
+  const heading = isKick ? "Aus dem Spiel entfernt" : "Spiel nicht gefunden";
   const body = isKick
-    ? "Die Prüfungsleitung hat dich aus dem Versammlungsraum entfernt."
-    : "Diese Prüfung existiert nicht mehr - vermutlich ist sie vorbei oder der Code stimmt nicht.";
+    ? "Der Host hat dich aus der Lobby entfernt."
+    : "Dieses Spiel existiert nicht mehr - vermutlich ist es vorbei oder der Code stimmt nicht.";
 
   return (
-    <div className="quiz-shell relative flex min-h-screen w-full flex-col items-center justify-center bg-[#0b0807] px-6 py-16 text-emerald-50">
+    <div className="quiz-shell relative flex min-h-screen w-full flex-col items-center justify-center bg-[#04110b] px-6 py-16 text-emerald-50">
       <div className="surface-panel-strong relative flex w-full max-w-lg flex-col items-center gap-7 p-8 text-center sm:p-10">
         <Image
-          src="/naruto/shinobi-crest.png"
-          alt="Shinobi Quiz Wappen"
+          src="/bear-logo.png"
+          alt="Lauchgruen"
           width={140}
           height={140}
-          className="size-28 rounded-lg border border-orange-300/25 object-cover shadow-[0_0_34px_rgba(249,115,22,0.2)]"
+          className="size-28 rounded-lg border border-lime-300/25 object-cover shadow-[0_0_34px_rgba(163,230,53,0.2)]"
           priority
         />
 

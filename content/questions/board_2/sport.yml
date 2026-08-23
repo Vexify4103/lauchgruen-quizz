@@ -1,0 +1,18 @@
+category: "sport"
+displayName: "Sport"
+questions:
+  - points: 100
+    prompt: "In welcher Sportart wird häufig Harz für besseren Halt am Ball verwendet?"
+    answer: "Im Handball."
+  - points: 200
+    prompt: "Wie nennt man im Tennis den Spielstand von 40:40?"
+    answer: "Einstand beziehungsweise Deuce."
+  - points: 300
+    prompt: "Nach welchen drei Spielfortsetzungen kann ein Fußballspieler den Ball direkt erhalten, ohne im Abseits zu stehen?"
+    answer: "Nach Einwurf, Abstoß oder Eckstoß."
+  - points: 400
+    prompt: "Wie viele Punkte benötigt ein Spieler im aktuellen 14-Partien-Format der Schachweltmeisterschaft zum vorzeitigen Matchsieg?"
+    answer: "7,5 Punkte."
+  - points: 500
+    prompt: "Wie heißt die von Dick Fosbury bekannt gemachte Hochsprungtechnik?"
+    answer: "Fosbury-Flop."

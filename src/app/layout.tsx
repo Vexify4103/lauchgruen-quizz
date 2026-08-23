@@ -4,16 +4,16 @@ import { SocketProvider } from "@/lib/socket-context";
 
 export const metadata: Metadata = {
   title: {
-    default: "Shinobi Quiz | Lauchgruen",
-    template: "%s | Lauchgruen Shinobi Quiz",
+    default: "Allgemeinwissen Quiz | Lauchgruen",
+    template: "%s | Lauchgruen Quiz",
   },
   description:
-    "Die Lauchgruen Naruto-Quizshow mit Kameras, Buzzer und Echtzeit-Spielbrett.",
-  applicationName: "Lauchgruen Shinobi Quiz",
+    "Die Lauchgruen Allgemeinwissen-Quizshow mit Kameras, Buzzer und Echtzeit-Spielbrett.",
+  applicationName: "Lauchgruen Quiz",
   icons: {
-    icon: [{ url: "/naruto/shinobi-crest.png", type: "image/png" }],
-    shortcut: "/naruto/shinobi-crest.png",
-    apple: "/naruto/shinobi-crest.png",
+    icon: [{ url: "/bear-logo.png", type: "image/png" }],
+    shortcut: "/bear-logo.png",
+    apple: "/bear-logo.png",
   },
 };
 

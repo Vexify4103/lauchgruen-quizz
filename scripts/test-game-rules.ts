@@ -1,32 +1,47 @@
 import assert from "node:assert/strict";
 import { canAcceptBuzz, judgmentScoreDelta, recordResolvedTurn } from "../src/server/game-rules";
 import { normalizeRestoredGame, registerBonusBuzzerRounds } from "../src/server/game-state";
+import { correctMultiplierLabel, scoringRuleLabels } from "../src/lib/scoring-rules";
 import type { BoardData, GameState, Player } from "../src/server/types";
 
+assert.equal(correctMultiplierLabel(0), null, "board one has no point multiplier badge");
+assert.equal(correctMultiplierLabel(2), "×2", "board three exposes its double-points badge");
+assert.equal(correctMultiplierLabel(2, true), null, "bonus scoring overrides board three");
+assert.deepEqual(
+  scoringRuleLabels(2),
+  ["Richtig +2×", "Falsch −1×"],
+  "the displayed final-board rules match score calculation",
+);
+
 assert.equal(
-  judgmentScoreDelta({ correct: false, points: 300, isBoard3: false, isPickerFirstAttempt: true }),
+  judgmentScoreDelta({ correct: false, points: 300, boardIndex: 0, isBonus: false, isPickerFirstAttempt: true }),
   0,
   "the regular picker's first wrong answer is penalty-free",
 );
 assert.equal(
-  judgmentScoreDelta({ correct: false, points: 300, isBoard3: false, isPickerFirstAttempt: false }),
+  judgmentScoreDelta({ correct: false, points: 300, boardIndex: 1, isBonus: false, isPickerFirstAttempt: false }),
   -150,
   "a wrong fallback buzz loses half points",
 );
 assert.equal(
-  judgmentScoreDelta({ correct: true, points: 300, isBoard3: false, isPickerFirstAttempt: false }),
+  judgmentScoreDelta({ correct: true, points: 300, boardIndex: 1, isBonus: false, isPickerFirstAttempt: false }),
   300,
   "a correct fallback buzz wins full points",
 );
 assert.equal(
-  judgmentScoreDelta({ correct: true, points: 300, isBoard3: true, isPickerFirstAttempt: true }),
+  judgmentScoreDelta({ correct: true, points: 300, boardIndex: 2, isBonus: false, isPickerFirstAttempt: true }),
   600,
   "board three doubles correct answers",
 );
 assert.equal(
-  judgmentScoreDelta({ correct: false, points: 300, isBoard3: true, isPickerFirstAttempt: true }),
+  judgmentScoreDelta({ correct: false, points: 300, boardIndex: 2, isBonus: false, isPickerFirstAttempt: true }),
   -300,
   "board three deducts full points for wrong answers",
+);
+assert.equal(
+  judgmentScoreDelta({ correct: false, points: 250, boardIndex: 2, isBonus: true, isPickerFirstAttempt: false }),
+  -125,
+  "a wrong bonus answer loses half its configured value regardless of the active board",
 );
 
 assert.equal(

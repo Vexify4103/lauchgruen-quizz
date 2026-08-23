@@ -1,0 +1,18 @@
+category: "geschichte"
+displayName: "Geschichte"
+questions:
+  - points: 100
+    prompt: "Wer überquerte mit Kriegselefanten die Alpen?"
+    answer: "Hannibal."
+  - points: 200
+    prompt: "In welchem Jahr fiel die Berliner Mauer?"
+    answer: "1989."
+  - points: 300
+    prompt: "Wer entwickelte um 1440 den modernen Buchdruck mit beweglichen Metalllettern?"
+    answer: "Johannes Gutenberg."
+  - points: 400
+    prompt: "Welcher russische Zar wurde auch „der Schreckliche“ genannt?"
+    answer: "Iwan IV."
+  - points: 500
+    prompt: "Welcher englische König hatte sechs Ehefrauen, von denen zwei hingerichtet wurden?"
+    answer: "Heinrich VIII."

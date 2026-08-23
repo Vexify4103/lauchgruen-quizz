@@ -1,0 +1,18 @@
+category: "sport"
+displayName: "Sport"
+questions:
+  - points: 100
+    prompt: "Wie heißt der Bereich einer Rennstrecke, in dem Formel-1-Autos Reifen wechseln und repariert werden?"
+    answer: "Die Boxengasse beziehungsweise Pit Lane."
+  - points: 200
+    prompt: "Aus wie vielen Spielern besteht ein Beachvolleyball-Team auf dem Feld?"
+    answer: "Aus zwei Spielern."
+  - points: 300
+    prompt: "Wie heißt der kurz gemähte Bereich auf einem Golfplatz, in dem sich das Loch befindet?"
+    answer: "Das Green."
+  - points: 400
+    prompt: "Wie heißt die aus Harry Potter bekannte Sportart Quidditch heute offiziell?"
+    answer: "Quadball."
+  - points: 500
+    prompt: "Wie viele Punkte erzielte Wilt Chamberlain 1962 in einem einzigen NBA-Spiel?"
+    answer: "100 Punkte."

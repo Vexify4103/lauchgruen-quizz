@@ -1,23 +1,18 @@
-category: geographie
-displayName: Geographie
+category: "geographie"
+displayName: "Geographie"
 questions:
   - points: 100
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_3/images/geographie_100.png"
-    answer: "Sunagakure."
+    prompt: "Nach welchem Windsystem ist ein bekanntes VW-Modell benannt?"
+    answer: "Nach den Passatwinden."
   - points: 200
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_3/images/geographie_200.png"
-    answer: "Otogakure."
+    prompt: "Wie heißt die Hauptstadt Kanadas?"
+    answer: "Ottawa."
   - points: 300
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_3/images/geographie_300.png"
-    answer: "Die Kamui-Dimension."
+    prompt: "Welche Anbauform eignet sich besonders für steile Hänge?"
+    answer: "Terrassenanbau."
   - points: 400
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_3/images/geographie_400.png"
-    answer: "Kusagakure."
+    prompt: "Welche Stadt ist die höchstgelegene verfassungsmäßige Hauptstadt der Welt?"
+    answer: "Quito in Ecuador."
   - points: 500
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_3/images/geographie_500.png"
-    answer: "Der Shikkotsu-Wald."
+    prompt: "Nenne die drei Hauptstädte Südafrikas und ihre jeweiligen Staatsfunktionen."
+    answer: "Pretoria für die Exekutive, Kapstadt für die Legislative und Bloemfontein für die Judikative."

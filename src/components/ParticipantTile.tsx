@@ -36,7 +36,7 @@ export function ParticipantTile({
   }, [participant, revision]);
 
   const frameClasses = isCurrentTurn
-    ? "border-[3px] border-orange-300 shadow-[0_0_26px_rgba(249,115,22,0.38)]"
+    ? "border-[3px] border-lime-300 shadow-[0_0_26px_rgba(163,230,53,0.38)]"
     : isHost
       ? "border-2 border-cyan-200/30"
       : "border border-white/10";
@@ -57,7 +57,7 @@ export function ParticipantTile({
   return (
     <div
       className={[
-        "relative h-full w-full overflow-hidden rounded-lg bg-[#160d09] transition-all",
+        "relative h-full w-full overflow-hidden rounded-lg bg-[#052e1a] transition-all",
         frameClasses,
         offlineClasses,
       ].join(" ")}
@@ -93,7 +93,7 @@ export function ParticipantTile({
       ) : null}
 
       {isHost ? (
-        <div className="absolute right-2 top-2 z-10 rounded-full bg-orange-500 px-2.5 py-1 text-[10px] font-black uppercase text-orange-50 shadow">
+        <div className="absolute right-2 top-2 z-10 rounded-full bg-lime-500 px-2.5 py-1 text-[10px] font-black uppercase text-lime-50 shadow">
           Host
         </div>
       ) : isOffline ? (
@@ -107,7 +107,7 @@ export function ParticipantTile({
           className={[
             "absolute bottom-2 left-2 z-10 rounded-full p-0.5 shadow-lg",
             isCurrentTurn
-              ? "bg-orange-400 shadow-orange-950/35"
+              ? "bg-lime-400 shadow-lime-950/35"
               : "bg-emerald-950/88 shadow-black/30",
           ].join(" ")}
         >
@@ -120,7 +120,7 @@ export function ParticipantTile({
             unoptimized
           />
           {isLeader ? (
-            <div className="absolute -right-1.5 -top-2 flex h-5 w-5 items-center justify-center rounded-full border border-amber-100/75 bg-gradient-to-br from-amber-200 via-amber-400 to-orange-400 shadow-lg shadow-amber-400/30">
+            <div className="absolute -right-1.5 -top-2 flex h-5 w-5 items-center justify-center rounded-full border border-amber-100/75 bg-gradient-to-br from-amber-200 via-amber-400 to-lime-400 shadow-lg shadow-amber-400/30">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 24 24"
@@ -134,7 +134,7 @@ export function ParticipantTile({
         </div>
       ) : null}
 
-      <div className="absolute bottom-2 right-2 z-10 max-w-[58%] rounded-md border border-white/10 bg-[#0b0807]/88 px-2.5 py-1 text-[10px] font-black text-emerald-50 shadow-lg shadow-black/25 backdrop-blur-sm">
+      <div className="absolute bottom-2 right-2 z-10 max-w-[58%] rounded-md border border-white/10 bg-[#04110b]/88 px-2.5 py-1 text-[10px] font-black text-emerald-50 shadow-lg shadow-black/25 backdrop-blur-sm">
         <div className="truncate">{player.displayName}</div>
       </div>
     </div>

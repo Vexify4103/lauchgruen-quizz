@@ -79,7 +79,7 @@ export function LobbyClient({ gameId, userId }: Props) {
 
   return (
     <LiveKitRoomProvider gameId={gameId} publish={Boolean(me)}>
-      <div className="quiz-shell min-h-screen bg-[#0b0807] px-5 py-6 text-emerald-50 sm:px-8 sm:py-8">
+      <div className="quiz-shell min-h-screen bg-[#04110b] px-5 py-6 text-emerald-50 sm:px-8 sm:py-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-4">
         <header className="surface-panel-strong p-5 sm:p-6">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -92,30 +92,30 @@ export function LobbyClient({ gameId, userId }: Props) {
               </Link>
               <div className="flex items-center gap-4">
                 <Image
-                  src="/naruto/shinobi-crest.png"
-                  alt="Shinobi Quiz Wappen"
+                  src="/bear-logo.png"
+                  alt="Lauchgruen"
                   width={52}
                   height={52}
                   className="brand-mark"
                   priority
                 />
                 <div>
-                  <div className="section-kicker">Versammlungsraum</div>
+                  <div className="section-kicker">Spiel-Lobby</div>
                   <h1 className="mt-1 text-2xl font-black text-emerald-50 sm:text-3xl">
-                    Shinobi <span className="text-lime-200">Quiz</span>
+                    Lauchgruen <span className="text-lime-200">Quiz</span>
                   </h1>
                 </div>
               </div>
               <p className="max-w-2xl text-sm leading-6 text-emerald-100/72 sm:text-base">
                 {isHost
-                  ? "Stelle dein Team zusammen, teile den Prüfungscode und gib das Startsignal, sobald alle Shinobi bereit sind."
-                  : "Du wurdest zu dieser Prüfung gerufen. Kamera verbinden, bereit melden und auf das Signal des Prüfungsleiters warten."}
+                  ? "Stelle die Runde zusammen, teile den Spielcode und gib das Startsignal, sobald alle Gäste bereit sind."
+                  : "Du bist zur Quizrunde eingeladen. Kamera verbinden, bereit melden und auf das Startsignal des Hosts warten."}
               </p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[340px]">
               <div className="surface-panel rounded-[1.5rem] p-4">
-                <div className="section-kicker">Prüfungscode</div>
+                <div className="section-kicker">Spielcode</div>
                 <div className="mt-2 font-mono text-3xl font-black text-lime-200">
                   {gameId}
                 </div>
@@ -183,7 +183,7 @@ export function LobbyClient({ gameId, userId }: Props) {
                       setObsCopied,
                     );
                   }}
-                  className="mt-5 inline-flex w-fit items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950 shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-0.5"
+                  className="mt-5 inline-flex w-fit items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-lime-400 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950 shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-0.5"
                 >
                   {obsCopied ? "OBS-URL kopiert" : "OBS-URL kopieren"}
                 </button>
@@ -230,7 +230,7 @@ export function LobbyClient({ gameId, userId }: Props) {
                         setObsCopied,
                       );
                     }}
-                    className="mt-5 inline-flex w-fit items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950 shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-0.5"
+                    className="mt-5 inline-flex w-fit items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-lime-400 px-5 py-3 text-sm font-black uppercase tracking-[0.14em] text-emerald-950 shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-0.5"
                   >
                     {obsCopied ? "OBS-URL kopiert" : "OBS-URL kopieren"}
                   </button>
@@ -270,9 +270,9 @@ export function LobbyClient({ gameId, userId }: Props) {
             <div className="surface-panel-strong rounded-[1.8rem] p-5 sm:p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="section-kicker">Teilnehmende Shinobi</div>
+                  <div className="section-kicker">Teilnehmende Gäste</div>
                   <h2 className="mt-3 text-2xl font-black text-amber-100">
-                    Reihenfolge der Prüfung
+                    Reihenfolge im Spiel
                   </h2>
                 </div>
                 <div className="rounded-full border border-emerald-300/18 bg-emerald-950/45 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-emerald-200/72">
@@ -414,7 +414,7 @@ export function LobbyClient({ gameId, userId }: Props) {
                   type="button"
                   onClick={() => emit("host:start_game")}
                   disabled={!allReady}
-                  className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 px-6 py-4 text-base font-black text-emerald-950 shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:from-emerald-800 disabled:to-emerald-900 disabled:text-emerald-600"
+                  className="mt-5 inline-flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-amber-300 via-amber-400 to-lime-400 px-6 py-4 text-base font-black text-emerald-950 shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:from-emerald-800 disabled:to-emerald-900 disabled:text-emerald-600"
                 >
                   {allReady ? "Spiel starten" : `Warte auf Spieler (${readyCount}/${contestants.length})`}
                 </button>
@@ -426,7 +426,7 @@ export function LobbyClient({ gameId, userId }: Props) {
                     "mt-5 inline-flex w-full items-center justify-center rounded-2xl px-6 py-4 text-base font-black transition-colors",
                     me?.ready
                       ? "bg-emerald-500 text-white hover:bg-emerald-400"
-                      : "bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 text-emerald-950 hover:from-amber-200 hover:to-orange-300",
+                      : "bg-gradient-to-r from-amber-300 via-amber-400 to-lime-400 text-emerald-950 hover:from-amber-200 hover:to-lime-300",
                   ].join(" ")}
                 >
                   {me?.ready ? "Als bereit markiert" : "Jetzt bereit"}

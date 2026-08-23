@@ -1,57 +1,39 @@
 default_points: 250
-default_prompt: "Welche Naruto-Szene ist hier umschrieben?"
-
+default_prompt: "Welcher Song ist anhand der umschriebenen Textzeile gesucht?"
 rounds:
-  - prompt: "Alter Pirat verkleidet sich als Schokohase und mobbt kuschelbedürftige Kinder."
-    answer: "Kakashis Prüfung, bei der Team 7 ihm die Glocken stehlen muss."
-
-  - prompt: "Wilde Schwänze lassen sich durch Liebe und einen Käfig besänftigen."
-    answer: "Der Neunschwänzige tötet Narutos Eltern."
-
-  - prompt: "Verrückter Inder wundert sich, wann er endlich ankommt."
-    answer: "Might Guy kämpft mit geöffnetem achten Tor."
-
-  - prompt: "Verrückter Künstler wird durch sein bombastisches Werk berühmt."
-    answer: "Deidara sprengt sich selbst in die Luft."
-
-  - prompt: "Emo-Teenager lässt sich im Wald am Hals tätowieren, weil er glaubt, dadurch stärker zu werden."
-    answer: "Sasuke erhält das Fluchmal von Orochimaru."
-
-  - prompt: "Du siehst aus wie 'ne Kuh, Bruder."
-    answer: "Itachi stirbt vor Sasukes Augen."
-
-  - prompt: "Komischer Opa ist Fan der Dino-Vernichtung und möchte gleich eine zweite haben."
-    answer: "Madara beschwört einen zweiten Meteoriten."
-
-  - prompt: "Drogenabhängiger Fresssack bekommt endlich sein High und spürt wieder seine Kraft."
-    answer: "Chōji nimmt die rote Pille."
-
-  - prompt: "Böse Organhändler finden die Beute ihres Lebens und freuen sich von ganzem Herzen."
-    answer: "Kakashi und Naruto besiegen Kakuzu."
-
-  - prompt: "Alter Spanner beobachtet kichernd Frauen in den heißen Quellen."
-    answer: "Jiraiya betreibt Recherche für seine Bücher."
-
-  - prompt: "Mädchen ist so warm, dass sie gleich einen XXL-Jumbofächer zum Abkühlen braucht."
-    answer: "Temari setzt ihren riesigen Fächer als Waffe ein."
-
-  - prompt: "Junge denkt sich, während seine Freunde in Lebensgefahr sind: Darauf erst mal Chips, geil."
-    answer: "Chōji isst Chips, während sein Team angegriffen wird."
-
-  - prompt: "Geile Monobraue findet dicke Arme erotischer als dicke Beine und verzichtet auf Beintraining."
-    answer: "Rock Lee trainiert im Handstand."
-
-  - prompt: "Lautes Mädchen verliert eine Win-Challenge und entscheidet, dass ein Bob im Kampf ohnehin besser ist."
-    answer: "Sakura schneidet sich im Kampf die Haare ab, um weiterkämpfen zu können."
-
-  - prompt: "Nicht jede Beute einer fleischfressenden Pflanze mundet gut."
-    answer: "Zetsu spuckt eine Person wieder aus."
-
-  - prompt: "Punk-Atze ist großer Fan von schwarzen Löchern."
-    answer: "Pain greift Konoha an."
-
-  - prompt: "Nerviger Schreihals wird zum Sprinter, nachdem er seine Gewichte abgelegt hat."
-    answer: "Rock Lee wird deutlich schneller, nachdem er seine Beingewichte ablegt."
-
-  - prompt: "Zwei Bros zeigen sich im krassen Entental gegenseitig, wie gut sie Schattenboxen können. Deutsch schwere Sprache und so, Alter."
-    answer: "Naruto und Sasuke bestreiten ihren finalen Kampf im Tal des Endes."
+  - prompt: "Du bist ein Feuerwerk – zeig allen deine Farben."
+    answer: "Katy Perry – Firework."
+  - prompt: "Es riecht nach jugendlichem Protestgeist."
+    answer: "Nirvana – Smells Like Teen Spirit."
+  - prompt: "Ich habe 99 Probleme, aber eine Frau gehört nicht dazu."
+    answer: "Jay-Z – 99 Problems."
+  - prompt: "Sag mir, was du wirklich, wirklich willst."
+    answer: "Spice Girls – Wannabe."
+  - prompt: "Sag mir warum – ist es nichts als Herzschmerz?"
+    answer: "Backstreet Boys – I Want It That Way."
+  - prompt: "Ich bin ein Außenseiter und frage mich, was ich hier eigentlich mache."
+    answer: "Radiohead – Creep."
+  - prompt: "Ich habe dir so sehr vertraut und bin trotzdem nur so weit gekommen."
+    answer: "Linkin Park – In the End."
+  - prompt: "Ich finde keinen Schlaf; meine Gedanken lassen mich nicht los."
+    answer: "Faithless – Insomnia."
+  - prompt: "Es ging hinab, während die Flammen immer höher stiegen."
+    answer: "Johnny Cash – Ring of Fire."
+  - prompt: "Nimm es mit mir auf – ich bin bald fort."
+    answer: "a-ha – Take On Me."
+  - prompt: "Stell dir eine Welt ohne Länder, Grenzen und Religionen vor."
+    answer: "John Lennon – Imagine."
+  - prompt: "Du warst ein Kind und krochst auf deinen Knien darauf zu."
+    answer: "MGMT – Kids."
+  - prompt: "Nichts, nicht einmal hundert Männer, könnte mich von dir wegziehen."
+    answer: "Toto – Africa."
+  - prompt: "Ich wache auf und spüre es in meinen Knochen; mein System ist aufgeladen."
+    answer: "Imagine Dragons – Radioactive."
+  - prompt: "Wir können die Sache auf dem Flur austragen – so hast du noch nie getanzt."
+    answer: "Milky Chance – Stolen Dance."
+  - prompt: "Er war ein Junge, sie war ein Mädchen – deutlicher geht es kaum."
+    answer: "Avril Lavigne – Sk8er Boi."
+  - prompt: "Spiel uns heute ein Lied; wir sind alle in Stimmung für eine Melodie."
+    answer: "Billy Joel – Piano Man."
+  - prompt: "Ist das das wirkliche Leben oder nur Fantasie?"
+    answer: "Queen – Bohemian Rhapsody."

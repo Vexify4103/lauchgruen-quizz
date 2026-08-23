@@ -76,7 +76,7 @@ export function LiveKitCameraSetup({
               className="quiz-input mt-2 flex h-12 w-full min-w-0 items-center justify-between gap-3 px-4 text-left text-sm font-black text-emerald-50 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <span className="truncate">{selectedCameraLabel}</span>
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-orange-300/20 bg-orange-400/[0.08] text-orange-100">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-lime-300/20 bg-lime-400/[0.08] text-lime-100">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 20 20"
@@ -93,7 +93,7 @@ export function LiveKitCameraSetup({
             {cameraMenuOpen ? (
               <div
                 role="listbox"
-                className="themed-scrollbar absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 max-h-64 overflow-y-auto rounded-lg border border-orange-300/20 bg-[#160d09]/98 p-1.5 shadow-2xl shadow-black/45 backdrop-blur"
+                className="themed-scrollbar absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 max-h-64 overflow-y-auto rounded-lg border border-lime-300/20 bg-[#052e1a]/98 p-1.5 shadow-2xl shadow-black/45 backdrop-blur"
               >
                 {[
                   { deviceId: "", label: "Browser-Standardkamera" },
@@ -117,7 +117,7 @@ export function LiveKitCameraSetup({
                       className={[
                         "flex min-h-10 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition-colors",
                         selected
-                          ? "bg-orange-500 text-orange-50"
+                          ? "bg-lime-500 text-lime-50"
                           : "text-emerald-100 hover:bg-white/[0.05] hover:text-lime-100",
                       ].join(" ")}
                     >
@@ -148,7 +148,7 @@ export function LiveKitCameraSetup({
           {status === "disabled"
             ? "LiveKit ist noch nicht konfiguriert. Setze LIVEKIT_* Variablen, dann verbindet sich die Kamera hier direkt."
             : isLive
-              ? "Kamera ist mit dem Shinobi-Videoraum verbunden. Du kannst die Quelle jederzeit wechseln."
+              ? "Kamera ist mit dem Videoraum verbunden. Du kannst die Quelle jederzeit wechseln."
               : "Wähle bei Bedarf OBS Virtual Camera oder eine andere Kamera, dann startet dein Browser den Videostream."}
         </div>
 

@@ -1,23 +1,18 @@
-category: geographie
-displayName: Geographie
+category: "geographie"
+displayName: "Geographie"
 questions:
   - points: 100
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_2/images/geographie_100.png"
-    answer: "Die Arena der Chūnin-Auswahlprüfung."
+    prompt: "Welcher Ozean ist der größte der Erde?"
+    answer: "Der Pazifische Ozean."
   - points: 200
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_2/images/geographie_200.png"
-    answer: "Der Berg Myōboku."
+    prompt: "Was ist der kleinste souveräne Staat der Welt?"
+    answer: "Die Vatikanstadt."
   - points: 300
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_2/images/geographie_300.png"
-    answer: "Kaguyas Eisdimension."
+    prompt: "Was bezeichnet man als Punkt Nemo?"
+    answer: "Den Punkt im Ozean, der am weitesten von jeder Landfläche entfernt ist."
   - points: 400
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_2/images/geographie_400.png"
-    answer: "Der Naka-Fluss."
+    prompt: "Welcher europäische Fluss berührt oder durchquert zehn Länder?"
+    answer: "Die Donau."
   - points: 500
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_2/images/geographie_500.png"
-    answer: "Die Ryūchi-Höhle."
+    prompt: "Wie viele Berge über 8.000 Meter gibt es auf der Erde?"
+    answer: "14."

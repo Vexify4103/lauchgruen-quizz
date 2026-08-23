@@ -17,13 +17,13 @@ export function JoinGameForm() {
       className="flex flex-col gap-2 sm:flex-row"
     >
       <label className="sr-only" htmlFor="game-code">
-        Prüfungscode
+        Spielcode
       </label>
       <input
         id="game-code"
         value={gameId}
         onChange={(e) => setGameId(e.target.value.toUpperCase())}
-        placeholder="PRÜFUNGSCODE"
+        placeholder="SPIELCODE"
         className="quiz-input flex-1 px-4 font-mono text-base font-black uppercase text-lime-100 placeholder:text-emerald-100/25"
         maxLength={8}
       />

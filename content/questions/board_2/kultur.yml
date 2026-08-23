@@ -1,0 +1,18 @@
+category: "kultur"
+displayName: "Kultur"
+questions:
+  - points: 100
+    prompt: "Was ist Goethes berühmtestes Drama?"
+    answer: "Faust."
+  - points: 200
+    prompt: "Welcher Maler verletzte sich selbst am Ohr?"
+    answer: "Vincent van Gogh."
+  - points: 300
+    prompt: "Welche Basilika in Barcelona ist seit 2025 das höchste Kirchengebäude der Welt?"
+    answer: "Die Sagrada Família."
+  - points: 400
+    prompt: "Welche vier Grundzutaten werden heute mit dem deutschen Reinheitsgebot verbunden?"
+    answer: "Wasser, Malz, Hopfen und Hefe."
+  - points: 500
+    prompt: "Welche Fachrichtung studierte die Rapperin Ikkimel?"
+    answer: "Sprachwissenschaften beziehungsweise Deutsche Philologie."

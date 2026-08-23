@@ -11,6 +11,8 @@ import { StartingSoon } from "@/components/StartingSoon";
 import { GameNotFound } from "@/components/GameNotFound";
 import { WinnerToast } from "@/components/WinnerToast";
 import { FinalResults } from "@/components/FinalResults";
+import { ScoringRules } from "@/components/ScoringRules";
+import { correctMultiplierLabel } from "@/lib/scoring-rules";
 import { LiveKitRoomProvider } from "@/lib/livekit-context";
 import type { ClientGameState } from "@/server/types";
 
@@ -77,13 +79,14 @@ function ObsQuestionDisplay({
   const isReview = Boolean(reviewQuestion && !activeQuestion);
   const isBonus = currentQuestion.category === "_bonus_buzzer";
   const categoryName = isBonus
-    ? "Spezialprüfung"
+    ? "Bonusrunde"
     : game.categories.find((category) => category.id === currentQuestion.category)?.displayName ?? "Frage";
   const hasAnswer = Boolean(q.answer);
   const hasMedia = Boolean(q.imageUrl || q.answerImageUrl);
   const showBonusInstruction = Boolean(
     isBonus && q.instruction && q.instruction !== q.prompt,
   );
+  const pointMultiplier = correctMultiplierLabel(game.currentBoardIndex, isBonus);
 
   return (
     <div className="surface-panel-strong shrink-0 overflow-hidden rounded-[1.6rem] px-5 py-4">
@@ -97,13 +100,22 @@ function ObsQuestionDisplay({
           <div className="flex flex-wrap items-center gap-2">
             <div className="section-kicker">
               {isReview ? "Review" : categoryName} · {currentQuestion.points}
+              {pointMultiplier ? ` ${pointMultiplier}` : ""}
             </div>
             <div className="rounded-full border border-emerald-300/16 bg-emerald-950/45 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-100/76">
               {isReview ? "Auflösung" : stateLabel}
             </div>
           </div>
+          {!isReview ? (
+            <ScoringRules
+              boardIndex={game.currentBoardIndex}
+              isBonus={isBonus}
+              compact
+              className="mt-3 rounded-lg"
+            />
+          ) : null}
           {showBonusInstruction ? (
-            <div className="mt-3 text-xs font-black uppercase text-orange-200/72">
+            <div className="mt-3 text-xs font-black uppercase text-lime-200/72">
               {q.instruction}
             </div>
           ) : null}
@@ -257,7 +269,7 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
   return (
     <LiveKitRoomProvider gameId={gameId} publish={false}>
       <div
-      className="quiz-shell flex h-screen w-screen flex-col overflow-hidden bg-[#0b0807] text-emerald-50"
+      className="quiz-shell flex h-screen w-screen flex-col overflow-hidden bg-[#04110b] text-emerald-50"
       style={{ padding: compact ? "8px" : "10px", gap: compact ? "6px" : "8px" }}
     >
       <div
@@ -321,8 +333,8 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
           <div className="surface-panel-strong rounded-[1.6rem] p-4">
             <div className="flex items-center gap-3">
               <Image
-                src="/naruto/shinobi-crest.png"
-                alt="Shinobi Quiz Wappen"
+                src="/bear-logo.png"
+                alt="Lauchgruen"
                 width={compact ? 56 : 64}
                 height={compact ? 56 : 64}
                 className="brand-mark"
@@ -331,7 +343,7 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
               <div>
                 <div className="section-kicker">Broadcast</div>
                 <div className="mt-1 text-lg font-black text-emerald-50">
-                  Shinobi <span className="text-lime-200">Quiz</span>
+                  Lauchgruen <span className="text-lime-200">Quiz</span>
                 </div>
               </div>
             </div>
@@ -353,10 +365,13 @@ export function ObsClient({ gameId, chatChannel: requestedChatChannel, hideCamer
               </div>
               <div className="rounded-2xl border border-emerald-300/10 bg-emerald-950/35 p-3">
                 <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300/52">
-                  Prüfung
+                  Brett
                 </div>
                 <div className="mt-1 text-sm font-black text-emerald-50">
-                  Runde {game.currentBoardIndex + 1}
+                  Brett {game.currentBoardIndex + 1}
+                  {correctMultiplierLabel(game.currentBoardIndex)
+                    ? ` ${correctMultiplierLabel(game.currentBoardIndex)}`
+                    : ""}
                 </div>
               </div>
               <div className="rounded-2xl border border-emerald-300/10 bg-emerald-950/35 p-3">

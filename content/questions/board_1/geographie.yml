@@ -1,23 +1,18 @@
-category: geographie
-displayName: Geographie
+category: "geographie"
+displayName: "Geographie"
 questions:
   - points: 100
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_1/images/geographie_100.png"
-    answer: "Das Eingangstor von Konohagakure."
+    prompt: "Was ist die Hauptstadt von Portugal?"
+    answer: "Lissabon."
   - points: 200
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_1/images/geographie_200.png"
-    answer: "Das Trainingsgelände von Team 7."
+    prompt: "Welcher Fluss fließt durch Ägypten und mündet ins Mittelmeer?"
+    answer: "Der Nil."
   - points: 300
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_1/images/geographie_300.png"
-    answer: "Der Genbu-Wasserfall."
+    prompt: "Welche Bewässerungsmethode eignet sich bei großer Hitze, Trockenheit und schwierigen Böden besonders gut?"
+    answer: "Die Tröpfchenbewässerung."
   - points: 400
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_1/images/geographie_400.png"
-    answer: "Die Kannabi-Brücke."
+    prompt: "Welches Land erstreckt sich durch seine Überseegebiete über die meisten Zeitzonen?"
+    answer: "Frankreich."
   - points: 500
-    prompt: "Welchen Ort sehen wir hier?"
-    imageUrl: "/questions/board_1/images/geographie_500.png"
-    answer: "Der Maskenlager-Tempel des Uzumaki-Clans."
+    prompt: "Wie heißt die Meerenge zwischen Russland und Alaska?"
+    answer: "Die Beringstraße."

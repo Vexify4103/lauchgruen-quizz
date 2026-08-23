@@ -24,7 +24,7 @@ export function CreateGameButton() {
       }}
       className="quiz-button-primary w-full py-3 text-sm disabled:translate-y-0 disabled:opacity-60"
     >
-      {pending ? "Prüfung wird vorbereitet..." : "Neue Prüfung eröffnen"}
+      {pending ? "Spiel wird vorbereitet..." : "Neues Spiel eröffnen"}
     </button>
   );
 }

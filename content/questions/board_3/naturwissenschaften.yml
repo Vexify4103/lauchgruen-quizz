@@ -1,0 +1,18 @@
+category: "naturwissenschaften"
+displayName: "Naturwissenschaften"
+questions:
+  - points: 100
+    prompt: "Was ist das größte Organ des Menschen?"
+    answer: "Die Haut."
+  - points: 200
+    prompt: "Aus welchen Teilchen besteht ein Atomkern?"
+    answer: "Aus Protonen und Neutronen."
+  - points: 300
+    prompt: "Nenne alle acht anerkannten Planeten unseres Sonnensystems."
+    answer: "Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus und Neptun."
+  - points: 400
+    prompt: "Was sind Tranquilizer?"
+    answer: "Beruhigende Medikamente, die unter anderem Angst und starke Unruhe reduzieren."
+  - points: 500
+    prompt: "Wie nennt man die Grenze eines Schwarzen Lochs, hinter der nichts mehr entkommen kann?"
+    answer: "Ereignishorizont."

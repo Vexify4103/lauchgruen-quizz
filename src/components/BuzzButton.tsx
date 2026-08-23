@@ -65,7 +65,7 @@ export function BuzzButton({ myPlayerId }: Props) {
     <div className="flex flex-col items-center gap-2">
       {isBonusBuzz && (
         <div className="text-xs font-extrabold text-amber-300 uppercase tracking-widest animate-pulse">
-          Spezialprüfung
+          Bonusrunde
         </div>
       )}
       <button
@@ -76,7 +76,7 @@ export function BuzzButton({ myPlayerId }: Props) {
           "w-44 h-44 rounded-full font-extrabold text-4xl transition-all border-4",
           eligible && !pressed
             ? isBonusBuzz
-              ? "bg-gradient-to-br from-amber-300 to-orange-500 border-amber-200 text-emerald-950 hover:scale-105 active:scale-95 shadow-2xl shadow-orange-400/60 animate-pulse-slow"
+              ? "bg-gradient-to-br from-amber-300 to-lime-500 border-amber-200 text-emerald-950 hover:scale-105 active:scale-95 shadow-2xl shadow-lime-400/60 animate-pulse-slow"
               : "bg-gradient-to-br from-amber-400 to-amber-600 border-amber-200 text-emerald-950 hover:scale-105 active:scale-95 shadow-2xl shadow-amber-400/60 animate-pulse-slow"
             : pressed
               ? "bg-emerald-600 border-emerald-300 text-white"

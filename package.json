@@ -10,6 +10,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test:rules": "tsx scripts/test-game-rules.ts",
+    "import:dropbox": "node scripts/import-allgemeinwissen-dropbox.mjs",
     "validate:questions": "node scripts/validate-questions.mjs"
   },
   "dependencies": {

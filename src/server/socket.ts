@@ -904,21 +904,18 @@ export async function registerSocketHandlers(io: SocketIOServer): Promise<void> 
 
       let questionResolved = false;
 
-      // Rule #1: the original picker's *first* attempt at their own cell is
-      // penalty-free on regular boards. Buzz attempts AND bonus-image answers
-      // always incur a penalty. Board 3 overrides this — wrong is always -points.
+      // The shared scoring definition decides whether the picker's first miss
+      // is free and which multiplier applies to correct and wrong answers.
       const isPickerFirstAttempt =
         !wasBonus &&
         answerer === game.activeQuestion.pickedBy &&
         game.activeQuestion.alreadyTried.length === 0;
 
-      // Board 3 (index 2) has special scoring: correct = x2 points, wrong = -points.
-      const isBoard3 = !wasBonus && game.currentBoardIndex === 2;
-
       const scoreDelta = judgmentScoreDelta({
         correct: parsed.data.correct,
         points,
-        isBoard3,
+        boardIndex: game.currentBoardIndex,
+        isBonus: wasBonus,
         isPickerFirstAttempt,
       });
       if (scoreDelta !== 0) awardPoints(game, answerer, scoreDelta);

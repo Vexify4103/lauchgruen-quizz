@@ -127,12 +127,12 @@ export function pickAllBoards(maxBoards = 3): BoardData[] {
  *   default_prompt: "Welches Ereignis wird hier dargestellt?"
  *   rounds:
  *     - prompt: "Welches Dorf liegt im Land des Feuers?"
- *       answer: "Konohagakure"                 # text only
+ *       answer: "Lissabon"                     # text only
  *     - image: buzzer_1.png
- *       answer: "Das Haupttor von Konoha"      # default prompt + image
+ *       answer: "Der Eiffelturm"                # default prompt + image
  *     - image: buzzer_2.jpg
  *       prompt: "Welches Gebäude sehen wir?"   # text + image
- *       answer: "Das Krankenhaus von Konoha"
+ *       answer: "Das Brandenburger Tor"
  *       points: 800   # optional per-round override
  *
  * Image files themselves live next to the YAML at content/questions/buzzer/<file>

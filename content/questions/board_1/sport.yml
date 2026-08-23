@@ -1,0 +1,18 @@
+category: "sport"
+displayName: "Sport"
+questions:
+  - points: 100
+    prompt: "In welchem Abstand finden die Olympischen Sommerspiele normalerweise statt?"
+    answer: "Alle vier Jahre."
+  - points: 200
+    prompt: "Wie lang ist eine offizielle Marathonstrecke?"
+    answer: "42,195 Kilometer."
+  - points: 300
+    prompt: "Um welche Trophäe spielen die Teams der nordamerikanischen Eishockeyliga NHL?"
+    answer: "Um den Stanley Cup."
+  - points: 400
+    prompt: "Was ist ein Triple-Double im Basketball?"
+    answer: "Zweistellige Werte in drei statistischen Kategorien innerhalb eines Spiels, etwa Punkte, Rebounds und Assists."
+  - points: 500
+    prompt: "In welchem Jahr und in welcher Stadt fanden die ersten Olympischen Spiele der Neuzeit statt?"
+    answer: "1896 in Athen."

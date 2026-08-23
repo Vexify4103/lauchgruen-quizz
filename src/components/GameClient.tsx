@@ -18,6 +18,7 @@ import { FinalResults } from "@/components/FinalResults";
 import Image from "next/image";
 import { LiveKitRoomProvider } from "@/lib/livekit-context";
 import { playCorrect, playWrong } from "@/lib/sounds";
+import { correctMultiplierLabel } from "@/lib/scoring-rules";
 
 interface Props {
   gameId: string;
@@ -70,7 +71,7 @@ export function GameClient({ gameId, userId, mode }: Props) {
 
   if (!game || !connected) {
     return (
-      <div className="quiz-shell flex h-screen w-screen items-center justify-center bg-[#0b0807] text-lime-200">
+      <div className="quiz-shell flex h-screen w-screen items-center justify-center bg-[#04110b] text-lime-200">
         <div className="quiz-status"><span className="quiz-live-dot" /> Verbinde mit Spiel...</div>
       </div>
     );
@@ -138,6 +139,12 @@ export function GameClient({ gameId, userId, mode }: Props) {
   const activeCategory = game.activeQuestion
     ? game.categories.find((category) => category.id === game.activeQuestion?.category)
     : null;
+  const activePointMultiplier = game.activeQuestion
+    ? correctMultiplierLabel(
+        game.currentBoardIndex,
+        game.activeQuestion.category === "_bonus_buzzer",
+      )
+    : null;
   const boardStateLabel = game.activeQuestion
     ? game.activeQuestion.buzzersOpen
       ? "Buzzer offen"
@@ -146,13 +153,13 @@ export function GameClient({ gameId, userId, mode }: Props) {
         : "Frage aktiv"
     : game.phase === "finished"
       ? "Spiel beendet"
-      : "Prüfungsbrett bereit";
+      : "Spielbrett bereit";
   const currentViewer = game.players[userId];
   const chatChannel = currentViewer?.twitchLogin ?? null;
   return (
     <LiveKitRoomProvider gameId={gameId} publish={Boolean(currentViewer)}>
       <div
-      className="quiz-shell flex h-screen w-screen flex-col overflow-hidden bg-[#0b0807] text-emerald-50"
+      className="quiz-shell flex h-screen w-screen flex-col overflow-hidden bg-[#04110b] text-emerald-50"
       style={{ padding: "10px", gap: "8px" }}
     >
       <header className="surface-panel-strong flex shrink-0 items-center justify-between px-4 py-3">
@@ -165,17 +172,17 @@ export function GameClient({ gameId, userId, mode }: Props) {
           </Link>
           <div className="flex items-center gap-3">
             <Image
-              src="/naruto/shinobi-crest.png"
-              alt="Shinobi Quiz Wappen"
+              src="/bear-logo.png"
+              alt="Lauchgruen"
               width={34}
               height={34}
               className="brand-mark !size-[34px]"
               priority
             />
             <div className="min-w-0">
-              <div className="section-kicker">Chunin-Prüfung</div>
+              <div className="section-kicker">Allgemeinwissen</div>
               <div className="truncate text-lg font-black text-emerald-50">
-                Shinobi <span className="text-lime-200">Quiz</span>
+                Lauchgruen <span className="text-lime-200">Quiz</span>
               </div>
             </div>
           </div>
@@ -263,6 +270,7 @@ export function GameClient({ gameId, userId, mode }: Props) {
                   <div className="min-w-0">
                     <div className="section-kicker">
                       {activeCategory?.displayName ?? "Frage"} · {game.activeQuestion.points}
+                      {activePointMultiplier ? ` ${activePointMultiplier}` : ""}
                     </div>
                     <div className="mt-2 text-lg font-black leading-tight text-amber-50">
                       {game.activeQuestion.question.prompt}
@@ -293,7 +301,7 @@ export function GameClient({ gameId, userId, mode }: Props) {
               {mode === "play" ? <SiteVolumeControl /> : null}
               {!game.activeQuestion ? (
                 <div className="mt-4 rounded-2xl border border-emerald-300/10 bg-emerald-950/35 p-4 text-sm text-emerald-100/68">
-                  Kein aktiver Buzzer. Das Prüfungsbrett wartet auf die nächste Aufgabe.
+                  Kein aktiver Buzzer. Das Spielbrett wartet auf die nächste Frage.
                 </div>
               ) : (
                 <div className="mt-5 flex justify-center">

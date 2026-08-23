@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0807;
-  --foreground: #fff7ed;
-  --surface: rgba(24, 15, 11, 0.92);
-  --surface-raised: rgba(32, 18, 12, 0.97);
-  --surface-muted: rgba(255, 237, 213, 0.045);
-  --border: rgba(255, 237, 213, 0.11);
-  --border-accent: rgba(251, 146, 60, 0.3);
-  --chakra: #22d3ee;
-  --ember: #fb923c;
-  --ember-bright: #fdba74;
-  --seal: #dc2626;
-  --paper: #ffedd5;
+  --background: #04110b;
+  --foreground: #ecfdf5;
+  --surface: rgba(3, 24, 16, 0.9);
+  --surface-raised: rgba(5, 36, 24, 0.96);
+  --surface-muted: rgba(167, 243, 208, 0.05);
+  --border: rgba(52, 211, 153, 0.2);
+  --border-accent: rgba(190, 242, 100, 0.28);
+  --lime: #bef264;
+  --lime-bright: #d9f99d;
+  --cyan: #67e8f9;
+  --amber: #fbbf24;
+  --paper: #f0fdf4;
   --danger: #fca5a5;
-  --font-geist-sans: "Segoe UI", "Trebuchet MS", sans-serif;
+  --font-geist-sans: "Trebuchet MS", "Segoe UI", sans-serif;
   --font-geist-mono: "Cascadia Code", "Consolas", monospace;
 }
 
@@ -36,17 +36,17 @@
 html {
   min-width: 320px;
   background: var(--background);
-  scrollbar-color: rgba(251, 146, 60, 0.46) rgba(11, 8, 7, 0.85);
+  scrollbar-color: rgba(190, 242, 100, 0.5) rgba(2, 44, 34, 0.88);
   scrollbar-width: thin;
 }
 
 body {
   min-width: 320px;
   background:
-    linear-gradient(rgba(255, 237, 213, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 237, 213, 0.018) 1px, transparent 1px),
-    radial-gradient(circle at 20% 0%, rgba(194, 65, 12, 0.12), transparent 34rem),
-    linear-gradient(150deg, #090706 0%, #160d09 52%, #080605 100%);
+    linear-gradient(rgba(167, 243, 208, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 243, 208, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 50% -10rem, rgba(190, 242, 100, 0.1), transparent 42rem),
+    linear-gradient(180deg, #064e3b 0%, #052e1a 48%, #022c22 100%);
   background-attachment: fixed;
   background-size: 64px 64px, 64px 64px, auto, auto;
   color: var(--foreground);
@@ -62,19 +62,19 @@ body::-webkit-scrollbar,
 
 html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track,
-.themed-scrollbar::-webkit-scrollbar-track { background: rgba(11, 8, 7, 0.78); }
+.themed-scrollbar::-webkit-scrollbar-track { background: rgba(2, 44, 34, 0.78); }
 
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb,
 .themed-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(251, 146, 60, 0.42);
-  border: 2px solid rgba(11, 8, 7, 0.86);
+  background: linear-gradient(180deg, rgba(251, 191, 36, 0.76), rgba(16, 185, 129, 0.54));
+  border: 2px solid rgba(2, 44, 34, 0.86);
   border-radius: 999px;
 }
 
 .themed-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(251, 146, 60, 0.42) rgba(11, 8, 7, 0.55);
+  scrollbar-color: rgba(251, 191, 36, 0.48) rgba(2, 44, 34, 0.5);
 }
 
 .quiz-shell {
@@ -88,7 +88,7 @@ body::-webkit-scrollbar-thumb,
   inset: 0 0 auto;
   height: 3px;
   content: "";
-  background: linear-gradient(90deg, #991b1b, var(--ember) 52%, var(--chakra));
+  background: linear-gradient(90deg, var(--lime), #34d399 52%, var(--cyan));
   z-index: 80;
 }
 
@@ -98,10 +98,10 @@ body::-webkit-scrollbar-thumb,
   z-index: -1;
   content: "";
   pointer-events: none;
-  opacity: 0.2;
+  opacity: 0.18;
   background-image:
-    radial-gradient(circle at 15% 30%, rgba(249, 115, 22, 0.22) 0 1px, transparent 2px),
-    radial-gradient(circle at 85% 70%, rgba(34, 211, 238, 0.15) 0 1px, transparent 2px);
+    radial-gradient(circle at 15% 30%, rgba(190, 242, 100, 0.22) 0 1px, transparent 2px),
+    radial-gradient(circle at 85% 70%, rgba(103, 232, 249, 0.16) 0 1px, transparent 2px);
   background-size: 92px 92px, 128px 128px;
 }
 
@@ -109,10 +109,8 @@ body::-webkit-scrollbar-thumb,
 .surface-panel-strong {
   border-radius: 8px;
   border: 1px solid var(--border);
-  background:
-    linear-gradient(115deg, rgba(255, 237, 213, 0.025), transparent 35%),
-    var(--surface);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 237, 213, 0.035);
+  background: linear-gradient(115deg, rgba(167, 243, 208, 0.035), transparent 35%), var(--surface);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(236, 253, 245, 0.045);
   backdrop-filter: blur(18px);
 }
 
@@ -122,52 +120,52 @@ body::-webkit-scrollbar-thumb,
 .surface-panel-strong {
   border-color: var(--border-accent);
   background:
-    linear-gradient(135deg, rgba(249, 115, 22, 0.085), transparent 38%),
-    linear-gradient(315deg, rgba(34, 211, 238, 0.025), transparent 34%),
+    linear-gradient(135deg, rgba(190, 242, 100, 0.075), transparent 38%),
+    linear-gradient(315deg, rgba(103, 232, 249, 0.035), transparent 34%),
     var(--surface-raised);
 }
 
 .surface-panel-strong::selection,
-.surface-panel::selection { background: rgba(249, 115, 22, 0.3); }
+.surface-panel::selection { background: rgba(190, 242, 100, 0.28); }
 
-.shinobi-hero {
+.knowledge-hero {
   isolation: isolate;
   min-height: 36rem;
   background-image:
-    linear-gradient(90deg, rgba(8, 5, 4, 0.94) 0%, rgba(8, 5, 4, 0.7) 48%, rgba(8, 5, 4, 0.22) 100%),
-    linear-gradient(0deg, rgba(8, 5, 4, 0.9), transparent 48%),
-    url("/naruto/shinobi-arena.png");
+    linear-gradient(90deg, rgba(2, 12, 8, 0.94) 0%, rgba(2, 12, 8, 0.68) 45%, rgba(2, 12, 8, 0.14) 100%),
+    linear-gradient(0deg, rgba(2, 12, 8, 0.88), transparent 52%),
+    url("/general/quiz-stage.webp");
   background-position: center;
   background-size: cover;
 }
 
-.shinobi-hero::before {
+.knowledge-hero::before {
   position: absolute;
   inset: 0;
   z-index: -1;
   content: "";
-  background: linear-gradient(135deg, transparent 76%, rgba(249, 115, 22, 0.2));
+  background: linear-gradient(135deg, transparent 76%, rgba(103, 232, 249, 0.16));
 }
 
-.shinobi-display {
-  font-family: "Arial Black", Impact, var(--font-geist-sans), sans-serif;
+.quiz-display {
+  font-family: "Arial Black", "Trebuchet MS", var(--font-geist-sans), sans-serif;
   letter-spacing: 0;
   text-transform: uppercase;
   text-wrap: balance;
 }
 
-.shinobi-wordmark {
+.quiz-wordmark {
   color: var(--paper);
-  text-shadow: 0 3px 0 rgba(127, 29, 29, 0.85), 0 10px 28px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 3px 0 rgba(6, 78, 59, 0.9), 0 10px 28px rgba(0, 0, 0, 0.55);
 }
 
-.shinobi-wordmark strong { color: var(--ember-bright); }
+.quiz-wordmark strong { color: var(--lime-bright); }
 
 .starting-soon-stage {
   isolation: isolate;
   background-image:
-    linear-gradient(180deg, rgba(7, 5, 4, 0.18), rgba(7, 5, 4, 0.42) 52%, rgba(7, 5, 4, 0.9)),
-    url("/naruto/shinobi-arena.png");
+    linear-gradient(180deg, rgba(2, 12, 8, 0.12), rgba(2, 12, 8, 0.38) 52%, rgba(2, 12, 8, 0.92)),
+    url("/general/quiz-stage.webp");
   background-position: center;
   background-size: cover;
 }
@@ -177,18 +175,17 @@ body::-webkit-scrollbar-thumb,
   inset: 0;
   z-index: -1;
   content: "";
-  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.65);
 }
 
-.scroll-strip {
-  border: 1px solid rgba(251, 146, 60, 0.22);
-  background:
-    linear-gradient(90deg, rgba(124, 45, 18, 0.58), rgba(41, 23, 15, 0.86) 10% 90%, rgba(124, 45, 18, 0.58));
-  box-shadow: inset 0 1px rgba(255, 237, 213, 0.08), 0 10px 30px rgba(0, 0, 0, 0.3);
+.category-strip {
+  border: 1px solid rgba(190, 242, 100, 0.24);
+  background: linear-gradient(90deg, rgba(6, 78, 59, 0.72), rgba(3, 35, 24, 0.92) 10% 90%, rgba(6, 78, 59, 0.72));
+  box-shadow: inset 0 1px rgba(236, 253, 245, 0.08), 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .section-kicker {
-  color: rgba(253, 186, 116, 0.72);
+  color: rgba(110, 231, 183, 0.72);
   font-size: 0.66rem;
   font-weight: 900;
   letter-spacing: 0;
@@ -207,10 +204,10 @@ body::-webkit-scrollbar-thumb,
 .brand-mark-hero {
   width: 3rem;
   height: 3rem;
-  border: 1px solid rgba(251, 146, 60, 0.3);
+  border: 1px solid rgba(190, 242, 100, 0.32);
   border-radius: 8px;
   object-fit: cover;
-  box-shadow: 0 0 26px rgba(249, 115, 22, 0.18);
+  box-shadow: 0 0 26px rgba(163, 230, 53, 0.18);
 }
 
 .quiz-button-primary,
@@ -231,16 +228,16 @@ body::-webkit-scrollbar-thumb,
 }
 
 .quiz-button-primary {
-  border: 1px solid rgba(255, 237, 213, 0.24);
-  background: linear-gradient(110deg, #ea580c, #f97316 54%, #fb923c);
-  color: #fff7ed;
-  box-shadow: 0 10px 26px rgba(194, 65, 12, 0.22), inset 0 1px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(217, 249, 157, 0.4);
+  background: linear-gradient(110deg, #bef264, #6ee7b7 56%, #67e8f9);
+  color: #052e1a;
+  box-shadow: 0 10px 26px rgba(16, 185, 129, 0.2), inset 0 1px rgba(255, 255, 255, 0.25);
 }
 
 .quiz-button-secondary {
-  border: 1px solid rgba(255, 237, 213, 0.13);
-  background: rgba(255, 237, 213, 0.045);
-  color: rgba(255, 247, 237, 0.8);
+  border: 1px solid rgba(167, 243, 208, 0.16);
+  background: rgba(167, 243, 208, 0.055);
+  color: rgba(236, 253, 245, 0.82);
 }
 
 .quiz-button-danger {
@@ -253,47 +250,52 @@ body::-webkit-scrollbar-thumb,
 .quiz-button-secondary:hover:not(:disabled),
 .quiz-button-danger:hover:not(:disabled) { transform: translateY(-1px); }
 
-.quiz-button-primary:hover:not(:disabled) { box-shadow: 0 14px 34px rgba(234, 88, 12, 0.3); }
-.quiz-button-secondary:hover:not(:disabled) { border-color: rgba(251, 146, 60, 0.4); color: var(--ember-bright); }
+.quiz-button-primary:hover:not(:disabled) { box-shadow: 0 14px 34px rgba(52, 211, 153, 0.28); }
+.quiz-button-secondary:hover:not(:disabled) { border-color: rgba(190, 242, 100, 0.4); color: var(--lime-bright); }
 
 .quiz-input {
   min-height: 3rem;
-  border: 1px solid rgba(255, 237, 213, 0.13);
+  border: 1px solid rgba(167, 243, 208, 0.16);
   border-radius: 8px;
-  background: rgba(5, 4, 3, 0.42);
+  background: rgba(2, 12, 8, 0.46);
   color: var(--paper);
   outline: none;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .quiz-input:focus {
-  border-color: rgba(251, 146, 60, 0.58);
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  border-color: rgba(190, 242, 100, 0.58);
+  box-shadow: 0 0 0 3px rgba(163, 230, 53, 0.1);
 }
 
-.site-volume-slider {
-  height: 0.5rem;
-  appearance: none;
-  border-radius: 999px;
-  outline: none;
+.score-adjustment-input {
+  appearance: textfield;
 }
+
+.score-adjustment-input::-webkit-inner-spin-button,
+.score-adjustment-input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.site-volume-slider { height: 0.5rem; appearance: none; border-radius: 999px; outline: none; }
 
 .site-volume-slider::-webkit-slider-thumb {
   width: 1.05rem;
   height: 1.05rem;
   appearance: none;
-  border: 2px solid #fff7ed;
+  border: 2px solid #ecfdf5;
   border-radius: 999px;
-  background: #f97316;
+  background: var(--lime);
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
 }
 
 .site-volume-slider::-moz-range-thumb {
   width: 0.85rem;
   height: 0.85rem;
-  border: 2px solid #fff7ed;
+  border: 2px solid #ecfdf5;
   border-radius: 999px;
-  background: #f97316;
+  background: var(--lime);
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
 }
 
@@ -302,11 +304,11 @@ body::-webkit-scrollbar-thumb,
   min-height: 1.75rem;
   align-items: center;
   gap: 0.4rem;
-  border: 1px solid rgba(255, 237, 213, 0.12);
+  border: 1px solid rgba(167, 243, 208, 0.15);
   border-radius: 999px;
-  background: rgba(255, 237, 213, 0.045);
+  background: rgba(167, 243, 208, 0.055);
   padding: 0.3rem 0.65rem;
-  color: rgba(255, 237, 213, 0.72);
+  color: rgba(209, 250, 229, 0.76);
   font-size: 0.65rem;
   font-weight: 900;
   letter-spacing: 0;
@@ -324,26 +326,11 @@ body::-webkit-scrollbar-thumb,
   height: 0.42rem;
   flex: none;
   border-radius: 999px;
-  background: var(--chakra);
-  box-shadow: 0 0 11px rgba(34, 211, 238, 0.72);
+  background: var(--cyan);
+  box-shadow: 0 0 11px rgba(103, 232, 249, 0.72);
 }
 
-.quiz-divider { border-color: rgba(255, 237, 213, 0.09); }
-
-/* The previous UI used emerald/lime utilities throughout. These scoped
-   mappings keep semantic greens for success while moving the base skin to ink and ember. */
-.quiz-shell [class*="text-emerald-50"] { color: #fff7ed !important; }
-.quiz-shell [class*="text-emerald-100"] { color: rgba(255, 237, 213, 0.76) !important; }
-.quiz-shell [class*="text-emerald-200"] { color: rgba(254, 215, 170, 0.78) !important; }
-.quiz-shell [class*="text-emerald-300"] { color: rgba(253, 186, 116, 0.7) !important; }
-.quiz-shell [class*="text-lime-"] { color: var(--ember-bright) !important; }
-.quiz-shell [class*="border-lime-"] { border-color: rgba(251, 146, 60, 0.38) !important; }
-.quiz-shell [class*="bg-emerald-950"] { background-color: rgba(24, 14, 10, 0.78) !important; }
-.quiz-shell [class*="bg-emerald-900"] { background-color: rgba(49, 26, 17, 0.78) !important; }
-.quiz-shell [class*="bg-emerald-800"] { background-color: rgba(69, 34, 20, 0.82) !important; }
-.quiz-shell [class*="border-emerald-900"] { border-color: rgba(120, 53, 15, 0.28) !important; }
-.quiz-shell [class*="border-emerald-800"] { border-color: rgba(154, 52, 18, 0.34) !important; }
-.quiz-shell [class*="border-emerald-700"] { border-color: rgba(194, 65, 12, 0.38) !important; }
+.quiz-divider { border-color: rgba(167, 243, 208, 0.1); }
 
 button:not(:disabled),
 [role="button"]:not([aria-disabled="true"]) { cursor: pointer; }
@@ -352,18 +339,18 @@ button:disabled,
 [role="button"][aria-disabled="true"] { cursor: not-allowed; }
 
 :where(a, button, input, textarea, summary, [tabindex]):focus-visible {
-  outline: 2px solid rgba(34, 211, 238, 0.92);
+  outline: 2px solid rgba(103, 232, 249, 0.92);
   outline-offset: 3px;
 }
 
-::selection { background: rgba(249, 115, 22, 0.32); color: #fff7ed; }
+::selection { background: rgba(190, 242, 100, 0.3); color: #f1fff7; }
 
 @media (max-width: 768px) {
-  .shinobi-hero {
+  .knowledge-hero {
     min-height: 31rem;
     background-image:
-      linear-gradient(0deg, rgba(8, 5, 4, 0.94) 0%, rgba(8, 5, 4, 0.55) 62%, rgba(8, 5, 4, 0.3) 100%),
-      url("/naruto/shinobi-arena.png");
+      linear-gradient(0deg, rgba(2, 12, 8, 0.95) 0%, rgba(2, 12, 8, 0.58) 62%, rgba(2, 12, 8, 0.24) 100%),
+      url("/general/quiz-stage.webp");
   }
 }
 

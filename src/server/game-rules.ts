@@ -1,4 +1,5 @@
 import type { GamePhase, GameState, PlayerId } from "./types";
+import { getScoringRule } from "../lib/scoring-rules";
 
 export function canAcceptBuzz({
   phase,
@@ -18,18 +19,20 @@ export function canAcceptBuzz({
 export function judgmentScoreDelta({
   correct,
   points,
-  isBoard3,
+  boardIndex,
+  isBonus,
   isPickerFirstAttempt,
 }: {
   correct: boolean;
   points: number;
-  isBoard3: boolean;
+  boardIndex: number;
+  isBonus: boolean;
   isPickerFirstAttempt: boolean;
 }): number {
-  if (correct) return isBoard3 ? points * 2 : points;
-  if (isBoard3) return -points;
-  if (isPickerFirstAttempt) return 0;
-  return -Math.floor(points / 2);
+  const rule = getScoringRule(boardIndex, isBonus);
+  if (correct) return points * rule.correctMultiplier;
+  if (isPickerFirstAttempt && rule.pickerFirstWrongFree) return 0;
+  return -Math.floor(points * rule.wrongMultiplier);
 }
 
 /** Records a resolved regular turn and reports when every contestant had one. */

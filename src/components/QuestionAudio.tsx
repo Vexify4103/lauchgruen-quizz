@@ -117,7 +117,7 @@ export function QuestionAudio({ src }: Props) {
           "shrink-0 w-12 h-12 rounded-full font-extrabold text-xl transition-all border-2 flex items-center justify-center",
           error
             ? "bg-red-900 border-red-700 text-red-300 cursor-not-allowed"
-            : "border-orange-200 bg-orange-500 text-orange-50 shadow-lg shadow-orange-950/30 hover:scale-105 active:scale-95",
+            : "border-lime-200 bg-lime-500 text-lime-50 shadow-lg shadow-lime-950/30 hover:scale-105 active:scale-95",
         ].join(" ")}
       >
         {playing ? "❚❚" : "▶"}
